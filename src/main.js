@@ -30,6 +30,13 @@ async function main() {
         
         const assetsDir = path.resolve(__dirname, '../assets');
         const outputDir = path.resolve(__dirname, '../output');
+        
+        // --- ASEGURAR QUE EXISTAN LAS CARPETAS ---
+        if (!fs.existsSync(outputDir)) {
+            console.log('📁 Creando carpeta de salida [output]...');
+            fs.mkdirSync(outputDir, { recursive: true });
+        }
+
         const videoPath = path.join(assetsDir, 'background_temp.mp4');
         const audioPath = path.join(assetsDir, 'music_temp.mp3');
         
