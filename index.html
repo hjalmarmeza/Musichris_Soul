@@ -220,7 +220,14 @@
             try {
                 // ENVIAR ORDEN AL BOT DE TELEGRAM
                 const msg = `[SOUL_TRIGGER]: ${item.id}`;
-                await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat}&text=${encodeURIComponent(msg)}`);
+                const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat}&text=${encodeURIComponent(msg)}`);
+                const result = await response.json();
+
+                if (!result.ok) {
+                    throw new Error(`Telegram dice: ${result.description}`);
+                }
+                
+                console.log('✅ Señal enviada con éxito');
                 
                 const steps = ["Señal Recibida por Telegram", "Validando Mac Remoto", "Producción Iniciada", "¡Misión Activa!"];
                 let i = 0;
