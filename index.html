@@ -47,7 +47,9 @@
             <h3 style="color:var(--accent-gold);">GitHub Cloud Config</h3>
             <p style="font-size:0.6rem; opacity:0.5;">Pega tu PAT (Personal Access Token) para activar la Nube.</p>
             <input type="password" id="gh-token" placeholder="GitHub PAT (token)">
-            <button class="btn-save" onclick="saveConfig()">ACTIVAR NUBE</button>
+            <input type="password" id="tg-token" placeholder="Telegram Bot Token">
+            <input type="text" id="tg-chat" placeholder="Telegram Chat ID">
+            <button class="btn-save" onclick="saveConfig()">ACTIVAR SISTEMA HÍBRIDO</button>
             <button style="background:none; border:none; color:white; width:100%; margin-top:20px; font-size:0.7rem;" onclick="toggleConfig()">CERRAR</button>
         </div>
     </div>
@@ -96,29 +98,40 @@
         }
 
         async function produceAtCloud(item) {
-            const token = localStorage.getItem('soul-gh-token');
-            if (!token) { alert('⚠️ Por favor, configura tu GitHub Token en el engranaje ⚙️.'); return; }
+            const ghToken = localStorage.getItem('soul-gh-token');
+            const tgToken = localStorage.getItem('soul-tg-token');
+            const tgChat = localStorage.getItem('soul-tg-chat');
+
+            if (!ghToken) { alert('⚠️ Por favor, configura tu GitHub Token en el engranaje ⚙️.'); return; }
 
             document.getElementById('production-hub').style.display = 'flex';
             const log = document.getElementById('log');
-            log.innerText = "Enviando Orden a GitHub...";
+            log.innerText = "Sincronizando Misión Híbrida...";
 
             try {
+                const msg = `[SOUL_TRIGGER]: ${item.id} - ${item.reflection_title}`;
+                
+                // 1. AVISO A TELEGRAM (Confirmación instantánea)
+                if (tgToken && tgChat) {
+                    await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChat}&text=${encodeURIComponent(msg)}`);
+                }
+
+                // 2. DISPARO A LA NUBE (GitHub Actions)
                 const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/dispatches`, {
                     method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+                    headers: { 'Authorization': `Bearer ${ghToken}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
                     body: JSON.stringify({ event_type: 'soul_trigger', client_payload: { id: item.id } })
                 });
 
                 if (res.status === 204) {
-                    log.innerText = "🚀 ¡MISIÓN ENVIADA! Revisa la pestaña Actions en GitHub.";
+                    log.innerText = "🚀 ¡MISIÓN ENVIADA! Revisa Telegram y la pestaña Actions.";
                     setTimeout(() => document.getElementById('production-hub').style.display = 'none', 3000);
                 } else {
                     const err = await res.json();
-                    throw new Error(err.message || 'Error desconocido');
+                    throw new Error(err.message || 'Error en GitHub API');
                 }
             } catch (e) {
-                alert('❌ Error al disparar la Nube: ' + e.message);
+                alert('❌ Error en el disparo: ' + e.message);
                 document.getElementById('production-hub').style.display = 'none';
             }
         }
@@ -127,11 +140,15 @@
             const m = document.getElementById('config-modal');
             m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
             document.getElementById('gh-token').value = localStorage.getItem('soul-gh-token') || '';
+            document.getElementById('tg-token').value = localStorage.getItem('soul-tg-token') || '';
+            document.getElementById('tg-chat').value = localStorage.getItem('soul-tg-chat') || '';
         }
 
         function saveConfig() {
             localStorage.setItem('soul-gh-token', document.getElementById('gh-token').value);
-            alert('✅ Token de Nube Guardado.');
+            localStorage.setItem('soul-tg-token', document.getElementById('tg-token').value);
+            localStorage.setItem('soul-tg-chat', document.getElementById('tg-chat').value);
+            alert('✅ Configuración Híbrida Guardada.');
             toggleConfig();
         }
 
