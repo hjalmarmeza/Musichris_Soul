@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 /**
- * Musichris Soul - Cinematic Engine v15.0
- * EFICIENCIA VISUAL: Resumen de fase y ajuste de interlineado.
+ * Musichris Soul - Cinematic Engine v16.0 (THE DIAMOND FLOW)
+ * Sistema de 4 Fases: Hecho, Revelación, Enseñanza y Cierre.
  */
 async function generateSubtitleFile(data) {
     const templatePath = path.join(__dirname, '../templates/style.ass');
@@ -14,18 +14,22 @@ async function generateSubtitleFile(data) {
 
     const firstVerse = data.verse_citation.split(/[,;]/)[0].trim();
 
-    // Generar secuencia de eventos para un flujo de 60 segundos
+    // Generar secuencia de eventos para un flujo de 60 segundos con 3 diapositivas de contenido
     const events = [
         // Caja de fondo (Card)
         `Dialogue: 0,0:00:00.00,0:00:55.00,Card,,0,0,0,,{\\fad(500,500)} `,
         
-        // FASE 1: Reflexión / Mensaje (2s - 25s)
-        `Dialogue: 1,0:00:02.00,0:00:25.00,MainText,,0,0,0,,{\\fad(800,800)}${formatText(data.text, 25)}`,
-        `Dialogue: 1,0:00:02.00,0:00:25.00,Citation,,0,0,0,,{\\fad(1000,1000)}${decorativeLine}\\N${firstVerse}`,
+        // FASE 1: EL HECHO / LA VISIÓN (2s - 19s)
+        `Dialogue: 1,0:00:02.00,0:00:19.00,MainText,,0,0,0,,{\\fad(600,600)}${formatText(data.text || '', 24)}`,
+        `Dialogue: 1,0:00:02.00,0:00:19.00,Citation,,0,0,0,,{\\fad(800,800)}${decorativeLine}\\N${firstVerse}`,
         
-        // FASE 2: Revelación Teológica (Contexto) (26s - 54s)
-        `Dialogue: 1,0:00:26.00,0:00:54.00,MainText,,0,0,0,,{\\fad(800,800)}${formatText(data.explanation, 25)}`,
-        `Dialogue: 1,0:00:26.00,0:00:54.00,Citation,,0,0,0,,{\\fad(1000,1000)}${decorativeLine}\\N${data.reflection_title}`,
+        // FASE 2: LA REVELACIÓN (Dato Maestro) (20s - 39s)
+        `Dialogue: 1,0:00:20.00,0:00:39.00,MainText,,0,0,0,,{\\fad(600,600)}${formatText(data.explanation || '', 24)}`,
+        `Dialogue: 1,0:00:20.00,0:00:39.00,Citation,,0,0,0,,{\\fad(800,800)}${decorativeLine}\\NREVELACIÓN`,
+
+        // FASE 3: LA ENSEÑANZA / IMPACTO (40s - 54s)
+        `Dialogue: 1,0:00:40.00,0:00:54.00,MainText,,0,0,0,,{\\fad(600,600)}${formatText(data.teaching || 'Dios tiene un propósito eterno para tu vida hoy.', 24)}`,
+        `Dialogue: 1,0:00:40.00,0:00:54.00,Citation,,0,0,0,,{\\fad(800,800)}${decorativeLine}\\NENSEÑANZA`,
 
         // Pie de página
         `Dialogue: 2,0:00:01.00,0:00:55.00,Footer,,0,0,0,,{\\fad(2000,0)}${footerText}`
@@ -50,7 +54,7 @@ function formatText(text, maxChars) {
         }
     });
     lines.push(currentLine.trim());
-    return lines.join('\\N'); // REDUCIDO A UN SOLO SALTO para evitar que se escape de pantalla
+    return lines.join('\\N'); 
 }
 
 module.exports = { generateSubtitleFile };

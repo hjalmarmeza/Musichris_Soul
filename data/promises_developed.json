@@ -2,28 +2,31 @@
   {
     "id": 1,
     "title": "Cireneo",
-    "reflection_title": "Discipulado de Amor",
+    "reflection_title": "Cireneo",
     "verse_citation": "Lucas 23:26",
-    "text": "Simón de Cirene nos enseña que las cargas impuestas son citas divinas para caminar con Jesús.",
-    "explanation": "La ley 'angaria' obligaba a cargar la cruz; Dios la convirtió en redención para toda una familia.",
+    "text": "Simón de Cirene es obligado a cargar la cruz de Jesús en el camino al Gólgota.",
+    "explanation": "La ley 'angaria' permitía a los romanos forzar a civiles a cargar suministros por una milla.",
+    "teaching": "Lo que parece una carga impuesta por la vida, es tu cita divina para caminar con Cristo.",
     "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360897/wi5649ngot0kzi9m7mwu.mp3"
-  },
-  {
-    "id": 2,
-    "title": "Alabastro",
-    "reflection_title": "Fragancia de Gracia",
-    "verse_citation": "Lucas 7:37",
-    "text": "Rompamos nuestro alabastro: la adoración más profunda nace de un corazón que se sabe perdonado.",
-    "explanation": "Que una mujer pecadora entrara a casa de un fariseo y se soltara el cabello era un escándalo radical.",
-    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360791/gqprsmse1a8q0b9rxboa.mp3"
   },
   {
     "id": 14,
     "title": "Kadosh",
-    "reflection_title": "Santidad Tripartita",
+    "reflection_title": "Kadosh",
     "verse_citation": "Isaías 6:3",
-    "text": "Isaías ve al Rey eterno. El triple 'Santo' (Kadosh) declara la perfección absoluta de Dios.",
-    "explanation": "En la crisis política tras la muerte del Rey Uzías, Dios se revela como el Soberano Inmovible.",
+    "text": "Isaías ve al Rey en Su trono. Los ángeles claman: '¡Santo, Santo, Santo es el Señor!'",
+    "explanation": "'Kadosh' es el superlativo hebreo: declara que la santidad de Dios es Su perfección absoluta.",
+    "teaching": "Cuando lo terrenal muere (Rey Uzías), Dios se revela como el único Soberano Inmovible.",
     "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765361154/sfm2apwuowwiajwnhi6v.mp3"
+  },
+  {
+    "id": 25,
+    "title": "Solo una Cosa",
+    "reflection_title": "Solo una Cosa",
+    "verse_citation": "Salmo 27:4",
+    "text": "David, rey y guerrero, reduce su vida a un solo anhelo: habitar en la casa de Dios.",
+    "explanation": "La palabra 'Inquirir' (Baqar) implica contemplar con deleite y reflexionar en Su bondad.",
+    "teaching": "En medio de mil problemas, tu única victoria real es proteger tu intimidad con el Padre.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765807152/Solo_una_cosa_lor5km.mp3"
   }
 ]
