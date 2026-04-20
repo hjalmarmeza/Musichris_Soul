@@ -7,15 +7,19 @@ const path = require('path');
  * Optimized for rich theological metadata.
  */
 async function uploadToYouTube(videoPath, soulData) {
-    console.log(`🚀 Iniciando subida ministerial: ${soulData.title}...`);
+    console.log(`🚀 Iniciando subida ministerial: ${soulData.reflection_title}...`);
     
-    if (!fs.existsSync('credentials.json') || !fs.existsSync('token.json')) {
-        console.error('❌ Error: Credenciales faltantes.');
-        return null;
+    // --- LÓGICA DE NUBE: USAR SECRETOS ---
+    const GOOGLE_CREDENTIALS = process.env.GOOGLE_CREDENTIALS;
+    const GOOGLE_TOKEN = process.env.GOOGLE_TOKEN;
+
+    if (!GOOGLE_CREDENTIALS || !GOOGLE_TOKEN) {
+        throw new Error('❌ Error: Credenciales de Google (Secretos) no configuradas.');
     }
 
-    const credentials = JSON.parse(fs.readFileSync('credentials.json'));
-    const token = JSON.parse(fs.readFileSync('token.json'));
+    const credentials = JSON.parse(GOOGLE_CREDENTIALS);
+    const token = JSON.parse(GOOGLE_TOKEN);
+
     const { client_secret, client_id, redirect_uris } = credentials.installed || credentials.web;
     const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
     oAuth2Client.setCredentials(token);

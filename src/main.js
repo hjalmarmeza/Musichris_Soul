@@ -1,6 +1,7 @@
 const { getSoulDatabase, getNextPendingBackground } = require('./sheet_reader');
 const { smartDownload, updateSheetValue } = require('./google_connector');
 const { generateSubtitleFile } = require('./engine');
+const { uploadToYouTube } = require('./youtube_uploader');
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -81,9 +82,15 @@ async function main() {
         console.log(`✅ Marcando paisaje (Fila ${landscapeInfo.row}) como DONE...`);
         await updateSheetValue('1y6GYX2DwjZOJVBwKotKCh3aSVha3K6iQsr5_yG7al88', `Hoja 1!C${landscapeInfo.row}`, 'DONE');
 
-        console.log(`\n✅ PRODUCCIÓN COMPLETADA: MÚSICA Y SUSCRIPCIÓN INTEGRADAS`);
-        console.log(`📍 RESULTADO: ${outputPath}`);
+        console.log('📦 ENVIANDO A YOUTUBE...');
+        const youtubeId = await uploadToYouTube(outputPath, soulItem);
 
-    } catch (error) { console.error('❌ ERROR CRÍTICO:', error.message); }
+        console.log(`\n✅ MISIÓN CUMPLIDA: VÍDEO FABRICADO Y PUBLICADO`);
+        console.log(`🔗 YOUTUBE ID: ${youtubeId}`);
+
+    } catch (error) { 
+        console.error('❌ ERROR CRÍTICO EN NUBE:', error.message);
+        process.exit(1); 
+    }
 }
 main();
