@@ -9,7 +9,7 @@ async function generateSubtitleFile(data) {
     const templatePath = path.join(__dirname, '../templates/style.ass');
     let template = fs.readFileSync(templatePath, 'utf8');
 
-    const footerText = "MUSICHRIS | NOTA DE VIDA";
+    const footerText = "MUSICHRIS | STUDIO";
     const decorativeLine = "{\\fsp-5}————————————";
 
     const firstVerse = data.verse_citation.split(/[,;]/)[0].trim();

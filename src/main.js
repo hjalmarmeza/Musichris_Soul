@@ -16,6 +16,7 @@ async function main() {
         const database = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/promises_developed.json'), 'utf8'));
         
         const targetId = process.argv.find(arg => arg.startsWith('--id='))?.split('=')[1];
+        const footerText = "MUSICHRIS | STUDIO";
         const soulItem = targetId 
             ? database.find(item => item.id == targetId) 
             : database[Math.floor(Math.random() * database.length)];
@@ -57,8 +58,9 @@ async function main() {
             [final_bg] ass=filename=assets/current_production.ass
         `.replace(/\s+/g, ' ').trim();
 
-        console.log('🎞️  Componiendo Reflexión (60s con Loop de Paisaje)...');
-        execSync(`"${ffmpegBin}" -y -stream_loop -1 -i "${videoPath}" -i "${audioPath}" -filter_complex "${mainFilter}" -map 0:v -map 1:a -t 60 -r 30 -c:v libx264 -c:a aac -preset fast -pix_fmt yuv420p "${intermediatePath}"`);
+        // COMPOSICIÓN PRINCIPAL: Loop del paisaje y captura del CLÍMAX (ss 60)
+        console.log('🎞️  Componiendo Cuerpo (Capturando Clímax desde 01:00)...');
+        execSync(`"${ffmpegBin}" -y -stream_loop -1 -i "${videoPath}" -ss 60 -i "${audioPath}" -filter_complex "${mainFilter}" -map 0:v -map 1:a -t 60 -r 30 -c:v libx264 -c:a aac -preset fast -pix_fmt yuv420p "${intermediatePath}"`);
 
         console.log('🎬 Orquestando Outro (Con Música y Suscripción)...');
         const outroFilter = `
