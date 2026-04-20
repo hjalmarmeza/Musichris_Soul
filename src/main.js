@@ -21,6 +21,10 @@ async function main() {
             ? database.find(item => item.id == targetId) 
             : database[Math.floor(Math.random() * database.length)];
         
+        // METADATOS PARA YOUTUBE
+        const title = `${soulItem.reflection_title} | MusiChris Studio 🕊️`;
+        const description = `Reflexión: ${soulItem.reflection_title}\nMúsica: MusiChris Studio ✨\n\n#Musichris #Studio #Reflexion #Esperanza #Victoria`;
+        
         if (!soulItem) throw new Error(`Pieza con ID ${targetId} no encontrada.`);
 
         console.log(`🎬 PRODUCIENDO: ${soulItem.reflection_title} (ID: ${soulItem.id})`);
