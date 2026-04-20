@@ -1,5 +1,5 @@
 const { getSoulDatabase, getNextPendingBackground } = require('./sheet_reader');
-const { smartDownload, updateSheetValue } = require('./google_connector');
+const { smartDownload, updateSheetValue, appendSheetRow } = require('./google_connector');
 const { generateSubtitleFile } = require('./engine');
 const { uploadToYouTube } = require('./youtube_uploader');
 const { execSync } = require('child_process');
@@ -84,6 +84,15 @@ async function main() {
 
         console.log('📦 ENVIANDO A YOUTUBE...');
         const youtubeId = await uploadToYouTube(outputPath, soulItem);
+        const youtubeUrl = `https://youtu.be/${youtubeId}`;
+
+        console.log('💎 REGISTRANDO VICTORIA EN HISTORIAL...');
+        await appendSheetRow('1y6GYX2DwjZOJVBwKotKCh3aSVha3K6iQsr5_yG7al88', 'Misiones!A:D', [
+            new Date().toLocaleString(),
+            soulItem.id,
+            soulItem.reflection_title,
+            youtubeUrl
+        ]);
 
         console.log(`\n✅ MISIÓN CUMPLIDA: VÍDEO FABRICADO Y PUBLICADO`);
         console.log(`🔗 YOUTUBE ID: ${youtubeId}`);

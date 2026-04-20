@@ -64,6 +64,18 @@ async function updateSheetValue(spreadsheetId, range, value) {
     });
 }
 
+async function appendSheetRow(spreadsheetId, range, values) {
+    const auth = await getAuth();
+    const sheets = google.sheets({ version: 'v4', auth });
+    console.log(`📝 Registrando Victoria en: ${range}...`);
+    await sheets.spreadsheets.values.append({
+        spreadsheetId,
+        range,
+        valueInputOption: 'USER_ENTERED',
+        requestBody: { values: [values] },
+    });
+}
+
 async function uploadToYouTube(videoPath, title, description) {
     const auth = await getAuth();
     const youtube = google.youtube({ version: 'v3', auth });
