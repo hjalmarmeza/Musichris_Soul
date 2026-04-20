@@ -2,40 +2,50 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>MusiChris Soul | Cloud Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>MusiChris Soul | Mission Control</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="assets/app_icon.png">
     <meta name="theme-color" content="#000000">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root { --bg-deep: #000000; --accent-gold: #D4AF37; --gold-light: #F1D592; --glass: rgba(255, 255, 255, 0.05); --gold-glow: rgba(212, 175, 55, 0.4); --safe-top: env(safe-area-inset-top); }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
-        body { margin: 0; font-family: 'Inter', sans-serif; background-color: var(--bg-deep); color: #ffffff; min-height: 100vh; display: flex; justify-content: center; overflow-x: hidden; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; touch-action: manipulation; }
+        body { margin: 0; font-family: 'Inter', sans-serif; background-color: var(--bg-deep); color: #ffffff; min-height: 100vh; display: flex; justify-content: center; overflow-x: hidden; -webkit-user-select: none; }
         .smoke-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000 url('assets/fondo_app.gif') center center no-repeat; background-size: cover; opacity: 0.4; }
         .container { width: 100%; max-width: 500px; padding: calc(var(--safe-top) + 2rem) 1.5rem 4rem; position: relative; }
-        header { text-align: center; margin-bottom: 2.5rem; }
-        .app-logo-box { width: 95px; height: 95px; margin: 0 auto 1.5rem; border-radius: 26px; border: 1.5px solid var(--accent-gold); box-shadow: 0 0 35px var(--gold-glow); overflow: hidden; }
+        header { text-align: center; margin-bottom: 2rem; }
+        .app-logo-box { width: 90px; height: 90px; margin: 0 auto 1rem; border-radius: 24px; border: 1.5px solid var(--accent-gold); box-shadow: 0 0 30px var(--gold-glow); overflow: hidden; }
         .app-logo-box img { width: 100%; height: 100%; object-fit: cover; }
-        h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin: 0; letter-spacing: -1px; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 0; letter-spacing: -1px; }
         .gold { color: var(--accent-gold); text-shadow: 0 0 15px var(--gold-glow); }
-        .sub-tag { font-size: 0.6rem; letter-spacing: 4px; color: var(--accent-gold); margin-top: 0.5rem; font-weight: 800; opacity: 0.7; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 2rem; }
-        .stat-box { background: var(--glass); backdrop-filter: blur(25px); padding: 1.2rem; border-radius: 22px; border: 1px solid rgba(212, 175, 55, 0.15); text-align: center; }
-        .stat-box .val { display: block; font-size: 1.8rem; font-weight: 900; color: var(--accent-gold); }
-        .list-flow { display: flex; flex-direction: column; gap: 12px; background: rgba(0,0,0,0.85); border-radius: 30px; padding: 1rem; border: 1px solid rgba(255,255,255,0.05); }
-        .item-card { background: rgba(255,255,255,0.04); padding: 1.25rem; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .info h4 { margin: 0; color: var(--accent-gold); }
-        .info p { margin: 0; font-size: 0.7rem; opacity: 0.5; }
-        #production-hub { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 5000; display: none; justify-content: center; align-items: center; flex-direction: column; text-align: center; }
-        .loader { width: 60px; height: 60px; border: 4px solid var(--glass); border-top-color: var(--accent-gold); border-radius: 50%; animation: spin 1s infinite linear; }
+        .sub-tag { font-size: 0.55rem; letter-spacing: 3px; color: var(--accent-gold); margin-top: 0.4rem; font-weight: 800; opacity: 0.6; }
+        
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+        .stat-box { background: var(--glass); backdrop-filter: blur(25px); padding: 1rem; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.15); text-align: center; }
+        .stat-box .val { display: block; font-size: 1.6rem; font-weight: 900; color: var(--accent-gold); }
+        .stat-box .lab { font-size: 0.6rem; opacity: 0.5; font-weight: 700; text-transform: uppercase; }
+
+        .search-container { position: sticky; top: 10px; z-index: 100; margin-bottom: 1.2rem; }
+        .search-bar { width: 100%; padding: 14px 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(212,175,55,0.3); border-radius: 18px; color: white; font-family: 'Inter', sans-serif; backdrop-filter: blur(20px); font-size: 0.95rem; box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: 0.3s; }
+        .search-bar:focus { border-color: var(--accent-gold); background: rgba(255,255,255,0.12); box-shadow: 0 0 20px var(--gold-glow); }
+
+        .list-flow { display: flex; flex-direction: column; gap: 10px; }
+        .item-card { background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 22px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
+        .item-card:active { transform: scale(0.98); background: rgba(212,175,55,0.1); border-color: var(--accent-gold); }
+        .info h4 { margin: 0 0 4px 0; color: var(--accent-gold); font-size: 1.1rem; }
+        .info p { margin: 0; font-size: 0.75rem; opacity: 0.45; font-style: italic; }
+        .badge-pub { font-size: 0.6rem; background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 10px; border-radius: 8px; font-weight: 900; border: 1px solid rgba(212,175,55,0.2); pointer-events: none; }
+
+        #production-hub { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 5000; display: none; justify-content: center; align-items: center; flex-direction: column; text-align: center; }
+        .loader { width: 55px; height: 55px; border: 4px solid var(--glass); border-top-color: var(--accent-gold); border-radius: 50%; animation: spin 1s infinite linear; }
         @keyframes spin { from {transform:rotate(0deg)} to {transform:rotate(360deg)} }
         
-        #config-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 6000; display: none; justify-content: center; align-items: center; padding: 2rem; }
-        .config-card { background: #111; padding: 2rem; border-radius: 25px; border: 1px solid var(--accent-gold); width: 100%; max-width: 350px; }
-        .config-card input { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 10px; }
-        .btn-save { width: 100%; padding: 12px; background: var(--accent-gold); color: #000; border: none; border-radius: 10px; font-weight: 800; }
-        .settings-trigger { position: fixed; bottom: 30px; right: 30px; font-size: 2rem; color: var(--accent-gold); text-shadow: 0 0 15px var(--gold-glow); z-index: 4000; }
+        #config-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 6000; display: none; justify-content: center; align-items: center; padding: 2rem; }
+        .config-card { background: #111; padding: 2rem; border-radius: 28px; border: 1px solid var(--accent-gold); width: 100%; max-width: 360px; box-shadow: 0 0 50px rgba(0,0,0,1); }
+        .config-card input { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 12px; }
+        .btn-save { width: 100%; padding: 14px; background: var(--accent-gold); color: #000; border: none; border-radius: 12px; font-weight: 800; margin-top: 15px; }
+        .settings-trigger { position: fixed; bottom: 25px; right: 25px; font-size: 1.8rem; color: var(--accent-gold); text-shadow: 0 0 15px var(--gold-glow); z-index: 4000; opacity: 0.6; }
     </style>
 </head>
 <body>
@@ -44,13 +54,12 @@
     
     <div id="config-modal">
         <div class="config-card">
-            <h3 style="color:var(--accent-gold);">GitHub Cloud Config</h3>
-            <p style="font-size:0.6rem; opacity:0.5;">Pega tu PAT (Personal Access Token) para activar la Nube.</p>
-            <input type="password" id="gh-token" placeholder="GitHub PAT (token)">
+            <h3 style="color:var(--accent-gold); margin-top:0;">Configuración de Misión</h3>
+            <input type="password" id="gh-token" placeholder="GitHub Personal Access Token">
             <input type="password" id="tg-token" placeholder="Telegram Bot Token">
             <input type="text" id="tg-chat" placeholder="Telegram Chat ID">
-            <button class="btn-save" onclick="saveConfig()">ACTIVAR SISTEMA HÍBRIDO</button>
-            <button style="background:none; border:none; color:white; width:100%; margin-top:20px; font-size:0.7rem;" onclick="toggleConfig()">CERRAR</button>
+            <button class="btn-save" onclick="saveConfig()">GUARDAR Y ACTIVAR</button>
+            <button style="background:none; border:none; color:white; width:100%; margin-top:20px; font-size:0.75rem; opacity:0.5;" onclick="toggleConfig()">CERRAR</button>
         </div>
     </div>
 
@@ -58,7 +67,7 @@
         <header>
             <div class="app-logo-box"><img src="assets/app_icon_fixed.png" alt="Soul"></div>
             <h1>MusiChris <span class="gold">Soul</span></h1>
-            <div class="sub-tag">CLOUD CENTER v40.10.0</div>
+            <div class="sub-tag">MASTER REMOTE v40.11.0</div>
         </header>
 
         <div class="stats-grid">
@@ -66,35 +75,62 @@
             <div class="stat-box"><span class="val">115</span><span class="lab">Paisajes</span></div>
         </div>
 
+        <div class="search-container">
+            <input type="text" class="search-bar" id="search-input" placeholder="Buscar canción ministerial..." onkeyup="filterSongs()">
+        </div>
+
         <section class="list-flow" id="content-list"></section>
     </div>
 
     <div id="production-hub">
         <div class="loader"></div>
-        <h2 style="color:var(--accent-gold); font-family:'Playfair Display';">Disparando a la Nube</h2>
-        <p id="log" style="font-size:0.7rem; letter-spacing:2px; opacity:0.5;">Conectando con GitHub Actions...</p>
+        <h2 style="color:var(--accent-gold); font-family:'Playfair Display'; margin-top:1.5rem;">Sincronizando Misión</h2>
+        <p id="log" style="font-size:0.7rem; letter-spacing:2px; opacity:0.6;">Contactando con GitHub Cloud...</p>
     </div>
 
     <script>
         const OWNER = "hjalmarmeza";
         const REPO = "Musichris_Soul";
+        let fullCatalog = [];
 
         async function init() {
             try {
                 const r = await fetch('data/promises_developed.json?v=' + Date.now());
                 const data = await r.json();
-                const list = document.getElementById('content-list');
-                const pubIds = [1];
-                document.getElementById('p-val').innerText = data.length - pubIds.length;
-                list.innerHTML = '';
-                data.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'item-card';
-                    div.onclick = () => produceAtCloud(item);
-                    div.innerHTML = `<div class="info"><h4>${item.reflection_title}</h4><p>${item.verse_citation}</p></div>`;
-                    list.appendChild(div);
-                });
+                fullCatalog = data;
+                renderList(data);
             } catch (e) { console.error(e); }
+        }
+
+        function renderList(data) {
+            const list = document.getElementById('content-list');
+            const pubIds = [1]; // ID de ejemplo que ya está publicado
+            document.getElementById('p-val').innerText = fullCatalog.length - pubIds.length;
+            
+            list.innerHTML = '';
+            data.forEach(item => {
+                const isPub = pubIds.includes(item.id);
+                const div = document.createElement('div');
+                div.className = 'item-card';
+                div.onclick = () => produceAtCloud(item);
+                div.innerHTML = `
+                    <div class="info">
+                        <h4>${item.reflection_title}</h4>
+                        <p>${item.verse_citation}</p>
+                    </div>
+                    <div class="badge-pub">VIDEOS: ${isPub ? 1 : 0}</div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function filterSongs() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filtered = fullCatalog.filter(item => 
+                item.reflection_title.toLowerCase().includes(query) || 
+                item.verse_citation.toLowerCase().includes(query)
+            );
+            renderList(filtered);
         }
 
         async function produceAtCloud(item) {
@@ -102,31 +138,19 @@
             const tgToken = localStorage.getItem('soul-tg-token');
             const tgChat = localStorage.getItem('soul-tg-chat');
 
-            if (!ghToken) { alert('⚠️ Por favor, configura tu GitHub Token en el engranaje ⚙️.'); return; }
+            if (!ghToken) { alert('⚠️ Configura tu GitHub Token en el engranaje ⚙️.'); return; }
 
             document.getElementById('production-hub').style.display = 'flex';
             const log = document.getElementById('log');
-            log.innerText = "Sincronizando Misión Híbrida...";
+            log.innerText = "ESTABLECIENDO CONEXIÓN...";
 
             try {
-                // REPORTE PROFESIONAL PARA TELEGRAM
-                const msg = `🕊 *MUSICHRIS SOUL* | _Mission Control_\n` +
-                            `━━━━━━━━━━━━━━━━━━\n` +
-                            `🚀 *ORDEN DE PRODUCCIÓN ACTIVADA*\n` +
-                            `━━━━━━━━━━━━━━━━━━\n` +
-                            `🎵 *PIEZA:* ${item.reflection_title}\n` +
-                            `🆔 *ID:* ${item.id}\n` +
-                            `📖 *CITA:* ${item.verse_citation}\n` +
-                            `☁️ *ESTADO:* Remitiendo a la Nube (GitHub)\n` +
-                            `━━━━━━━━━━━━━━━━━━\n` +
-                            `🛰️ _Iniciando renderizado FFmpeg industrial..._`;
+                const msg = `🕊 *MUSICHRIS SOUL* | _Mission Control_\n━━━━━━━━━━━━━━━━━━\n🚀 *ORDEN DE PRODUCCIÓN ACTIVADA*\n━━━━━━━━━━━━━━━━━━\n🎵 *PIEZA:* ${item.reflection_title}\n🆔 *ID:* ${item.id}\n📖 *CITA:* ${item.verse_citation}\n☁️ *ESTADO:* Remitiendo a GitHub Actions...`;
                 
-                // 1. AVISO A TELEGRAM (Confirmación instantánea)
                 if (tgToken && tgChat) {
                     await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChat}&text=${encodeURIComponent(msg)}&parse_mode=Markdown`);
                 }
 
-                // 2. DISPARO A LA NUBE (GitHub Actions)
                 const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/dispatches`, {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${ghToken}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
@@ -134,14 +158,14 @@
                 });
 
                 if (res.status === 204) {
-                    log.innerText = "🚀 ¡MISIÓN ENVIADA! Revisa Telegram y la pestaña Actions.";
+                    log.innerText = "🚀 ¡MISIÓN ENVIADA! Revisa la pestaña Actions.";
                     setTimeout(() => document.getElementById('production-hub').style.display = 'none', 3000);
                 } else {
                     const err = await res.json();
-                    throw new Error(err.message || 'Error en GitHub API');
+                    throw new Error(err.message || 'Error API GitHub');
                 }
             } catch (e) {
-                alert('❌ Error en el disparo: ' + e.message);
+                alert('❌ Error: ' + e.message);
                 document.getElementById('production-hub').style.display = 'none';
             }
         }
@@ -158,7 +182,7 @@
             localStorage.setItem('soul-gh-token', document.getElementById('gh-token').value);
             localStorage.setItem('soul-tg-token', document.getElementById('tg-token').value);
             localStorage.setItem('soul-tg-chat', document.getElementById('tg-chat').value);
-            alert('✅ Configuración Híbrida Guardada.');
+            alert('✅ Configuración Guardada.');
             toggleConfig();
         }
 
