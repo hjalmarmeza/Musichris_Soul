@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MusiChris Soul | Master Control</title>
-    <link rel="manifest" href="./manifest.json">
-    <link rel="apple-touch-icon" href="https://hjalmarmeza.github.io/Musichris_Soul/assets/app_icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/app_icon.png">
     <meta name="theme-color" content="#000000">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -35,30 +35,45 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: #000 url('./assets/fondo_app.gif') center center no-repeat;
+            background: #000 url('assets/fondo_app.gif') center center no-repeat;
             background-size: cover;
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         .container {
             width: 100%;
             max-width: 500px;
-            padding: calc(var(--safe-top) + 2rem) 1.5rem 3rem;
+            padding: calc(var(--safe-top) + 1.5rem) 1.2rem 3rem;
             position: relative;
         }
 
         header {
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             position: relative;
         }
 
-        .btn-sync-circle {
+        /* --- LOGO VIA CSS (REFORZADO) --- */
+        .logo-sphere {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.2rem;
+            border-radius: 28px;
+            background-image: url('assets/app_icon.png');
+            background-size: cover;
+            background-position: center;
+            background-color: #111;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 0 25px var(--gold-glow);
+            position: relative;
+        }
+
+        .btn-sync-action {
             position: absolute;
-            top: -10px;
+            top: 0;
             right: 0;
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             background: var(--glass);
             border: 2px solid var(--accent-gold);
             border-radius: 50%;
@@ -66,276 +81,226 @@
             justify-content: center;
             align-items: center;
             color: var(--accent-gold);
-            box-shadow: 0 0 20px var(--gold-glow);
+            box-shadow: 0 0 15px var(--gold-glow);
             backdrop-filter: blur(10px);
-            cursor: pointer;
             z-index: 100;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .btn-sync-circle.rotating { transform: rotate(720deg); }
-
-        .logo-wrap {
-            width: 95px;
-            height: 95px;
-            margin: 0 auto 1.5rem;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 2px solid var(--accent-gold);
-            box-shadow: 0 0 40px var(--gold-glow);
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .app-icon {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .btn-sync-action.rotating { animation: spin 0.8s ease-in-out; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
+            font-size: 2.4rem;
             margin: 0;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
         }
 
-        .gold-text {
+        .gold-glow-text {
             color: var(--accent-gold);
-            text-shadow: 0 0 20px var(--gold-glow);
+            text-shadow: 0 0 15px var(--gold-glow);
         }
 
-        .version-badge {
-            font-size: 0.7rem;
-            letter-spacing: 5px;
+        .version-tag {
+            font-size: 0.6rem;
+            letter-spacing: 4px;
             color: var(--accent-gold);
-            margin-top: 0.8rem;
+            margin-top: 0.4rem;
             font-weight: 800;
-            opacity: 0.9;
+            opacity: 0.7;
         }
 
-        .stats-bar {
+        /* --- STATS DYNAMIC --- */
+        .mission-stats {
             display: flex;
-            gap: 12px;
-            margin-bottom: 2.5rem;
+            gap: 10px;
+            margin-bottom: 2rem;
         }
 
-        .stat-item {
+        .stat-card {
             flex: 1;
-            background: var(--glass);
-            backdrop-filter: blur(25px);
-            padding: 1.2rem;
-            border-radius: 24px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
-        .stat-v {
+        .stat-card .val {
             display: block;
             font-size: 1.8rem;
-            font-weight: 800;
+            font-weight: 900;
             color: var(--accent-gold);
-            margin-bottom: 4px;
         }
 
-        .stat-l {
-            font-size: 0.65rem;
+        .stat-card .lab {
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #ffffff;
-            opacity: 0.6;
+            letter-spacing: 1.5px;
+            opacity: 0.5;
             font-weight: 700;
         }
 
-        .catalog-card {
-            background: rgba(0,0,0,0.7);
+        /* --- CATALOG --- */
+        .catalog-container {
+            background: rgba(0,0,0,0.8);
             backdrop-filter: blur(30px);
-            border-radius: 32px;
-            padding: 1.8rem;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border-radius: 28px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .promise-list {
+        .catalog-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            max-height: 550px;
+            gap: 12px;
+            max-height: 450px;
             overflow-y: auto;
-            padding-right: 8px;
+            padding-right: 4px;
         }
 
-        .promise-item {
-            background: rgba(255,255,255,0.04);
-            padding: 1.4rem;
-            border-radius: 24px;
+        .entry-item {
+            background: rgba(255,255,255,0.03);
+            padding: 1.2rem;
+            border-radius: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.02);
+            transition: 0.3s;
         }
 
-        .promise-item:active { transform: scale(0.96); background: rgba(212, 175, 55, 0.08); }
+        .entry-item:active { background: rgba(212, 175, 55, 0.05); }
 
-        .promise-info { flex: 1; overflow: hidden; padding-right: 15px; }
+        .entry-info h4 { margin: 0; font-size: 1rem; color: var(--accent-gold); }
+        .entry-info p { margin: 4px 0 0; font-size: 0.75rem; opacity: 0.5; }
 
-        .promise-info h4 {
-            margin: 0 0 6px 0;
-            font-size: 1.1rem;
-            color: var(--accent-gold);
-            font-weight: 700;
-        }
-
-        .promise-info p {
-            margin: 0;
-            font-size: 0.85rem;
-            opacity: 0.6;
-            font-style: italic;
-        }
-
-        .pub-badge {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+        .pub-status {
+            font-size: 0.6rem;
+            background: #111;
             border: 1px solid var(--accent-gold);
             color: var(--accent-gold);
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 0.65rem;
-            font-weight: 800;
-            white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-weight: 900;
         }
 
-        #production-terminal {
+        /* PRODUCTION ENGINE */
+        #production-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98);
-            backdrop-filter: blur(40px);
-            z-index: 1000;
+            background: #000;
+            z-index: 2000;
             display: none;
-            padding: 2.5rem;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            padding: 2rem;
+            text-align: center;
         }
 
-        .terminal-box { width: 100%; max-width: 400px; text-align: center; }
-        .progress-bar { width: 100%; height: 6px; background: rgba(212, 175, 55, 0.1); border-radius: 10px; margin: 2.5rem 0; overflow: hidden; }
-        .progress-fill { width: 0%; height: 100%; background: var(--accent-gold); box-shadow: 0 0 20px var(--accent-gold); transition: width 0.4s ease; }
-        .step { display: flex; gap: 15px; align-items: center; margin-bottom: 18px; font-size: 0.9rem; opacity: 0.3; }
-        .step.active { opacity: 1; color: var(--accent-gold); animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
-        .step.done { opacity: 1; color: #10b981; }
-        .step-dot { width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
-        .promise-list::-webkit-scrollbar { width: 4px; }
-        .promise-list::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 10px; }
+        .loader-ring { width: 60px; height: 60px; border: 4px solid var(--glass); border-top-color: var(--accent-gold); border-radius: 50%; animation: spin 1s infinite linear; margin-bottom: 2rem; }
     </style>
 </head>
 <body>
     <div class="smoke-container"></div>
     <div class="container">
         <header>
-            <div id="sync-btn" class="btn-sync-circle" onclick="syncApp()">🔄</div>
-            <div class="logo-wrap">
-                <img src="https://hjalmarmeza.github.io/Musichris_Soul/assets/app_icon.png" alt="MusiChris Soul" class="app-icon" onerror="this.src='./assets/app_icon.png'">
-            </div>
-            <h1>MusiChris <span class="gold-text">Soul</span></h1>
-            <div class="version-badge">BETA v40.1</div>
+            <div id="sync-icon" class="btn-sync-action" onclick="refreshData()">🔄</div>
+            <div class="logo-sphere"></div>
+            <h1>MusiChris <span class="gold-glow-text">Soul</span></h1>
+            <div class="version-tag">MISSION CONTROL v40.2</div>
         </header>
 
-        <div class="stats-bar">
-            <div class="stat-item"><span class="stat-v" id="stat-promises">0</span><span class="stat-l">Promesas</span></div>
-            <div class="stat-item"><span class="stat-v">116</span><span class="stat-l">Paisajes</span></div>
+        <div class="mission-stats">
+            <div class="stat-card">
+                <span class="val" id="count-promises">92</span>
+                <span class="lab">Promesas Pendientes</span>
+            </div>
+            <div class="stat-card">
+                <span class="val" id="count-landscapes">115</span>
+                <span class="lab">Paisajes Libres</span>
+            </div>
         </div>
 
-        <section class="catalog-card">
-            <h2 style="font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 1.8rem 0; font-size: 1.6rem; color: #fff;">Catálogo de Gloria</h2>
-            <div class="promise-list" id="promise-list"></div>
+        <section class="catalog-container">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 0 0 1.2rem 0; font-style: italic;">Catálogo de Publicación</h2>
+            <div class="catalog-list" id="main-list">
+                <!-- Carga dinámica -->
+            </div>
         </section>
     </div>
 
-    <div id="production-terminal">
-        <div class="terminal-box">
-            <h2 style="font-family: 'Playfair Display', serif; color: var(--accent-gold); font-size: 2rem;">Produciendo</h2>
-            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-            <div class="terminal-steps">
-                <div class="step" id="step-1"><div class="step-dot"></div> Ingesta Teológica</div>
-                <div class="step" id="step-2"><div class="step-dot"></div> Sincronía Secuencial</div>
-                <div class="step" id="step-3"><div class="step-dot"></div> Renderizado Master</div>
-                <div class="step" id="step-4"><div class="step-dot"></div> Publicación Sentry</div>
-            </div>
-            <p id="terminal-status" style="font-size: 0.7rem; opacity: 0.6; text-transform: uppercase;">Ajustando filtros cinemáticos...</p>
-        </div>
+    <div id="production-screen">
+        <div class="loader-ring"></div>
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--accent-gold);">Generando Materia Prima</h2>
+        <p id="engine-sub" style="font-size: 0.7rem; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px;">Iniciando Renderizado FFmpeg...</p>
     </div>
 
     <script>
-        async function syncApp() {
-            const btn = document.getElementById('sync-btn');
-            btn.classList.add('rotating');
-            await loadContent();
-            setTimeout(() => btn.classList.remove('rotating'), 800);
+        const DB_URL = "data/promises_developed.json";
+
+        async function refreshData() {
+            const icon = document.getElementById('sync-icon');
+            icon.classList.add('rotating');
+            await initApp();
+            setTimeout(() => icon.classList.remove('rotating'), 800);
         }
 
-        async function loadContent() {
+        async function initApp() {
             try {
-                // Forzamos limpieza de caché en el fetch
-                const response = await fetch('./data/promises_developed.json?v=' + Date.now());
-                const data = await response.json();
-                document.getElementById('stat-promises').innerText = data.length;
-                const list = document.getElementById('promise-list');
+                const res = await fetch(DB_URL + '?v=' + Date.now());
+                const data = await res.json();
+                
+                const list = document.getElementById('main-list');
                 list.innerHTML = '';
-                data.forEach((item, index) => {
-                    const el = document.createElement('div');
-                    el.className = 'promise-item';
-                    el.onclick = () => produceVideo(item);
-                    // Lógica de conteo de publicaciones (Simulación basada en historial o ID)
-                    const pubCount = (index === 0 || index === 80) ? 1 : 0;
-                    el.innerHTML = `
-                        <div class="promise-info">
-                            <h4>${item.reflection_title || item.title}</h4>
-                            <p>${item.verse_citation || item.verse}</p>
+                
+                // Simulación de los que ya están publicados (Basado en tu subida de hoy)
+                const publishedIds = [1]; 
+                
+                document.getElementById('count-promises').innerText = data.length - publishedIds.length;
+                document.getElementById('count-landscapes').innerText = 116 - publishedIds.length;
+
+                data.forEach(item => {
+                    const isPub = publishedIds.includes(item.id);
+                    const div = document.createElement('div');
+                    div.className = 'entry-item';
+                    div.onclick = () => startProduction(item);
+                    div.innerHTML = `
+                        <div class="entry-info">
+                            <h4>${item.reflection_title}</h4>
+                            <p>${item.verse_citation}</p>
                         </div>
-                        <div class="pub-badge">Pub: ${pubCount}</div>
+                        <div class="pub-status">VIDEOS: ${isPub ? 1 : 0}</div>
                     `;
-                    list.appendChild(el);
+                    list.appendChild(div);
                 });
             } catch (e) {
-                console.error("Error:", e);
-                document.getElementById('promise-list').innerHTML = '<p style="opacity:0.5; text-align:center;">Reconectando con la Gloria...</p>';
+                console.error(e);
             }
         }
 
-        function produceVideo(item) {
-            document.getElementById('production-terminal').style.display = 'flex';
-            let progress = 0;
-            const fill = document.getElementById('progress-fill');
-            const status = document.getElementById('terminal-status');
-            const runStep = (stepId, text, time) => new Promise(resolve => {
-                document.getElementById(stepId).className = 'step active';
-                status.innerText = text;
-                setTimeout(() => {
-                    document.getElementById(stepId).className = 'step done';
-                    progress += 25;
-                    fill.style.width = progress + '%';
-                    resolve();
-                }, time);
-            });
-            (async () => {
-                await runStep('step-1', "Analizando teología profunda...", 1500);
-                await runStep('step-2', "Eligiendo paisajes de alta gama...", 2000);
-                await runStep('step-3', "Aplicando motor FFmpeg Soul...", 4000);
-                await runStep('step-4', "Sincronizando con YouTube Studio...", 1500);
-                status.innerText = "¡Misión Cumplida!";
-                setTimeout(() => {
-                    document.getElementById('production-terminal').style.display = 'none';
-                    document.querySelectorAll('.step').forEach(s => s.className = 'step');
-                    fill.style.width = '0%';
-                }, 2000);
-            })();
+        function startProduction(item) {
+            const screen = document.getElementById('production-screen');
+            const sub = document.getElementById('engine-sub');
+            screen.style.display = 'flex';
+            
+            const steps = ["Extrayendo Teología", "Sincronizando Melodía", "Renderizando Master", "Publicando en YouTube"];
+            let i = 0;
+            const timer = setInterval(() => {
+                if(i >= steps.length) {
+                    clearInterval(timer);
+                    sub.innerText = "¡PROCESO FINALIZADO!";
+                    setTimeout(() => screen.style.display = 'none', 1500);
+                } else {
+                    sub.innerText = steps[i];
+                    i++;
+                }
+            }, 1500);
         }
-        window.onload = loadContent;
+
+        window.onload = initApp;
     </script>
 </body>
 </html>
