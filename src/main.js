@@ -6,15 +6,12 @@ const fs = require('fs');
 const path = require('path');
 
 // --- DETECCIÓN HÍBRIDA DE FFmpeg ---
-let ffmpegBin = "/Users/hjalmarmeza/Library/Application Support/JDownloader 2/tools/mac/ffmpeg_10.10+/ffmpeg";
-if (!fs.existsSync(ffmpegBin)) {
-    ffmpegBin = "ffmpeg"; // Fallback para GitHub Actions o sistema
-}
-const georgiaFont = "/System/Library/Fonts/Supplemental/Georgia.ttf";
+const ffmpegBin = process.env.FFMPEG_PATH || "ffmpeg";
+const georgiaFont = process.env.FONT_PATH || "georgia"; // GitHub Actions tiene fuentes estándar
 
 async function main() {
     try {
-        console.log('🚀 [MusiChris Soul] - PRODUCCIÓN DE GRADO SHORT-SOVEREIGN v15.0');
+        console.log('🚀 [MusiChris Soul] - PRODUCCIÓN EN LA NUBE v15.3');
         const database = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/promises_developed.json'), 'utf8'));
         if (database.length === 0) throw new Error("Base de datos vacía. Revisa conexiones API.");
         
