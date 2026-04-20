@@ -109,11 +109,21 @@
             log.innerText = "Sincronizando Misión Híbrida...";
 
             try {
-                const msg = `[SOUL_TRIGGER]: ${item.id} - ${item.reflection_title}`;
+                // REPORTE PROFESIONAL PARA TELEGRAM
+                const msg = `🕊 *MUSICHRIS SOUL* | _Mission Control_\n` +
+                            `━━━━━━━━━━━━━━━━━━\n` +
+                            `🚀 *ORDEN DE PRODUCCIÓN ACTIVADA*\n` +
+                            `━━━━━━━━━━━━━━━━━━\n` +
+                            `🎵 *PIEZA:* ${item.reflection_title}\n` +
+                            `🆔 *ID:* ${item.id}\n` +
+                            `📖 *CITA:* ${item.verse_citation}\n` +
+                            `☁️ *ESTADO:* Remitiendo a la Nube (GitHub)\n` +
+                            `━━━━━━━━━━━━━━━━━━\n` +
+                            `🛰️ _Iniciando renderizado FFmpeg industrial..._`;
                 
                 // 1. AVISO A TELEGRAM (Confirmación instantánea)
                 if (tgToken && tgChat) {
-                    await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChat}&text=${encodeURIComponent(msg)}`);
+                    await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChat}&text=${encodeURIComponent(msg)}&parse_mode=Markdown`);
                 }
 
                 // 2. DISPARO A LA NUBE (GitHub Actions)
