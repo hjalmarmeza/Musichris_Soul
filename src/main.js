@@ -5,7 +5,11 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const ffmpegBin = "/Users/hjalmarmeza/Library/Application Support/JDownloader 2/tools/mac/ffmpeg_10.10+/ffmpeg";
+// --- DETECCIÓN HÍBRIDA DE FFmpeg ---
+let ffmpegBin = "/Users/hjalmarmeza/Library/Application Support/JDownloader 2/tools/mac/ffmpeg_10.10+/ffmpeg";
+if (!fs.existsSync(ffmpegBin)) {
+    ffmpegBin = "ffmpeg"; // Fallback para GitHub Actions o sistema
+}
 const georgiaFont = "/System/Library/Fonts/Supplemental/Georgia.ttf";
 
 async function main() {
@@ -14,7 +18,15 @@ async function main() {
         const database = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/promises_developed.json'), 'utf8'));
         if (database.length === 0) throw new Error("Base de datos vacía. Revisa conexiones API.");
         
-        const soulItem = database[Math.floor(Math.random() * database.length)];
+        // --- NUEVA LÓGICA DE CONTROL REMOTO ---
+        const targetId = process.argv.find(arg => arg.startsWith('--id='))?.split('=')[1];
+        const soulItem = targetId 
+            ? database.find(item => item.id == targetId) 
+            : database[Math.floor(Math.random() * database.length)];
+        
+        if (!soulItem) throw new Error(`Pieza con ID ${targetId} no encontrada.`);
+
+        console.log(`🎬 PRODUCIENDO: ${soulItem.reflection_title} (ID: ${soulItem.id})`);
         const landscapeInfo = await getNextPendingBackground();
         const backgroundUrl = landscapeInfo.url;
         

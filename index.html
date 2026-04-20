@@ -112,10 +112,35 @@
         }
         .loader { width: 70px; height: 70px; border: 5px solid var(--glass); border-top: 5px solid var(--accent-gold); border-radius: 50%; animation: spin 1.2s infinite linear; box-shadow: 0 0 20px var(--gold-glow); }
         #log { margin-top: 2rem; font-size: 0.65rem; color: var(--accent-gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+
+        /* CONFIG MODAL */
+        #config-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 3000;
+            display: none; justify-content: center; align-items: center; padding: 2rem;
+        }
+        .config-card { background: #111; padding: 2rem; border-radius: 25px; border: 1px solid var(--accent-gold); width: 100%; max-width: 350px; }
+        .config-card input { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 10px; font-size: 0.8rem; }
+        .btn-save { width: 100%; padding: 12px; background: var(--accent-gold); color: #000; border: none; border-radius: 10px; font-weight: 800; margin-top: 10px; }
+
+        .settings-trigger { position: fixed; bottom: 20px; right: 20px; opacity: 0.3; font-size: 1.2rem; }
     </style>
 </head>
 <body>
     <div class="smoke-bg"></div>
+    <div class="settings-trigger" onclick="toggleConfig()">⚙️</div>
+    
+    <div id="config-modal">
+        <div class="config-card">
+            <h3 style="color:var(--accent-gold); margin-top:0;">Configuración de Misión</h3>
+            <p style="font-size:0.6rem; opacity:0.5;">Tus tokens se guardan solo en este móvil de forma privada.</p>
+            <input type="password" id="tg-token" placeholder="Telegram Bot Token">
+            <input type="text" id="tg-chat" placeholder="Telegram Chat ID">
+            <button class="btn-save" onclick="saveConfig()">GUARDAR CONFIGURACIÓN</button>
+            <button style="background:none; border:none; color:white; width:100%; margin-top:15px; font-size:0.7rem; opacity:0.5;" onclick="toggleConfig()">CERRAR</button>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <div id="sync-b" class="refresh-btn" onclick="sync()">🔄</div>
@@ -173,24 +198,59 @@
             } catch (e) { console.error(e); }
         }
 
-        function produce(item) {
+        async function produce(item) {
+            const token = localStorage.getItem('soul-tg-token');
+            const chat = localStorage.getItem('soul-tg-chat');
+
+            if (!token || !chat) {
+                alert('⚠️ Por favor, configura tu Bot de Telegram primero en el icono de engranaje (abajo a la derecha).');
+                return;
+            }
+
             document.getElementById('production-hub').style.display = 'flex';
             const log = document.getElementById('log');
-            const steps = ["Enviando Señal a Mac", "Validando Teología", "Iniciando Renderizado", "Subiendo a YouTube"];
-            let i = 0;
-            const timer = setInterval(() => {
-                if(i >= steps.length) {
-                    clearInterval(timer);
-                    log.innerText = "¡PRODUCCIÓN EN CURSO!";
-                    setTimeout(() => document.getElementById('production-hub').style.display = 'none', 1500);
-                } else {
-                    log.innerText = steps[i];
-                    i++;
-                }
-            }, 1500);
+            log.innerText = "Emitiendo orden al Mac...";
 
-            // AQUÍ DISPARAREMOS LA ORDEN REAL A TELEGRAM EN EL SIGUIENTE PASO
+            try {
+                // ENVIAR ORDEN AL BOT DE TELEGRAM
+                const msg = `[SOUL_TRIGGER]: ${item.id}`;
+                await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat}&text=${encodeURIComponent(msg)}`);
+                
+                const steps = ["Señal Recibida por Telegram", "Validando Mac Remoto", "Producción Iniciada", "¡Misión Activa!"];
+                let i = 0;
+                const timer = setInterval(() => {
+                    if(i >= steps.length) {
+                        clearInterval(timer);
+                        log.innerText = "¡REVISAR TERMINAL DEL MAC!";
+                        setTimeout(() => document.getElementById('production-hub').style.display = 'none', 1500);
+                    } else {
+                        log.innerText = steps[i];
+                        i++;
+                    }
+                }, 1200);
+
+            } catch (e) {
+                alert('❌ Error al conectar con Telegram: ' + e.message);
+                document.getElementById('production-hub').style.display = 'none';
+            }
         }
+
+        function toggleConfig() {
+            const m = document.getElementById('config-modal');
+            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+            if (m.style.display === 'flex') {
+                document.getElementById('tg-token').value = localStorage.getItem('soul-tg-token') || '';
+                document.getElementById('tg-chat').value = localStorage.getItem('soul-tg-chat') || '';
+            }
+        }
+
+        function saveConfig() {
+            localStorage.setItem('soul-tg-token', document.getElementById('tg-token').value);
+            localStorage.setItem('soul-tg-chat', document.getElementById('tg-chat').value);
+            alert('✅ Configuración Guardada en este dispositivo.');
+            toggleConfig();
+        }
+
         window.onload = load;
     </script>
 </body>
