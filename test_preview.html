@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusiChris Soul - Diamond Flow Preview</title>
+    <style>
+        body { margin: 0; background: #000; font-family: 'Georgia', serif; overflow: hidden; display: flex; justify: center; align: items: center; height: 100vh; color: white; }
+        #video-container { width: 360px; height: 640px; background: url('https://res.cloudinary.com/dveqs8f3n/video/upload/v1766642912/Nature_Background.mp4') center/cover; position: relative; border: 5px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        
+        #card { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; height: 50%; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; opacity: 0; transition: opacity 0.8s; }
+        
+        #main-text { font-size: 20px; line-height: 1.4; margin-bottom: 20px; }
+        #citation { font-size: 14px; color: #FFD700; font-style: italic; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 10px; }
+        
+        #outro { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.8s; }
+        #logo { width: 100px; height: 100px; background: yellow; border-radius: 50%; margin-bottom: 20px; } /* Placeholder logo */
+        
+        #timer { position: absolute; top: 10px; right: 10px; font-family: monospace; background: rgba(0,0,0,0.5); padding: 5px; font-size: 12px; }
+        #controls { position: absolute; bottom: -60px; width: 100%; text-align: center; color: yellow; }
+    </style>
+</head>
+<body>
+
+    <div id="video-container">
+        <div id="timer">00:00</div>
+        
+        <div id="card">
+            <div id="main-text"></div>
+            <div id="citation"></div>
+        </div>
+
+        <div id="outro">
+            <div id="logo"></div>
+            <div style="font-size: 24px; font-weight: bold;">@Musichris_Studio</div>
+            <div style="font-size: 16px; margin: 10px 0;">¡Caminemos juntos en fe!</div>
+            <div style="background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 14px; color: cyan;">Suscríbete ahora</div>
+        </div>
+
+        <div id="controls">SIMULADOR DIAMOND FLOW - ID 20 (Getsemaní)</div>
+    </div>
+
+    <audio id="bg-audio" src="https://res.cloudinary.com/dveqs8f3n/video/upload/v1765486162/Getsemani%CC%81_ondgti.mp3"></audio>
+
+    <script>
+        const data = {
+            f1: { text: "En el huerto de los olivos, Jesús suda sangre mientras rinde Su voluntad al Padre.", cite: "Mateo 26:39" },
+            f2: { text: "Getsemaní significa 'prensa de aceite'; de Su dolor brotó nuestra sanidad plena.", cite: "REVELACIÓN" },
+            f3: { text: "¡Hay propósito! Lo que hoy te cuesta rendir, mañana será el aceite de unción para otros.", cite: "ESPERANZA" }
+        };
+
+        const card = document.getElementById('card');
+        const mText = document.getElementById('main-text');
+        const citeText = document.getElementById('citation');
+        const outro = document.getElementById('outro');
+        const timer = document.getElementById('timer');
+        const audio = document.getElementById('bg-audio');
+
+        let time = 0;
+        
+        document.body.onclick = () => {
+            if(audio.paused) audio.play();
+            setInterval(() => {
+                time++;
+                let s = time % 60;
+                timer.innerText = `00:${s < 10 ? '0'+s : s}`;
+
+                // FASE 1: 2-19s
+                if (time === 2) {
+                    mText.innerText = data.f1.text;
+                    citeText.innerText = data.f1.cite;
+                    card.style.opacity = 1;
+                }
+                if (time === 19) card.style.opacity = 0;
+
+                // FASE 2: 20-39s
+                if (time === 20) {
+                    mText.innerText = data.f2.text;
+                    citeText.innerText = data.f2.cite;
+                    card.style.opacity = 1;
+                }
+                if (time === 39) card.style.opacity = 0;
+
+                // FASE 3: 40-54s
+                if (time === 40) {
+                    mText.innerText = data.f3.text;
+                    citeText.style.color = "cyan";
+                    citeText.innerText = data.f3.cite;
+                    card.style.opacity = 1;
+                }
+                if (time === 54) card.style.opacity = 0;
+
+                // FASE 4: 55-65s
+                if (time === 55) outro.style.opacity = 1;
+                if (time === 65) location.reload();
+
+            }, 1000);
+        };
+    </script>
+</body>
+</html>

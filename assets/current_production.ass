@@ -14,13 +14,16 @@ Style: MainText,Georgia,68,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,1
 ; Estilo de la Cita (Debajo de la línea - Más elegante)
 Style: Citation,Georgia,55,&H00EEEEEE,&H000000FF,&H00000000,&H00000000,0,1,0,0,100,100,3,0,1,0,0,5,200,200,380,1
 ; Estilo Pie de Página (Más bajo para no interferir con la tarjeta)
-Style: Footer,Avenir Next,35,&H00CCCCCC,&H000000FF,&H00000000,&H00000000,1,0,0,0,100,100,5,0,1,0,0,2,100,100,200,1
+Style: Footer,Avenir Next,40,&H00CCCCCC,&H000000FF,&H00000000,&H00000000,1,0,0,0,100,100,8,0,1,0,0,8,100,100,80,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:00.00,0:00:55.00,Card,,0,0,0,,{\fad(500,500)} 
-Dialogue: 1,0:00:02.00,0:00:25.00,MainText,,0,0,0,,{\fad(800,800)}Simón de Cirene nos enseña\N\Nque a veces las cargas que\N\Nla vida nos impone son\N\Ninvitaciones disfrazadas\N\Npara caminar junto a Jesús.\N\NAl llevar Su cruz, Simón no\N\Nsolo alivió el peso físico\N\Ndel Salvador, sino que\N\Nencontró una redención que\N\Ntransformó a toda su\N\Nfamilia. No temas a los\N\Ndesvíos del camino; pueden\N\Nser el inicio de tu mayor\N\Ntestimonio.
-Dialogue: 1,0:00:02.00,0:00:25.00,Citation,,0,0,0,,{\fad(1000,1000)}{\fsp-5}————————————\NLucas 23:26
-Dialogue: 1,0:00:26.00,0:00:54.00,MainText,,0,0,0,,{\fad(800,800)}La ley de la 'angaria'\N\Nobligaba a cualquier civil a\N\Nservir al Imperio Romano.\N\NSimón, un extranjero que venía\N\Ndel campo, fue forzado a este\N\Nacto, pero la soberanía divina\N\Nconvirtió una imposición legal\N\Nen un encuentro eterno con la\N\NGracia, demostrando que Dios\N\Nutiliza hasta los decretos\N\Nhumanos para Sus propósitos de\N\Namor.
-Dialogue: 1,0:00:26.00,0:00:54.00,Citation,,0,0,0,,{\fad(1000,1000)}{\fsp-5}————————————\NDiscipulado de Amor
-Dialogue: 2,0:00:01.00,0:00:55.00,Footer,,0,0,0,,{\fad(2000,0)}MUSICHRIS | NOTA DE VIDA
+Dialogue: 0,0:00:00.00,0:01:05.00,Card,,0,0,0,,{\fad(500,500)} 
+Dialogue: 1,0:00:02.00,0:00:19.50,MainText,,0,0,0,,{\fad(800,800)}En el huerto de los\Nolivos, Jesús suda\Nsangre mientras rinde Su\Nvoluntad al Padre.
+Dialogue: 1,0:00:02.00,0:00:19.50,Citation,,0,0,0,,{\fad(1000,1000)}{\fsp-5}————————————\NMateo 26:39
+Dialogue: 2,0:00:20.00,0:00:39.50,MainText,,0,0,0,,{\fad(800,800)}Getsemaní significa\N'prensa de aceite'; de\NSu dolor brotó nuestra\Nsanidad plena.
+Dialogue: 2,0:00:20.00,0:00:39.50,Citation,,0,0,0,,{\fad(1000,1000)}{\fsp-5}————————————\NREVELACIÓN
+Dialogue: 3,0:00:40.00,0:00:54.50,MainText,,0,0,0,,{\fad(800,800)}{\c&H00FFFF&}¡Hay propósito! Lo que\Nhoy te cuesta rendir,\Nmañana será el aceite de\Nunción para otros.
+Dialogue: 3,0:00:40.00,0:00:54.50,Citation,,0,0,0,,{\fad(1000,1000)}{\fsp-5}————————————\NESPERANZA
+Dialogue: 1,0:00:55.00,0:01:04.00,Footer,,0,0,0,,{\fad(800,800)}{\an5\pos(540,1650)}@Musichris_Studio\N{\fscx85\fscy85}¡Caminemos juntos en fe!\N{\fscx75\fscy75\c&H00FFFF&}Suscríbete ahora para más reflexiones
+Dialogue: 5,0:00:01.00,0:00:54.50,Footer,,0,0,0,,{\fad(2000,0)}MUSICHRIS | NOTA DE VIDA
