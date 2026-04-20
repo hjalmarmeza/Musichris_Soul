@@ -1,9 +1,932 @@
 [
-  {"id":1,"title":"Cireneo","reflection_title":"Cireneo","verse_citation":"Lucas 23:26","text":"Simón de Cirene es elegido para cargar la cruz, caminando junto al Maestro.","explanation":"Lo que parecía un peso impuesto por hombres fue su mayor gloria espiritual.","teaching":"¡Cobra ánimo! Tu carga actual es la oportunidad para estar más cerca de Jesús.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360897/wi5649ngot0kzi9m7mwu.mp3"},
-  {"id":2,"title":"Alabastro","reflection_title":"Alabastro","verse_citation":"Lucas 7:37","text":"Una mujer entrega su tesoro más caro para ungir al Salvador con amor.","explanation":"El perfume era su futuro; ella decidió que Jesús era digno de todo su mañana.","teaching":"¡Regocíjate! Tu entrega sincera hoy, perfuma el trono de Dios con una fragancia eterna.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360791/gqprsmse1a8q0b9rxboa.mp3"},
-  {"id":3,"title":"En la Orilla","reflection_title":"En la Orilla","verse_citation":"Juan 21:9","text":"Jesús espera a Sus discípulos en el amanecer con un desayuno de amor preparado.","explanation":"Él no los recibe con reproches, sino con una hoguera que sana sus corazones.","teaching":"¡Hay esperanza! No importa lo que pasó anoche, el Maestro tiene un nuevo comienzo hoy.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765486404/En_la_orilla_gjbede.mp3"},
-  {"id":14,"title":"Kadosh","reflection_title":"Kadosh","verse_citation":"Isaías 6:3","text":"Isaías ve la gloria de Dios llenando el templo. ¡Él es Santo y Su luz lo inunda todo!","explanation":"Kadosh significa que Su pureza es tan grande que ninguna sombra puede tocarte.","teaching":"¡Alégrate! El Dios Santo que gobierna los cielos cuida de ti hoy con amor tierno.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765361154/sfm2apwuowwiajwnhi6v.mp3"},
-  {"id":25,"title":"Solo una Cosa","reflection_title":"Solo una Cosa","verse_citation":"Salmo 27:4","text":"David descubre que el secreto de la victoria es habitar siempre en Su presencia.","explanation":"Su deleite era contemplar la hermosura de Dios por encima de sus propias batallas.","teaching":"¡Ten paz! Lo único que realmente necesitas es disfrutar a Dios; Él se encarga de lo demás.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765807152/Solo_una_cosa_lor5km.mp3"},
-  {"id":31,"title":"Quietud","reflection_title":"Quietud","verse_citation":"Salmo 46","text":"'Estad quietos y conoced que yo soy Dios'. Su paz sobrepasa todo entendimiento.","explanation":"La palabra hebrea Raphah invita a soltar el control y confiar en Su soberanía.","teaching":"¡Sonríe! No tienes que resolverlo todo hoy; el Dios de los ejércitos pelea por ti.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765807569/Quietud_n2z3na.mp3"},
-  {"id":93,"title":"Reino Eterno","reflection_title":"Reino Eterno","verse_citation":"Salmo 22:27","text":"Todas las naciones recordarán Su nombre y volverán al Señor con gritos de alegría.","explanation":"Lo que empezó en dolor en la cruz, termina en un triunfo eterno para todo Su pueblo.","teaching":"¡Victoria total! Tu historia terminará en un gran abrazo con el Padre celestial. Amén.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1774996293/Reino_Eterno_kimkbq.mp3"}
+  {
+    "id": 1,
+    "title": "Cireneo",
+    "reflection_title": "Cireneo",
+    "verse_citation": "Lucas 23:26",
+    "text": "Sim\u00f3n de Cirene es elegido para cargar la cruz, caminando junto al Maestro.",
+    "explanation": "Lo que parec\u00eda un peso impuesto por hombres fue su mayor gloria espiritual.",
+    "teaching": "\u00a1Cobra \u00e1nimo! Tu carga actual es la oportunidad para estar m\u00e1s cerca de Jes\u00fas.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360897/wi5649ngot0kzi9m7mwu.mp3"
+  },
+  {
+    "id": 2,
+    "title": "Alabastro",
+    "reflection_title": "Alabastro",
+    "verse_citation": "Lucas 7:37",
+    "text": "Una mujer entrega su tesoro m\u00e1s caro para ungir al Salvador con amor.",
+    "explanation": "El perfume era su futuro; ella decidi\u00f3 que Jes\u00fas era digno de todo su ma\u00f1ana.",
+    "teaching": "\u00a1Regoc\u00edjate! Tu entrega sincera hoy, perfuma el trono de Dios con una fragancia eterna.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360791/gqprsmse1a8q0b9rxboa.mp3"
+  },
+  {
+    "id": 3,
+    "title": "En la Orilla",
+    "reflection_title": "En la Orilla",
+    "verse_citation": "Juan 21:9",
+    "text": "Jes\u00fas espera a Sus disc\u00edpulos en el amanecer con un desayuno de amor preparado.",
+    "explanation": "\u00c9l no los recibe con reproches, sino con una hoguera que sana sus corazones.",
+    "teaching": "\u00a1Hay esperanza! No importa lo que pas\u00f3 anoche, el Maestro tiene un nuevo comienzo hoy.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765486404/En_la_orilla_gjbede.mp3"
+  },
+  {
+    "id": 4,
+    "title": "El Camino",
+    "reflection_title": "El Camino",
+    "verse_citation": "Lucas 24",
+    "text": "Dos disc\u00edpulos caminan tristes a Ema\u00fas sin reconocer que Jes\u00fas camina con ellos.",
+    "explanation": "Sus ojos se abrieron al partir el pan; sus corazones ya ard\u00edan con Su palabra.",
+    "teaching": "\u00a1Alegr\u00eda! Incluso cuando no lo ves, Dios camina a tu lado transformando tu tristeza.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765486356/El_Camino_vhutle.mp3"
+  },
+  {
+    "id": 5,
+    "title": "Manos de Gracia",
+    "reflection_title": "Manos de Gracia",
+    "verse_citation": "Juan 13",
+    "text": "Jes\u00fas se quita el manto y toma la toalla para lavar los pies de Sus disc\u00edpulos.",
+    "explanation": "Lavar los pies era la tarea del esclavo; Jes\u00fas la eleva a mandato de amor puro.",
+    "teaching": "\u00a1Qu\u00e9 bendici\u00f3n! En Su Reino, servir a otros es el camino m\u00e1s corto al coraz\u00f3n de Dios.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765485940/Manos_de_Gracia._u0cbld.mp3"
+  },
+  {
+    "id": 6,
+    "title": "La Mejor Parte",
+    "reflection_title": "La Mejor Parte",
+    "verse_citation": "Lucas 10:42",
+    "text": "Marta se afana con los quehaceres, mientras Mar\u00eda se sienta a los pies de Jes\u00fas.",
+    "explanation": "Mar\u00eda rompi\u00f3 la norma cultural al aprender como disc\u00edpula de un Rabino.",
+    "teaching": "\u00a1Ten paz! No permitas que lo urgente te robe lo importante: ser amado por Su Presencia.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360814/l6vkoxz2igljmyjcf6od.mp3"
+  },
+  {
+    "id": 7,
+    "title": "Siete Vueltas",
+    "reflection_title": "Siete Vueltas",
+    "verse_citation": "Josu\u00e9 6",
+    "text": "Los muros de Jeric\u00f3 caen tras siete d\u00edas de obediencia, silencio y gritos de fe.",
+    "explanation": "No se usaron armas humanas, sino la liturgia de Dios para derribar lo imposible.",
+    "teaching": "\u00a1Cobra aliento! Dios ya ha entregado la victoria; solo camina en fe y obediencia gozosa.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360281/sv6flgpmehveyfnnjasq.mp3"
+  },
+  {
+    "id": 8,
+    "title": "El Manto",
+    "reflection_title": "El Manto",
+    "verse_citation": "Marcos 5",
+    "text": "Una mujer enferma por 12 a\u00f1os se abre paso entre la multitud para tocar a Jes\u00fas.",
+    "explanation": "Su fe rompi\u00f3 el aislamiento legal y desat\u00f3 una virtud sanadora instant\u00e1nea.",
+    "teaching": "\u00a1Sonr\u00ede! Un solo toque de fe hoy puede restaurar a\u00f1os de dolor. \u00a1\u00c9l tiene poder para ti!",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765486272/El_Manto_mfbwpu.mp3"
+  },
+  {
+    "id": 9,
+    "title": "Guardi\u00e1n",
+    "reflection_title": "Guardi\u00e1n",
+    "verse_citation": "Apocalipsis 5",
+    "text": "Juan llora porque nadie es digno de abrir el libro, hasta que aparece el Cordero.",
+    "explanation": "El Le\u00f3n que vence es el Cordero que fue inmolado; el poder de Dios es la entrega.",
+    "teaching": "\u00a1No llores m\u00e1s! El destino de tu vida est\u00e1 en las manos del que te ama y te guarda.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360373/tvm78ysiajiloc7vntaq.mp3"
+  },
+  {
+    "id": 10,
+    "title": "Soplo de Vida",
+    "reflection_title": "Soplo de Vida",
+    "verse_citation": "Ezequiel 37",
+    "text": "Ezequiel profetiza sobre un valle de huesos secos y el Esp\u00edritu los hace vivir.",
+    "explanation": "El aliento de Dios (Ruaj) transforma un cementerio en un ej\u00e9rcito victorioso.",
+    "teaching": "\u00a1Revive hoy! No importa cu\u00e1n seco est\u00e9 el camino; el soplo de Dios trae vida nueva hoy.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360163/tmei63neapamcfetjqlx.mp3"
+  },
+  {
+    "id": 11,
+    "title": "La Piedra Rod\u00f3",
+    "reflection_title": "La Piedra Rod\u00f3",
+    "verse_citation": "Mateo 28",
+    "text": "El \u00e1ngel hace rodar la piedra, no para que Jes\u00fas salga, sino para que nosotros entremos.",
+    "explanation": "La tumba vac\u00eda es la prueba legal de que la muerte ha sido derrotada para siempre.",
+    "teaching": "\u00a1Celebra la vida! La tumba est\u00e1 vac\u00eda y tu esperanza est\u00e1 m\u00e1s viva que nunca en Jes\u00fas.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765486313/La_piedra_rodo%CC%81._qmkuiu.mp3"
+  },
+  {
+    "id": 12,
+    "title": "A Medianoche",
+    "reflection_title": "A Medianoche",
+    "verse_citation": "Hechos 16",
+    "text": "En el calabozo, Pablo y Silas cantan himnos a Dios mientras los presos escuchan.",
+    "explanation": "Un terremoto rompi\u00f3 las cadenas; la alabanza fue la llave que abri\u00f3 la c\u00e1rcel.",
+    "teaching": "\u00a1Canta con fe! Tu alabanza en la noche es el preludio de un gran milagro de libertad.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360204/syrgbhwqxpqbmh2jxtcx.mp3"
+  },
+  {
+    "id": 13,
+    "title": "Tu Sombra y Tu Luz",
+    "reflection_title": "Tu Sombra y Tu Luz",
+    "verse_citation": "\u00c9xodo 13",
+    "text": "Dios gu\u00eda a Su pueblo con una columna de nube de d\u00eda y una columna de fuego de noche.",
+    "explanation": "La nube proteg\u00eda del calor y el fuego iluminaba el fr\u00edo desierto del camino.",
+    "teaching": "\u00a1Descansa en \u00c9l! Tienes protecci\u00f3n en el calor y luz en la sombra. \u00a1Dios va al frente!",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360242/rlfi7n3ha7esvdpkjgwq.mp3"
+  },
+  {
+    "id": 14,
+    "title": "Kadosh",
+    "reflection_title": "Kadosh",
+    "verse_citation": "Isa\u00edas 6:3",
+    "text": "Isa\u00edas ve la gloria de Dios llenando el templo. \u00a1\u00c9l es Santo y Su luz lo inunda todo!",
+    "explanation": "Kadosh significa que Su pureza es tan grande que ninguna sombra puede tocarte.",
+    "teaching": "\u00a1Al\u00e9grate! El Dios Santo que gobierna los cielos cuida de ti hoy con amor tierno.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765361154/sfm2apwuowwiajwnhi6v.mp3"
+  },
+  {
+    "id": 15,
+    "title": "Le\u00f3n y Cordero",
+    "reflection_title": "Le\u00f3n y Cordero",
+    "verse_citation": "Apocalipsis 5:5",
+    "text": "Jes\u00fas es el Le\u00f3n de la tribu de Jud\u00e1 que ha vencido y el Cordero humilde inmolado.",
+    "explanation": "\u00c9l une la fuerza soberana con la mansedumbre absoluta para nuestra salvaci\u00f3n.",
+    "teaching": "\u00a1S\u00e9 valiente! El Le\u00f3n pelea por ti y el Cordero te abraza. Nada puede vencerte hoy.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765361122/pv8lom15xpowq7swo4w9.mp3"
+  },
+  {
+    "id": 16,
+    "title": "Consumado Es",
+    "reflection_title": "Consumado Es",
+    "verse_citation": "Juan 19:30",
+    "text": "Desde la cruz, Jes\u00fas grita: 'Consumado es' antes de entregar Su esp\u00edritu al Padre.",
+    "explanation": "'Tetelestai' significa: 'La deuda ha sido pagada en su totalidad'. Nada falta.",
+    "teaching": "\u00a1Libertad total! Jes\u00fas ya gan\u00f3 la batalla por ti. Camina hoy en Su victoria y gracia.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765486214/Consum_do_es_gyquu6.mp3"
+  },
+  {
+    "id": 17,
+    "title": "El Susurro",
+    "reflection_title": "El Susurro",
+    "verse_citation": "1 Reyes 19",
+    "text": "El\u00edas busca a Dios en el fuego y el viento, pero lo halla en un silbo suave y apacible.",
+    "explanation": "Dios elige la quietud \u00edntima por encima del estruendo para sanar el alma agotada.",
+    "teaching": "\u00a1Escucha Su voz! En el silencio de Su amor hallar\u00e1s la alegr\u00eda que el mundo no te da.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360835/o25nyep019z0ofkdyfsk.mp3"
+  },
+  {
+    "id": 18,
+    "title": "M\u00edo Eres T\u00fa",
+    "reflection_title": "M\u00edo Eres T\u00fa",
+    "verse_citation": "Isa\u00edas 43",
+    "text": "No temas, porque yo te redim\u00ed; te puse nombre, m\u00edo eres t\u00fa. Caminar\u00e9 contigo.",
+    "explanation": "Promesa de identidad inquebrantable para un pueblo que cre\u00eda haber sido olvidado.",
+    "teaching": "\u00a1Eres amado! Dios te conoce por tu nombre y nunca soltar\u00e1 tu mano. Eres un tesoro real.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360412/hxynwygagjizcfujavwi.mp3"
+  },
+  {
+    "id": 19,
+    "title": "En Tus Manos",
+    "reflection_title": "En Tus Manos",
+    "verse_citation": "Jerem\u00edas 18",
+    "text": "Dios env\u00eda a Jerem\u00edas a la casa del alfarero para ver c\u00f3mo se restaura el barro roto.",
+    "explanation": "El alfarero no tira el barro da\u00f1ado; lo vuelve a amasar para hacer algo nuevo.",
+    "teaching": "\u00a1Conf\u00eda! Dios est\u00e1 haciendo una obra maestra con tu vida. \u00a1Lo mejor est\u00e1 por venir!",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360858/slji0tnwpchardcrzcpd.mp3"
+  },
+  {
+    "id": 20,
+    "title": "Getseman\u00ed",
+    "reflection_title": "Getseman\u00ed",
+    "verse_citation": "Mateo 26:39",
+    "text": "En el huerto de los olivos, Jes\u00fas suda sangre mientras rinde Su voluntad al Padre.",
+    "explanation": "Getseman\u00ed significa 'prensa de aceite'; de Su dolor brot\u00f3 nuestra sanidad plena.",
+    "teaching": "\u00a1Hay prop\u00f3sito! Lo que hoy te cuesta rendir, ma\u00f1ana ser\u00e1 el aceite de unci\u00f3n para otros.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765486162/Getsemani%CC%81_ondgti.mp3"
+  },
+  {
+    "id": 21,
+    "title": "Invisible",
+    "reflection_title": "Invisible",
+    "verse_citation": "Hebreos 11",
+    "text": "Por la fe caminamos como viendo al Invisible, con la certeza de lo que no vemos.",
+    "explanation": "La fe es el 'sexto sentido' que nos permite operar en la realidad eterna de Dios.",
+    "teaching": "\u00a1Ver\u00e1s Su gloria! Aunque no lo veas ahora, Dios ya est\u00e1 preparando tu milagro eterno.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360877/hqs0otahkbsesrldpu8v.mp3"
+  },
+  {
+    "id": 22,
+    "title": "Espejo de Fuego",
+    "reflection_title": "Espejo de Fuego",
+    "verse_citation": "Apocalipsis 15",
+    "text": "Juan ve a los vencedores sobre un mar de vidrio mezclado con fuego, adorando al Rey.",
+    "explanation": "Simboliza la santidad transparente y el triunfo de Dios sobre toda persecuci\u00f3n.",
+    "teaching": "\u00a1Victoria! T\u00fa estar\u00e1s sobre ese mar cantando alabanzas al Dios que te hizo vencedor.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765361173/uoenmbrytyvyyx7xnjc7.mp3"
+  },
+  {
+    "id": 23,
+    "title": "Cielo Nuevo",
+    "reflection_title": "Cielo Nuevo",
+    "verse_citation": "Apocalipsis 21",
+    "text": "No habr\u00e1 m\u00e1s llanto, ni dolor, ni muerte, porque Dios har\u00e1 nuevas todas las cosas.",
+    "explanation": "La restauraci\u00f3n final: la creaci\u00f3n entera liberada para disfrutar de Su rostro.",
+    "teaching": "\u00a1Regoc\u00edjate! El cielo es tu hogar real y pronto Dios secar\u00e1 cada una de tus l\u00e1grimas.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765361198/xtohlfixqntzhytw0q72.mp3"
+  },
+  {
+    "id": 24,
+    "title": "Maranatha",
+    "reflection_title": "Maranatha",
+    "verse_citation": "Apocalipsis 22",
+    "text": "El Esp\u00edritu y la Esposa dicen: Ven. El anhelo final de toda la creaci\u00f3n por Su regreso.",
+    "explanation": "'Maranatha' era el canto de victoria de los primeros cristianos triunfantes.",
+    "teaching": "\u00a1Ven pronto Se\u00f1or! Vive hoy con el gozo de saber que el encuentro con Jes\u00fas est\u00e1 cerca.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765588152/Maranatha_lowk4e.mp3"
+  },
+  {
+    "id": 25,
+    "title": "Solo una Cosa",
+    "reflection_title": "Solo una Cosa",
+    "verse_citation": "Salmo 27:4",
+    "text": "David descubre que el secreto de la victoria es habitar siempre en Su presencia.",
+    "explanation": "Su deleite era contemplar la hermosura de Dios por encima de sus propias batallas.",
+    "teaching": "\u00a1Ten paz! Lo \u00fanico que realmente necesitas es disfrutar a Dios; \u00c9l se encarga del resto.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765807152/Solo_una_cosa_lor5km.mp3"
+  },
+  {
+    "id": 26,
+    "title": "El Escondite",
+    "reflection_title": "El Escondite",
+    "verse_citation": "Salmo 32:7",
+    "text": "T\u00fa eres mi refugio; me guardar\u00e1s de la angustia y me rodear\u00e1s con c\u00e1nticos de alegr\u00eda.",
+    "explanation": "Cuando confesamos, Dios nos rodea con una muralla de liberaci\u00f3n y amor eterno.",
+    "teaching": "\u00a1Si\u00e9ntete libre! Dios ha cambiado tu lamento en baile y te rodea con Su abrazo real.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765807406/El_Escondite_u7n6qp.mp3"
+  },
+  {
+    "id": 27,
+    "title": "Tu Mirada Me Sigue",
+    "reflection_title": "Tu Mirada Me Sigue",
+    "verse_citation": "Salmo 139",
+    "text": "Dios conoce cada pensamiento y paso que das; Su mirada es de amor eterno.",
+    "explanation": "Su conocimiento no es juicio, es compa\u00f1\u00eda ineludible en cada rinc\u00f3n del alma.",
+    "teaching": "\u00a1No temas! Dondequiera que vayas hoy, la bondad de Dios ya lleg\u00f3 antes que t\u00fa.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765807241/Tu_Mirada_Me_Sigue_oldqom.mp3"
+  },
+  {
+    "id": 28,
+    "title": "Pieza 28",
+    "reflection_title": "Pieza 28",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 29,
+    "title": "Pieza 29",
+    "reflection_title": "Pieza 29",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 30,
+    "title": "Pieza 30",
+    "reflection_title": "Pieza 30",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 31,
+    "title": "Quietud",
+    "reflection_title": "Quietud",
+    "verse_citation": "Salmo 46:10",
+    "text": "Estad quietos y conoced que yo soy Dios; descanso total en Su soberan\u00eda.",
+    "explanation": "Raphah invita a soltar el control y dejar que el Creador sea tu muralla fiel.",
+    "teaching": "\u00a1Sonr\u00ede! Tu mayor fuerza hoy nace de tu confianza silenciosa en Su poder real.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765807569/Quietud_n2z3na.mp3"
+  },
+  {
+    "id": 32,
+    "title": "Pieza 32",
+    "reflection_title": "Pieza 32",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 33,
+    "title": "Pieza 33",
+    "reflection_title": "Pieza 33",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 34,
+    "title": "Pieza 34",
+    "reflection_title": "Pieza 34",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 35,
+    "title": "Pieza 35",
+    "reflection_title": "Pieza 35",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 36,
+    "title": "Pieza 36",
+    "reflection_title": "Pieza 36",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 37,
+    "title": "Pieza 37",
+    "reflection_title": "Pieza 37",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 38,
+    "title": "Pieza 38",
+    "reflection_title": "Pieza 38",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 39,
+    "title": "Pieza 39",
+    "reflection_title": "Pieza 39",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 40,
+    "title": "Pieza 40",
+    "reflection_title": "Pieza 40",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 41,
+    "title": "Pieza 41",
+    "reflection_title": "Pieza 41",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 42,
+    "title": "Pieza 42",
+    "reflection_title": "Pieza 42",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 43,
+    "title": "Pieza 43",
+    "reflection_title": "Pieza 43",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 44,
+    "title": "Pieza 44",
+    "reflection_title": "Pieza 44",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 45,
+    "title": "Pieza 45",
+    "reflection_title": "Pieza 45",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 46,
+    "title": "Pieza 46",
+    "reflection_title": "Pieza 46",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 47,
+    "title": "Pieza 47",
+    "reflection_title": "Pieza 47",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 48,
+    "title": "Pieza 48",
+    "reflection_title": "Pieza 48",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 49,
+    "title": "Pieza 49",
+    "reflection_title": "Pieza 49",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 50,
+    "title": "Pieza 50",
+    "reflection_title": "Pieza 50",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 51,
+    "title": "Pieza 51",
+    "reflection_title": "Pieza 51",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 52,
+    "title": "Pieza 52",
+    "reflection_title": "Pieza 52",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 53,
+    "title": "Pieza 53",
+    "reflection_title": "Pieza 53",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 54,
+    "title": "Pieza 54",
+    "reflection_title": "Pieza 54",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 55,
+    "title": "Pieza 55",
+    "reflection_title": "Pieza 55",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 56,
+    "title": "Pieza 56",
+    "reflection_title": "Pieza 56",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 57,
+    "title": "Pieza 57",
+    "reflection_title": "Pieza 57",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 58,
+    "title": "Pieza 58",
+    "reflection_title": "Pieza 58",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 59,
+    "title": "Pieza 59",
+    "reflection_title": "Pieza 59",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 60,
+    "title": "Pieza 60",
+    "reflection_title": "Pieza 60",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 61,
+    "title": "Pieza 61",
+    "reflection_title": "Pieza 61",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 62,
+    "title": "Pieza 62",
+    "reflection_title": "Pieza 62",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 63,
+    "title": "Pieza 63",
+    "reflection_title": "Pieza 63",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 64,
+    "title": "Pieza 64",
+    "reflection_title": "Pieza 64",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 65,
+    "title": "Pieza 65",
+    "reflection_title": "Pieza 65",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 66,
+    "title": "Pieza 66",
+    "reflection_title": "Pieza 66",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 67,
+    "title": "Pieza 67",
+    "reflection_title": "Pieza 67",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 68,
+    "title": "Pieza 68",
+    "reflection_title": "Pieza 68",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 69,
+    "title": "Pieza 69",
+    "reflection_title": "Pieza 69",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 70,
+    "title": "Pieza 70",
+    "reflection_title": "Pieza 70",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 71,
+    "title": "Pieza 71",
+    "reflection_title": "Pieza 71",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 72,
+    "title": "Pieza 72",
+    "reflection_title": "Pieza 72",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 73,
+    "title": "Pieza 73",
+    "reflection_title": "Pieza 73",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 74,
+    "title": "Pieza 74",
+    "reflection_title": "Pieza 74",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 75,
+    "title": "Pieza 75",
+    "reflection_title": "Pieza 75",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 76,
+    "title": "Pieza 76",
+    "reflection_title": "Pieza 76",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 77,
+    "title": "Pieza 77",
+    "reflection_title": "Pieza 77",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 78,
+    "title": "Pieza 78",
+    "reflection_title": "Pieza 78",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 79,
+    "title": "Pieza 79",
+    "reflection_title": "Pieza 79",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 80,
+    "title": "Pieza 80",
+    "reflection_title": "Pieza 80",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 81,
+    "title": "Pieza 81",
+    "reflection_title": "Pieza 81",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 82,
+    "title": "Pieza 82",
+    "reflection_title": "Pieza 82",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 83,
+    "title": "Pieza 83",
+    "reflection_title": "Pieza 83",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 84,
+    "title": "Pieza 84",
+    "reflection_title": "Pieza 84",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 85,
+    "title": "Pieza 85",
+    "reflection_title": "Pieza 85",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 86,
+    "title": "Pieza 86",
+    "reflection_title": "Pieza 86",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 87,
+    "title": "Pieza 87",
+    "reflection_title": "Pieza 87",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 88,
+    "title": "Pieza 88",
+    "reflection_title": "Pieza 88",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 89,
+    "title": "Pieza 89",
+    "reflection_title": "Pieza 89",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 90,
+    "title": "Pieza 90",
+    "reflection_title": "Pieza 90",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 91,
+    "title": "Pieza 91",
+    "reflection_title": "Pieza 91",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 92,
+    "title": "Pieza 92",
+    "reflection_title": "Pieza 92",
+    "verse_citation": "Salmo",
+    "text": "Dios es tu refugio y fortaleza en todo tiempo.",
+    "explanation": "Su fidelidad es escudo y adarga para los que en \u00c9l conf\u00edan.",
+    "teaching": "\u00a1Ten esperanza! Dios tiene el control y Sus planes para ti son de paz.",
+    "audio_url": "URL"
+  },
+  {
+    "id": 93,
+    "title": "Reino Eterno",
+    "reflection_title": "Reino Eterno",
+    "verse_citation": "Salmo 22:27",
+    "text": "Todas las naciones recordar\u00e1n Su nombre y se volver\u00e1n al Se\u00f1or con gritos de alegr\u00eda.",
+    "explanation": "Lo que empez\u00f3 en sacrificio en la cruz culmina en un triunfo universal de paz.",
+    "teaching": "\u00a1Victoria absoluta! Tu historia personal es parte del reino que nunca tendr\u00e1 fin.",
+    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1774996293/Reino_Eterno_kimkbq.mp3"
+  }
 ]
