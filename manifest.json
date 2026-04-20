@@ -1,0 +1,22 @@
+{
+  "name": "MusiChris Soul",
+  "short_name": "Soul",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#D4AF37",
+  "description": "Centro de Producción de Reflexiones Ministeriales MusiChris Studio",
+  "icons": [
+    {
+      "src": "assets/app_icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/app_icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
