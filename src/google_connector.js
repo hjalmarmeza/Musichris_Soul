@@ -1,17 +1,25 @@
 const { google } = require('googleapis');
 const fs = require('fs');
-const path = require('path');
 const axios = require('axios');
 
-const CREDENTIALS_PATH = path.join(__dirname, '../credentials.json');
-const TOKEN_PATH = path.join(__dirname, '../token.json');
-
+/**
+ * Musichris Soul - Google Cloud Connector
+ * Optimized for GitHub Actions (Uses Secrets instead of local files)
+ */
 async function getAuth() {
-    const content = fs.readFileSync(CREDENTIALS_PATH);
-    const creds = JSON.parse(content);
+    const GOOGLE_CREDENTIALS = process.env.GOOGLE_CREDENTIALS;
+    const GOOGLE_TOKEN = process.env.GOOGLE_TOKEN;
+
+    if (!GOOGLE_CREDENTIALS || !GOOGLE_TOKEN) {
+        throw new Error('❌ Error: Credenciales de Google (Secretos) no configuradas en el entorno.');
+    }
+
+    const creds = JSON.parse(GOOGLE_CREDENTIALS);
+    const token = JSON.parse(GOOGLE_TOKEN);
+    
     const { client_secret, client_id, redirect_uris } = creds.installed || creds.web;
     const auth = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
-    auth.setCredentials(JSON.parse(fs.readFileSync(TOKEN_PATH)));
+    auth.setCredentials(token);
     return auth;
 }
 
@@ -76,23 +84,23 @@ async function appendSheetRow(spreadsheetId, range, values) {
     });
 }
 
-async function uploadToYouTube(videoPath, title, description) {
+async function uploadToYouTube(videoPath, soulItem) {
     const auth = await getAuth();
     const youtube = google.youtube({ version: 'v3', auth });
     
-    console.log('[YOUTUBE] Iniciando subida de video ministerial:', videoPath);
+    console.log('[YOUTUBE] Iniciando subida de video ministerial:', soulItem.reflection_title);
     
     const fileSize = fs.statSync(videoPath).size;
     const res = await youtube.videos.insert({
         part: 'snippet,status',
         requestBody: {
             snippet: {
-                title: `${title} | MusiChris Soul 🕊️`,
-                description: description || 'MusiChris Soul: Una nota de vida para tu alma.',
-                categoryId: '10' // Música
+                title: `${soulItem.reflection_title} | MusiChris Soul 🕊️`,
+                description: `Soberanía Ministerial: ${soulItem.reflection_title}\nCita: ${soulItem.verse_citation}\n\nExplora tu fe con MusiChris Soul.`,
+                categoryId: '10'
             },
             status: {
-                privacyStatus: 'unlisted', // Iniciamos en Oculto para revisión final
+                privacyStatus: 'private', 
                 selfDeclaredMadeForKids: false
             }
         },
@@ -107,7 +115,7 @@ async function uploadToYouTube(videoPath, title, description) {
     });
     
     console.log('\n[YOUTUBE] ¡Subida exitosa! YouTube ID:', res.data.id);
-    return res.data;
+    return res.data.id;
 }
 
-module.exports = { smartDownload, getSoulSheetsData, updateSheetValue, uploadToYouTube };
+module.exports = { smartDownload, getSoulSheetsData, updateSheetValue, appendSheetRow, uploadToYouTube };
