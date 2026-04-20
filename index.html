@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MusiChris Soul | Master Control</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="assets/app_icon.png">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./assets/app_icon.png">
     <meta name="theme-color" content="#000000">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -35,7 +35,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: #000 url('assets/fondo_app.gif') center center no-repeat;
+            background: #000 url('./assets/fondo_app.gif') center center no-repeat;
             background-size: cover;
             opacity: 0.6;
         }
@@ -47,7 +47,6 @@
             position: relative;
         }
 
-        /* --- HEADER PREMIUM --- */
         header {
             text-align: center;
             margin-bottom: 2.5rem;
@@ -71,15 +70,27 @@
             backdrop-filter: blur(10px);
             cursor: pointer;
             z-index: 100;
+            transition: transform 0.6s ease;
+        }
+
+        .btn-sync-circle.rotating { transform: rotate(360deg); }
+
+        .logo-wrap {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1.5rem;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 30px var(--gold-glow);
+            background: #000;
         }
 
         .app-icon {
-            width: 90px;
-            height: 90px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px var(--gold-glow);
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         h1 {
@@ -103,7 +114,6 @@
             opacity: 0.8;
         }
 
-        /* --- STATS BAR --- */
         .stats-bar {
             display: flex;
             gap: 10px;
@@ -135,7 +145,6 @@
             font-weight: 700;
         }
 
-        /* --- CATALOGUE --- */
         .catalog-card {
             background: var(--glass);
             backdrop-filter: blur(30px);
@@ -145,25 +154,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .catalog-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .catalog-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            margin: 0;
-            font-style: italic;
-        }
-
         .promise-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            max-height: 400px;
+            max-height: 500px;
             overflow-y: auto;
             padding-right: 5px;
         }
@@ -179,38 +174,36 @@
             transition: all 0.3s ease;
         }
 
-        .promise-item:active {
-            transform: scale(0.97);
-            background: rgba(212, 175, 55, 0.1);
-        }
+        .promise-info { flex: 1; overflow: hidden; }
 
         .promise-info h4 {
             margin: 0 0 4px 0;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--accent-gold);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .promise-info p {
             margin: 0;
             font-size: 0.75rem;
-            opacity: 0.6;
-            font-weight: 300;
+            opacity: 0.5;
         }
 
         .mood-tag {
-            font-size: 0.6rem;
-            background: rgba(212, 175, 55, 0.1);
+            font-size: 0.65rem;
+            background: rgba(212, 175, 55, 0.15);
             color: var(--accent-gold);
-            padding: 4px 10px;
-            border-radius: 8px;
-            white-space: nowrap;
-            margin-left: 10px;
-            max-width: 100px;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-weight: 800;
+            margin-left: 15px;
+            min-width: 40px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        /* --- TERMINAL --- */
         #production-terminal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -223,71 +216,37 @@
             align-items: center;
         }
 
-        .terminal-box {
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .progress-bar {
-            width: 100%; height: 4px;
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 10px;
-            margin: 2rem 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            width: 0%; height: 100%;
-            background: var(--accent-gold);
-            box-shadow: 0 0 15px var(--accent-gold);
-            transition: width 0.3s ease;
-        }
-
-        .step {
-            display: flex; gap: 12px; align-items: center;
-            margin-bottom: 15px; font-size: 0.8rem; opacity: 0.3;
-        }
-
+        .terminal-box { width: 100%; max-width: 400px; text-align: center; }
+        .progress-bar { width: 100%; height: 4px; background: rgba(212, 175, 55, 0.1); border-radius: 10px; margin: 2rem 0; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: var(--accent-gold); box-shadow: 0 0 15px var(--accent-gold); transition: width 0.3s ease; }
+        .step { display: flex; gap: 12px; align-items: center; margin-bottom: 15px; font-size: 0.8rem; opacity: 0.3; }
         .step.active { opacity: 1; color: var(--accent-gold); }
         .step.done { opacity: 1; color: #10b981; }
-
         .step-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
-
-        /* --- SCROLLBAR --- */
         .promise-list::-webkit-scrollbar { width: 3px; }
         .promise-list::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 10px; }
     </style>
 </head>
 <body>
     <div class="smoke-container"></div>
-
     <div class="container">
         <header>
-            <div class="btn-sync-circle" onclick="location.reload()">🔄</div>
-            <img src="assets/app_icon.png" alt="Icon" class="app-icon">
+            <div id="sync-btn" class="btn-sync-circle" onclick="syncApp()">🔄</div>
+            <div class="logo-wrap">
+                <img src="./assets/app_icon.png" alt="MusiChris Soul" class="app-icon" onerror="this.src='https://res.cloudinary.com/dveqs8f3n/image/upload/v1776689378/app_icon_v2.png'">
+            </div>
             <h1>MusiChris <span class="gold-text">Soul</span></h1>
             <div class="version-badge">VERSION 40.0.0</div>
         </header>
 
         <div class="stats-bar">
-            <div class="stat-item">
-                <span class="stat-v" id="stat-promises">0</span>
-                <span class="stat-l">Promesas</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-v" id="stat-landscapes">0</span>
-                <span class="stat-l">Paisajes</span>
-            </div>
+            <div class="stat-item"><span class="stat-v" id="stat-promises">0</span><span class="stat-label stat-l">Promesas</span></div>
+            <div class="stat-item"><span class="stat-v" id="stat-landscapes">116</span><span class="stat-label stat-l">Paisajes</span></div>
         </div>
 
         <section class="catalog-card">
-            <div class="catalog-header">
-                <h2>Catálogo de Gloria</h2>
-            </div>
-            <div class="promise-list" id="promise-list">
-                <!-- Dinámico -->
-            </div>
+            <h2 style="font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 1.5rem 0; font-size: 1.4rem;">Catálogo de Gloria</h2>
+            <div class="promise-list" id="promise-list"></div>
         </section>
     </div>
 
@@ -306,19 +265,20 @@
     </div>
 
     <script>
-        // Simulamos la carga desde el JSON que creamos antes
-        const SOUL_DATABASE_REMOTE = "data/promises_developed.json";
+        async function syncApp() {
+            const btn = document.getElementById('sync-btn');
+            btn.classList.add('rotating');
+            await loadContent();
+            setTimeout(() => btn.classList.remove('rotating'), 1000);
+        }
 
         async function loadContent() {
             try {
-                const response = await fetch(SOUL_DATABASE_REMOTE);
+                const response = await fetch('./data/promises_developed.json');
                 const data = await response.json();
-                
                 document.getElementById('stat-promises').innerText = data.length;
-                
                 const list = document.getElementById('promise-list');
                 list.innerHTML = '';
-                
                 data.forEach(item => {
                     const el = document.createElement('div');
                     el.className = 'promise-item';
@@ -332,55 +292,40 @@
                     `;
                     list.appendChild(el);
                 });
-
-                // Simulación de paisajes (esto vendría de una API real en prod)
-                document.getElementById('stat-landscapes').innerText = '116';
-
             } catch (e) {
-                console.error("Error cargando base de datos:", e);
-                // Fallback si no hay JSON
-                document.getElementById('promise-list').innerHTML = '<p style="opacity:0.5; text-align:center;">Error al conectar con la BD.</p>';
+                console.error("Error:", e);
+                document.getElementById('promise-list').innerHTML = '<p style="opacity:0.5; text-align:center;">Cargando catálogo maestro...</p>';
             }
         }
 
         function produceVideo(item) {
-            const terminal = document.getElementById('production-terminal');
-            terminal.style.display = 'flex';
-            
+            document.getElementById('production-terminal').style.display = 'flex';
             let progress = 0;
             const fill = document.getElementById('progress-fill');
             const status = document.getElementById('terminal-status');
-
-            const runStep = (stepId, text, time) => {
-                return new Promise(resolve => {
-                    document.getElementById(stepId).className = 'step active';
-                    status.innerText = text;
-                    setTimeout(() => {
-                        document.getElementById(stepId).className = 'step done';
-                        progress += 25;
-                        fill.style.width = progress + '%';
-                        resolve();
-                    }, time);
-                });
-            };
-
-            // Simulación de flujo de producción
+            const runStep = (stepId, text, time) => new Promise(resolve => {
+                document.getElementById(stepId).className = 'step active';
+                status.innerText = text;
+                setTimeout(() => {
+                    document.getElementById(stepId).className = 'step done';
+                    progress += 25;
+                    fill.style.width = progress + '%';
+                    resolve();
+                }, time);
+            });
             (async () => {
                 await runStep('step-1', "Descargando Audio y Verso...", 1500);
                 await runStep('step-2', "Eligiendo Paisaje Ministerial...", 2000);
-                await runStep('step-3', "Renderizando con FFmpeg Master...", 4000);
+                await runStep('step-3', "Renderizado con FFmpeg Master...", 4000);
                 await runStep('step-4', "Finalizando en YouTube...", 1500);
-                
                 status.innerText = "¡Vídeo Publicado!";
-                setTimeout(() => { 
-                    terminal.style.display = 'none';
-                    // Reset steps
+                setTimeout(() => {
+                    document.getElementById('production-terminal').style.display = 'none';
                     document.querySelectorAll('.step').forEach(s => s.className = 'step');
                     fill.style.width = '0%';
                 }, 2000);
             })();
         }
-
         window.onload = loadContent;
     </script>
 </body>
