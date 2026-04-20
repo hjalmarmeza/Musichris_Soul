@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🛰️ Sincronizando Código y Activos
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🛠️ Configurando Entorno Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
@@ -32,7 +32,7 @@ jobs:
         run: node src/main.js --id=${{ github.event.client_payload.id }}
 
       - name: 📦 Guardando Resultado (Artifact)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: soul-video-output
           path: output/
