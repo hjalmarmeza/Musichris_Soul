@@ -16,24 +16,22 @@ async function generateSubtitleFile(data) {
 
     // Usamos diferentes CAPAS (Layers) para cada fase para evitar que FFmpeg oculte texto accidentalmente
     const events = [
-        `Dialogue: 0,0:00:00.00,0:01:05.00,Card,,0,0,0,,{\\fad(500,500)} `,
+        // La tarjeta de cristal termina justo con la enseñanza (54.5s)
+        `Dialogue: 0,0:00:00.00,0:00:54.50,Card,,0,0,0,,{\\fad(500,500)} `,
         
-        // FASE 1: EL HECHO (Capa 1)
+        // FASE 1: (2s - 19.5s)
         `Dialogue: 1,0:00:02.00,0:00:19.50,MainText,,0,0,0,,{\\fad(800,800)}${formatText(data.text || '', 24)}`,
         `Dialogue: 1,0:00:02.00,0:00:19.50,Citation,,0,0,0,,{\\fad(1000,1000)}${decorativeLine}\\N${firstVerse}`,
         
-        // FASE 2: LA REVELACIÓN (Capa 2 - Empezamos 0.5s después para limpiar pantalla)
+        // FASE 2: (20s - 39.5s)
         `Dialogue: 2,0:00:20.00,0:00:39.50,MainText,,0,0,0,,{\\fad(800,800)}${formatText(data.explanation || '', 24)}`,
         `Dialogue: 2,0:00:20.00,0:00:39.50,Citation,,0,0,0,,{\\fad(1000,1000)}${decorativeLine}\\NREVELACIÓN`,
 
-        // FASE 3: LA ENSEÑANZA (Capa 3)
+        // FASE 3: (40s - 54.5s)
         `Dialogue: 3,0:00:40.00,0:00:54.50,MainText,,0,0,0,,{\\fad(800,800)}{\\c&H00FFFF&}${formatText(data.teaching || '', 24)}`,
         `Dialogue: 3,0:00:40.00,0:00:54.50,Citation,,0,0,0,,{\\fad(1000,1000)}${decorativeLine}\\NESPERANZA`,
 
-        // FASE 4: EL CIERRE (Capa 1 - Posición fija central)
-        `Dialogue: 1,0:00:55.00,0:01:04.00,Footer,,0,0,0,,{\\fad(800,800)}{\\an5\\pos(540,1650)}@Musichris_Studio\\N{\\fscx85\\fscy85}¡Caminemos juntos en fe!\\N{\\fscx75\\fscy75\\c&H00FFFF&}Suscríbete ahora para más reflexiones`,
-
-        // Pie de página constante
+        // Pie de página constante (solo durante las fases de texto)
         `Dialogue: 5,0:00:01.00,0:00:54.50,Footer,,0,0,0,,{\\fad(2000,0)}${footerText}`
     ];
 
