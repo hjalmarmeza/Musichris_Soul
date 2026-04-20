@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>MusiChris Soul | Master Control</title>
+    <title>MusiChris Soul | Master Remote</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="assets/app_icon.png">
     <meta name="theme-color" content="#000000">
@@ -18,7 +18,7 @@
             --safe-top: env(safe-area-inset-top);
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
 
         body {
             margin: 0;
@@ -29,21 +29,22 @@
             display: flex;
             justify-content: center;
             overflow-x: hidden;
+            -webkit-user-select: none;
         }
 
-        .smoke-container {
+        .smoke-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             background: #000 url('assets/fondo_app.gif') center center no-repeat;
             background-size: cover;
-            opacity: 0.5;
+            opacity: 0.4;
         }
 
         .container {
             width: 100%;
             max-width: 500px;
-            padding: calc(var(--safe-top) + 2rem) 1.5rem 3rem;
+            padding: calc(var(--safe-top) + 2rem) 1.5rem 4rem;
             position: relative;
         }
 
@@ -53,260 +54,144 @@
             position: relative;
         }
 
-        .btn-sync-circle {
+        .refresh-btn {
             position: absolute;
-            top: -10px;
-            right: 0;
-            width: 48px;
-            height: 48px;
+            top: -10px; right: 0;
+            width: 48px; height: 48px;
             background: var(--glass);
             border: 2px solid var(--accent-gold);
             border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
             color: var(--accent-gold);
             box-shadow: 0 0 15px var(--gold-glow);
             backdrop-filter: blur(10px);
-            cursor: pointer;
             z-index: 100;
-            transition: transform 0.6s ease;
         }
+        .refresh-btn.active { animation: spin 0.8s ease-in-out; }
+        @keyframes spin { from {transform:rotate(0deg)} to {transform:rotate(360deg)} }
 
-        .btn-sync-circle.rotating { transform: rotate(360deg); }
-
-        .logo-wrap {
-            width: 90px;
-            height: 90px;
+        .app-logo-box {
+            width: 95px; height: 95px;
             margin: 0 auto 1.5rem;
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid var(--accent-gold);
-            box-shadow: 0 0 30px var(--gold-glow);
+            border-radius: 26px;
             background: #000;
-        }
-
-        .app-icon {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.4rem;
-            margin: 0;
-            letter-spacing: -1px;
-        }
-
-        .gold-text {
-            color: var(--accent-gold);
-            text-shadow: 0 0 15px var(--gold-glow);
-        }
-
-        .version-badge {
-            font-size: 0.65rem;
-            letter-spacing: 5px;
-            color: var(--accent-gold);
-            margin-top: 0.5rem;
-            font-weight: 800;
-            opacity: 0.8;
-        }
-
-        .stats-bar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 2rem;
-        }
-
-        .stat-item {
-            flex: 1;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            padding: 1rem;
-            border-radius: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            text-align: center;
-        }
-
-        .stat-v {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--accent-gold);
-        }
-
-        .stat-l {
-            font-size: 0.55rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.5;
-            font-weight: 700;
-        }
-
-        .catalog-card {
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(30px);
-            border-radius: 32px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .promise-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-height: 450px;
-            overflow-y: auto;
-            padding-right: 5px;
-        }
-
-        .promise-item {
-            background: rgba(255,255,255,0.03);
-            padding: 1.2rem;
-            border-radius: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .promise-info { flex: 1; overflow: hidden; }
-
-        .promise-info h4 {
-            margin: 0 0 4px 0;
-            font-size: 0.95rem;
-            color: var(--accent-gold);
+            border: 1.5px solid var(--accent-gold);
+            box-shadow: 0 0 35px var(--gold-glow);
             overflow: hidden;
-            text-overflow: ellipsis;
         }
+        .app-logo-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .promise-info p {
-            margin: 0;
-            font-size: 0.75rem;
-            opacity: 0.5;
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin: 0; letter-spacing: -1px; }
+        .gold { color: var(--accent-gold); text-shadow: 0 0 15px var(--gold-glow); }
+        .sub-tag { font-size: 0.6rem; letter-spacing: 4px; color: var(--accent-gold); margin-top: 0.5rem; font-weight: 800; opacity: 0.7; border-top: 1px solid rgba(212,175,55,0.3); display: inline-block; padding-top: 4px; }
+
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 2rem; }
+        .stat-box { background: var(--glass); backdrop-filter: blur(25px); padding: 1.2rem; border-radius: 22px; border: 1px solid rgba(212, 175, 55, 0.15); text-align: center; }
+        .stat-box .val { display: block; font-size: 1.8rem; font-weight: 900; color: var(--accent-gold); }
+        .stat-box .lab { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; font-weight: 700; }
+
+        .main-card { background: rgba(0,0,0,0.85); backdrop-filter: blur(35px); border-radius: 35px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 15px 45px rgba(0,0,0,0.6); }
+        .list-flow { display: flex; flex-direction: column; gap: 12px; max-height: 480px; overflow-y: auto; padding-right: 6px; }
+        
+        .item-card { 
+            background: rgba(255,255,255,0.04); padding: 1.25rem; border-radius: 22px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            border: 1px solid transparent; transition: 0.3s;
         }
+        .item-card:active { transform: scale(0.97); background: rgba(212, 175, 55, 0.08); border-color: var(--accent-gold); }
 
-        .pub-badge {
-            font-size: 0.6rem;
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--accent-gold);
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-weight: 800;
-            margin-left: 10px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+        .info h4 { margin: 0 0 5px 0; font-size: 1.05rem; color: var(--accent-gold); }
+        .info p { margin: 0; font-size: 0.8rem; opacity: 0.45; font-style: italic; }
+        .badge-pub { font-size: 0.65rem; background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 5px 12px; border-radius: 10px; font-weight: 900; border: 1px solid rgba(212,175,55,0.2); }
+
+        /* PRODUCTION ENGINE */
+        #production-hub {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98); z-index: 2000;
+            display: none; justify-content: center; align-items: center; flex-direction: column; padding: 2rem;
         }
-
-        /* --- TERMINAL --- */
-        #production-terminal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            display: none;
-            padding: 2rem;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .terminal-box { width: 100%; max-width: 400px; text-align: center; }
-        .progress-bar { width: 100%; height: 4px; background: rgba(212, 175, 55, 0.1); border-radius: 10px; margin: 2rem 0; overflow: hidden; }
-        .progress-fill { width: 0%; height: 100%; background: var(--accent-gold); box-shadow: 0 0 15px var(--accent-gold); transition: width 0.3s ease; }
+        .loader { width: 70px; height: 70px; border: 5px solid var(--glass); border-top: 5px solid var(--accent-gold); border-radius: 50%; animation: spin 1.2s infinite linear; box-shadow: 0 0 20px var(--gold-glow); }
+        #log { margin-top: 2rem; font-size: 0.65rem; color: var(--accent-gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
     </style>
 </head>
 <body>
-    <div class="smoke-container"></div>
+    <div class="smoke-bg"></div>
     <div class="container">
         <header>
-            <div id="sync-btn" class="btn-sync-circle" onclick="syncApp()">🔄</div>
-            <div class="logo-wrap">
-                <img src="assets/app_icon_fixed.png" alt="MusiChris Soul" class="app-icon" onerror="this.src='./assets/app_icon_fixed.png';">
+            <div id="sync-b" class="refresh-btn" onclick="sync()">🔄</div>
+            <div class="app-logo-box">
+                <img src="assets/app_icon_fixed.png" alt="Soul" onerror="this.src='assets/app_icon.png'">
             </div>
-            <h1>MusiChris <span class="gold-text">Soul</span></h1>
-            <div class="version-badge">VERSION 40.4.0</div>
+            <h1>MusiChris <span class="gold">Soul</span></h1>
+            <div class="sub-tag">MASTER REMOTE v40.5</div>
         </header>
 
-        <div class="stats-bar">
-            <div class="stat-item"><span class="stat-v" id="p-count">92</span><span class="stat-l">Por publicar</span></div>
-            <div class="stat-item"><span class="stat-v" id="l-count">115</span><span class="stat-l">Paisajes</span></div>
+        <div class="stats-grid">
+            <div class="stat-box"><span class="val" id="p-val">--</span><span class="lab">Promesas Pendientes</span></div>
+            <div class="stat-box"><span class="val" id="l-val">115</span><span class="lab">Paisajes Libres</span></div>
         </div>
 
-        <section class="catalog-card">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 0 0 1.2rem 0; font-style: italic;">Catálogo de Gloria</h2>
-            <div class="promise-list" id="promise-list"></div>
+        <section class="main-card">
+            <h2 style="font-family:'Playfair Display'; font-size:1.4rem; margin:0 0 1.2rem 0; font-style:italic;">Control de Publicación</h2>
+            <div class="list-flow" id="content-list"></div>
         </section>
     </div>
 
-    <div id="production-terminal">
-        <div class="terminal-box">
-            <h2 style="font-family: 'Playfair Display', serif; color: var(--accent-gold);">Procesando</h2>
-            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-            <p id="terminal-status" style="font-size: 0.6rem; opacity: 0.5; text-transform: uppercase;">Iniciando Motor...</p>
-        </div>
+    <div id="production-hub">
+        <div class="loader"></div>
+        <h2 style="font-family:'Playfair Display'; color:var(--accent-gold); margin-top:2rem;">Desplegando Misión</h2>
+        <p id="log">Conectando con Servidor Local...</p>
     </div>
 
     <script>
-        async function syncApp() {
-            document.getElementById('sync-btn').classList.add('rotating');
-            await loadContent();
-            setTimeout(() => document.getElementById('sync-btn').classList.remove('rotating'), 800);
+        async function sync() {
+            document.getElementById('sync-b').classList.add('active');
+            await load();
+            setTimeout(() => document.getElementById('sync-b').classList.remove('active'), 800);
         }
 
-        async function loadContent() {
+        async function load() {
             try {
-                const res = await fetch('data/promises_developed.json?v=' + Date.now());
-                const data = await res.json();
+                const r = await fetch('data/promises_developed.json?c=' + Date.now());
+                const data = await r.json();
+                const list = document.getElementById('content-list');
                 const pubIds = [1];
-                document.getElementById('p-count').innerText = data.length - pubIds.length;
-                document.getElementById('l-count').innerText = 116 - pubIds.length;
+                document.getElementById('p-val').innerText = data.length - pubIds.length;
                 
-                const list = document.getElementById('promise-list');
                 list.innerHTML = '';
                 data.forEach(item => {
                     const isPub = pubIds.includes(item.id);
-                    const el = document.createElement('div');
-                    el.className = 'promise-item';
-                    el.onclick = () => produceVideo(item);
-                    el.innerHTML = `
-                        <div class="promise-info">
-                            <h4>${item.reflection_title}</h4>
-                            <p>${item.verse_citation}</p>
-                        </div>
-                        <div class="pub-badge">Pub: ${isPub ? 1 : 0}</div>
+                    const div = document.createElement('div');
+                    div.className = 'item-card';
+                    div.onclick = () => produce(item);
+                    div.innerHTML = `
+                        <div class="info"><h4>${item.reflection_title}</h4><p>${item.verse_citation}</p></div>
+                        <div class="badge-pub">VIDEOS: ${isPub ? 1 : 0}</div>
                     `;
-                    list.appendChild(el);
+                    list.appendChild(div);
                 });
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) { console.error(e); }
         }
 
-        function produceVideo(item) {
-            document.getElementById('production-terminal').style.display = 'flex';
-            let progress = 0;
-            const fill = document.getElementById('progress-fill');
-            const status = document.getElementById('terminal-status');
-            const steps = ["Extrayendo Biblia", "Sincronizando Melodía", "Renderizando Master", "Publicando en YouTube"];
+        function produce(item) {
+            document.getElementById('production-hub').style.display = 'flex';
+            const log = document.getElementById('log');
+            const steps = ["Enviando Señal a Mac", "Validando Teología", "Iniciando Renderizado", "Subiendo a YouTube"];
             let i = 0;
             const timer = setInterval(() => {
                 if(i >= steps.length) {
                     clearInterval(timer);
-                    status.innerText = "¡Misión Cumplida!";
-                    setTimeout(() => document.getElementById('production-terminal').style.display = 'none', 1500);
+                    log.innerText = "¡PRODUCCIÓN EN CURSO!";
+                    setTimeout(() => document.getElementById('production-hub').style.display = 'none', 1500);
                 } else {
-                    status.innerText = steps[i];
-                    progress += 25;
-                    fill.style.width = progress + '%';
+                    log.innerText = steps[i];
                     i++;
                 }
             }, 1500);
+
+            // AQUÍ DISPARAREMOS LA ORDEN REAL A TELEGRAM EN EL SIGUIENTE PASO
         }
-        window.onload = loadContent;
+        window.onload = load;
     </script>
 </body>
 </html>
