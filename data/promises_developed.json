@@ -1,32 +1,9 @@
 [
-  {
-    "id": 1,
-    "title": "Cireneo",
-    "reflection_title": "Cireneo",
-    "verse_citation": "Lucas 23:26",
-    "text": "Simón de Cirene es obligado a cargar la cruz de Jesús en el camino al Gólgota.",
-    "explanation": "La ley 'angaria' permitía a los romanos forzar a civiles a cargar suministros por una milla.",
-    "teaching": "Lo que parece una carga impuesta por la vida, es tu cita divina para caminar con Cristo.",
-    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360897/wi5649ngot0kzi9m7mwu.mp3"
-  },
-  {
-    "id": 14,
-    "title": "Kadosh",
-    "reflection_title": "Kadosh",
-    "verse_citation": "Isaías 6:3",
-    "text": "Isaías ve al Rey en Su trono. Los ángeles claman: '¡Santo, Santo, Santo es el Señor!'",
-    "explanation": "'Kadosh' es el superlativo hebreo: declara que la santidad de Dios es Su perfección absoluta.",
-    "teaching": "Cuando lo terrenal muere (Rey Uzías), Dios se revela como el único Soberano Inmovible.",
-    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765361154/sfm2apwuowwiajwnhi6v.mp3"
-  },
-  {
-    "id": 25,
-    "title": "Solo una Cosa",
-    "reflection_title": "Solo una Cosa",
-    "verse_citation": "Salmo 27:4",
-    "text": "David, rey y guerrero, reduce su vida a un solo anhelo: habitar en la casa de Dios.",
-    "explanation": "La palabra 'Inquirir' (Baqar) implica contemplar con deleite y reflexionar en Su bondad.",
-    "teaching": "En medio de mil problemas, tu única victoria real es proteger tu intimidad con el Padre.",
-    "audio_url": "https://res.cloudinary.com/dveqs8f3n/video/upload/v1765807152/Solo_una_cosa_lor5km.mp3"
-  }
+  {"id":1,"title":"Cireneo","reflection_title":"Cireneo","verse_citation":"Lucas 23:26","text":"Simón de Cirene es elegido para cargar la cruz, caminando junto al Maestro.","explanation":"Lo que parecía un peso impuesto por hombres fue su mayor gloria espiritual.","teaching":"¡Cobra ánimo! Tu carga actual es la oportunidad para estar más cerca de Jesús.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360897/wi5649ngot0kzi9m7mwu.mp3"},
+  {"id":2,"title":"Alabastro","reflection_title":"Alabastro","verse_citation":"Lucas 7:37","text":"Una mujer entrega su tesoro más caro para ungir al Salvador con amor.","explanation":"El perfume era su futuro; ella decidió que Jesús era digno de todo su mañana.","teaching":"¡Regocíjate! Tu entrega sincera hoy, perfuma el trono de Dios con una fragancia eterna.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765360791/gqprsmse1a8q0b9rxboa.mp3"},
+  {"id":3,"title":"En la Orilla","reflection_title":"En la Orilla","verse_citation":"Juan 21:9","text":"Jesús espera a Sus discípulos en el amanecer con un desayuno de amor preparado.","explanation":"Él no los recibe con reproches, sino con una hoguera que sana sus corazones.","teaching":"¡Hay esperanza! No importa lo que pasó anoche, el Maestro tiene un nuevo comienzo hoy.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765486404/En_la_orilla_gjbede.mp3"},
+  {"id":14,"title":"Kadosh","reflection_title":"Kadosh","verse_citation":"Isaías 6:3","text":"Isaías ve la gloria de Dios llenando el templo. ¡Él es Santo y Su luz lo inunda todo!","explanation":"Kadosh significa que Su pureza es tan grande que ninguna sombra puede tocarte.","teaching":"¡Alégrate! El Dios Santo que gobierna los cielos cuida de ti hoy con amor tierno.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765361154/sfm2apwuowwiajwnhi6v.mp3"},
+  {"id":25,"title":"Solo una Cosa","reflection_title":"Solo una Cosa","verse_citation":"Salmo 27:4","text":"David descubre que el secreto de la victoria es habitar siempre en Su presencia.","explanation":"Su deleite era contemplar la hermosura de Dios por encima de sus propias batallas.","teaching":"¡Ten paz! Lo único que realmente necesitas es disfrutar a Dios; Él se encarga de lo demás.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765807152/Solo_una_cosa_lor5km.mp3"},
+  {"id":31,"title":"Quietud","reflection_title":"Quietud","verse_citation":"Salmo 46","text":"'Estad quietos y conoced que yo soy Dios'. Su paz sobrepasa todo entendimiento.","explanation":"La palabra hebrea Raphah invita a soltar el control y confiar en Su soberanía.","teaching":"¡Sonríe! No tienes que resolverlo todo hoy; el Dios de los ejércitos pelea por ti.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1765807569/Quietud_n2z3na.mp3"},
+  {"id":93,"title":"Reino Eterno","reflection_title":"Reino Eterno","verse_citation":"Salmo 22:27","text":"Todas las naciones recordarán Su nombre y volverán al Señor con gritos de alegría.","explanation":"Lo que empezó en dolor en la cruz, termina en un triunfo eterno para todo Su pueblo.","teaching":"¡Victoria total! Tu historia terminará en un gran abrazo con el Padre celestial. Amén.","audio_url":"https://res.cloudinary.com/dveqs8f3n/video/upload/v1774996293/Reino_Eterno_kimkbq.mp3"}
 ]
