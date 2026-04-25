@@ -1,5 +1,16 @@
 const { getSoulSheetsData } = require('./google_connector');
 
+// Utility for human-like title matching (ignores v2, v3, punctuation, casing, and accents)
+const smartNormalize = (s) => {
+    if (!s) return '';
+    return s.toString().toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Quitar tildes
+        .replace(/\s+v\d+$/i, '')                       // Quitar " v2", " v1" al final
+        .replace(/\((.*?)\)/g, '')                      // Quitar todo lo entre paréntesis
+        .replace(/[^a-z0-9]/g, '')                      // Quitar TODO lo que no sea letra o número
+        .trim();
+};
+
 async function getSoulDatabase() {
     console.log('📡 [API-MASTER-SYNC] Sincronizando Ecosistema Elite...');
     const audioCatalog = await getSoulSheetsData('19zXfIiAZktXXyixZ1HdcW1IO9bOBn8S8sRPZAXUVZbE', 'Hoja 2!A:E');
@@ -16,12 +27,20 @@ async function getSoulDatabase() {
     const idxTitleAud = 2;       // Título en Audio Catalog (Col C)
     const idxUrlAud = 3;         // URL en Audio Catalog (Col D)
 
+    const normalizedCatalog = audioCatalog.map(ac => ({
+        original: ac[idxTitleAud],
+        clean: smartNormalize(ac[idxTitleAud]),
+        row: ac
+    }));
+
     return theologyMaster.slice(1).map(theo => {
         const songTitle = (theo[idxTitleTheo] || '').trim();
         if (!songTitle) return null;
 
-        const audioData = audioCatalog.find(c => (c[idxTitleAud] || '').trim().toLowerCase() === songTitle.toLowerCase());
-        if (!audioData) return null;
+        const cleanTarget = smartNormalize(songTitle);
+        const audioMatch = normalizedCatalog.find(nc => nc.clean === cleanTarget || cleanTarget.includes(nc.clean) || nc.clean.includes(cleanTarget));
+        
+        if (!audioMatch) return null;
 
         return {
             title: songTitle,
@@ -29,7 +48,7 @@ async function getSoulDatabase() {
             verse_citation: (theo[idxVerseTheo] || '').split(/[,;\/]/)[0].trim(), // Solo la primera cita (soporta , ; /)
             text: theo[idxContentTheo] || '',
             explanation: theo[idxContextTheo] || '',
-            audio_url: audioData[idxUrlAud]
+            audio_url: audioMatch.row[idxUrlAud]
         };
     }).filter(i => i && i.audio_url);
 }
