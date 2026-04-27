@@ -56,23 +56,7 @@ async function main() {
         
         // --- MOTOR GRÁFICO DE ALTA FIDELIDAD (PNG OVERLAYS) ---
         console.log('📝 Generando superposiciones cinematográficas...');
-        const p1Card = path.join(assetsDir, 'p1.png');
-        const p2Card = path.join(assetsDir, 'p2.png');
-        const p3Card = path.join(assetsDir, 'p3.png');
-        const creditsCard = path.join(assetsDir, 'credits.png');
         
-        // Función para limitar texto y asegurar legibilidad
-        const smartLimit = (text, maxChars = 200) => {
-            if (!text || text.length <= maxChars) return text;
-            // Intentar cortar en el segundo punto seguido
-            const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
-            if (sentences.length >= 2) {
-                const draft = (sentences[0] + sentences[1]).trim();
-                if (draft.length <= maxChars + 50) return draft;
-            }
-            return text.substring(0, maxChars).trim() + "...";
-        };
-
         const runGraphics = (mode, output, title, body) => {
             const result = spawnSync('python3', ['src/graphics_engine.py', mode, output, title, body]);
             if (result.error) console.error(`Error en graphics_engine: ${result.error}`);
