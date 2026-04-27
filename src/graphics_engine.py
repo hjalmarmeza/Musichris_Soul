@@ -28,21 +28,25 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
         font_main = font_citation = font_handle = font_button = font_footer = ImageFont.load_default()
 
     if not is_outro:
-        # Wrap logic (Safe wrap for 900px card - v6.0 High density)
-        wrap_width = 18 # Optimized for shorter summary
-        wrapped_lines = textwrap.wrap(body, width=wrap_width)
-        line_spacing = 55 # More breathable
+        # Force font to start a bit larger
+        base_font_size = 75
+        font_main = ImageFont.truetype(font_bold, base_font_size)
 
-        # HARD FIT LOOP: Shrink until width < 750 and height < 750 (Reserved space for titles)
+        # Usar un ancho de bloque mayor (más palabras por línea para llenar el repositorio horizontalmente)
+        wrap_width = 34
+        wrapped_lines = textwrap.wrap(body, width=wrap_width)
+        line_spacing = 40
+
+        # HARD FIT LOOP: Shrink until width < 820 (margen de 40px por lado)
         while True:
             max_w = max([draw.textbbox((0, 0), l, font=font_main)[2] for l in wrapped_lines])
             total_h = sum([draw.textbbox((0, 0), l, font=font_main)[3] for l in wrapped_lines]) + (len(wrapped_lines)-1)*line_spacing
             
-            if max_w < 780 and total_h < 750:
+            if max_w < 820 and total_h < 750:
                 break
             
-            base_font_size -= 4
-            if base_font_size < 50: break 
+            base_font_size -= 2 # Bajada más suave y precisa
+            if base_font_size < 35: break 
             font_main = ImageFont.truetype(font_bold, base_font_size)
         
         # 1. MIDDLE: Body Text (Positioned slightly higher to avoid overlap)
