@@ -82,21 +82,23 @@ async function main() {
         // RE-MAPEO NARRATIVO VALIDADO: Contexto/Resumen -> Revelación/Enseñanza -> Esperanza/Idea Central
         console.log('   - Fase 1: Contexto/Resumen (La Promesa)');
         
-        // LIMPIEZA DE TEXTO (Eliminar introducciones repetitivas y cortes)
+        // LIMPIEZA DE TEXTO AGRESIVA (Eliminar preámbulos y metadatos del texto)
         const cleanText = (txt) => {
             if (!txt) return "";
             return txt
-                .replace(/^El sobreescrito del salmo dice:\s*/i, "")
-                .replace(/^Este salmo fue escrito\s*/i, "")
-                .replace(/^El contexto de este pasaje\s*/i, "")
+                .replace(/El sobreescrito del salmo dice:?/gi, "")
+                .replace(/Este salmo fue escrito por?/gi, "")
+                .replace(/El contexto de este pasaje es?/gi, "")
+                .replace(/Salmo de David,?/gi, "")
                 .trim();
         };
 
         const contextText = cleanText(soulItem.explanation);
         const revelationText = cleanText(soulItem.text);
         
-        // Mensaje de Esperanza Inspirador
-        const hopeMsg = `En medio de "${soulItem.reflection_title}", Su gracia te sostiene. ¡Tu victoria viene de lo alto! 🙌`;
+        // Mensaje de Esperanza Inspirador (Una sola idea fluida)
+        const pureReflection = soulItem.reflection_title.split('/')[0].trim();
+        const hopeMsg = `En medio de tu ${pureReflection.toLowerCase()}, Su gracia te sostiene. ¡Tu victoria viene de lo alto! 🙌`;
 
         const phases = {
             p1: { title: soulItem.verse_citation, body: contextText },
