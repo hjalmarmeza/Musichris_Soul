@@ -28,41 +28,39 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
         font_main = font_citation = font_handle = font_button = font_footer = ImageFont.load_default()
 
     if not is_outro:
-        # Wrap logic (Safe wrap for 900px card)
-        wrap_width = 18
+        # Wrap logic (Safe wrap for 900px card - High density)
+        wrap_width = 16
         wrapped_lines = textwrap.wrap(body, width=wrap_width)
-        line_spacing = 50 
+        line_spacing = 45 
 
-        # HARD FIT LOOP: Shrink until width < 780 and height < 950
-        print(f"DEBUG: Starting fit loop for: {title[:20]}...")
+        # HARD FIT LOOP: Shrink until width < 750 and height < 900
         while True:
             max_w = max([draw.textbbox((0, 0), l, font=font_main)[2] for l in wrapped_lines])
             total_h = sum([draw.textbbox((0, 0), l, font=font_main)[3] for l in wrapped_lines]) + (len(wrapped_lines)-1)*line_spacing
             
-            if max_w < 780 and total_h < 950:
+            if max_w < 750 and total_h < 900:
                 break
             
-            base_font_size -= 5
-            if base_font_size < 50: break 
+            base_font_size -= 4
+            if base_font_size < 40: break 
             font_main = ImageFont.truetype(font_bold, base_font_size)
         
-        print(f"DEBUG: Final Font: {base_font_size}pt | MaxW: {max_w}px | TotalH: {total_h}px")
-        
-        # Center the block in the screen
-        y = (height // 2) - (total_h // 2) - 80
+        # Absolute Centering in the 1920x1080 frame
+        # Card is 900x1100 centered at 960y.
+        y = 960 - (total_h // 2) - 50 # Small offset for visual balance
         
         for line in wrapped_lines:
             w, h = draw.textbbox((0, 0), line, font=font_main)[2:]
-            draw.text(((width-w)/2, y), line, font=font_main, fill="white", stroke_width=4, stroke_fill="black")
+            draw.text(((width-w)/2, y), line, font=font_main, fill="white", stroke_width=3, stroke_fill="black")
             y += h + line_spacing
             
         # Drawing Decoration Line & Title (Citation/Phase)
-        y += 50
+        y += 40
         deco = "————————"
         w_deco, h_deco = draw.textbbox((0, 0), deco, font=font_citation)[2:]
         draw.text(((width-w_deco)/2, y), deco, font=font_citation, fill=(255, 255, 255, 180))
         
-        y += h_deco + 25
+        y += h_deco + 20
         w_cite, h_cite = draw.textbbox((0, 0), title, font=font_citation)[2:]
         
         # Gold highlight for the phase title

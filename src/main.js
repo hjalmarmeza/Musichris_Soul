@@ -79,26 +79,37 @@ async function main() {
             if (result.stderr.length > 0) console.error(`Python Stderr: ${result.stderr.toString()}`);
         };
 
-        // RE-MAPEO NARRATIVO VALIDADO: Contexto/Resumen -> Revelación/Enseñanza -> Esperanza/Idea Central
-        console.log('   - Fase 1: Contexto/Resumen (La Promesa)');
-        
-        // LIMPIEZA DE TEXTO AGRESIVA (Eliminar preámbulos y metadatos del texto)
-        const cleanText = (txt) => {
+        // LIMPIEZA DE TEXTO UNIVERSAL Y PODA ESTRICTA (Protocolo Flow)
+        const processText = (txt, limit = 320) => {
             if (!txt) return "";
-            return txt
-                .replace(/El sobreescrito del salmo dice:?/gi, "")
+            let cleaned = txt
+                .replace(/El sobr?eescrito del salmo dice:?/gi, "")
                 .replace(/Este salmo fue escrito por?/gi, "")
                 .replace(/El contexto de este pasaje es?/gi, "")
                 .replace(/Salmo de David,?/gi, "")
+                .replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, "") // Eliminar Emojis
                 .trim();
+            
+            if (cleaned.length > limit) {
+                cleaned = cleaned.substring(0, limit);
+                const lastSpace = cleaned.lastIndexOf(" ");
+                cleaned = cleaned.substring(0, lastSpace > 0 ? lastSpace : limit).trim() + "...";
+            }
+            return cleaned;
         };
 
-        const contextText = cleanText(soulItem.explanation);
-        const revelationText = cleanText(soulItem.text);
+        const contextText = processText(soulItem.explanation);
+        const revelationText = processText(soulItem.text);
         
-        // Mensaje de Esperanza Inspirador (Una sola idea fluida)
+        // Mensaje de Esperanza Inspirador (Una sola idea fluida, sin emojis problemáticos)
         const pureReflection = soulItem.reflection_title.split('/')[0].trim();
-        const hopeMsg = `En medio de tu ${pureReflection.toLowerCase()}, Su gracia te sostiene. ¡Tu victoria viene de lo alto! 🙌`;
+        const hopeMsg = `En medio de tu ${pureReflection.toLowerCase()}, Su gracia te sostiene. Tu victoria viene de lo alto!`;
+
+        const timestamp = Date.now();
+        const p1Card = path.join(process.cwd(), `p1_${timestamp}.png`);
+        const p2Card = path.join(process.cwd(), `p2_${timestamp}.png`);
+        const p3Card = path.join(process.cwd(), `p3_${timestamp}.png`);
+        const creditsCard = path.join(process.cwd(), `credits_${timestamp}.png`);
 
         const phases = {
             p1: { title: soulItem.verse_citation, body: contextText },
@@ -107,14 +118,8 @@ async function main() {
         };
         
         runGraphics('phase1', p1Card, phases.p1.title, phases.p1.body);
-        
-        console.log('   - Fase 2: Revelación (Enseñanza Poderosa)');
         runGraphics('phase2', p2Card, phases.p2.title, phases.p2.body);
-        
-        console.log('   - Fase 3: Esperanza (Idea Central)');
         runGraphics('phase3', p3Card, phases.p3.title, phases.p3.body);
-        
-        console.log('   - Fase 4: Cierre');
         runGraphics('outro', creditsCard, "", "");
 
         const intermediatePath = path.join(outputDir, 'temp_reflection.mp4');
