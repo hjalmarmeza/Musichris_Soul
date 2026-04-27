@@ -23,11 +23,11 @@ async function syncSheetsToJson() {
         const formattedData = soulDatabase.map((item, index) => ({
             id: index + 1,
             title: item.title,
-            verse: item.verse_citation,
+            reflection_title: item.reflection_title,
+            verse_citation: item.verse_citation,
             text: item.text,
             explanation: item.explanation,
-            audio_url: item.audio_url,
-            mood: item.mood
+            audio_url: item.audio_url
         }));
 
         fs.writeFileSync(jsonPath, JSON.stringify(formattedData, null, 2));
