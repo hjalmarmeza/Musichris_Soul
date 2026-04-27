@@ -126,6 +126,7 @@
         function filterSongs() {
             const query = document.getElementById('search-input').value.toLowerCase();
             const filtered = fullCatalog.filter(item => 
+                item.title.toLowerCase().includes(query) || 
                 item.reflection_title.toLowerCase().includes(query) || 
                 item.verse_citation.toLowerCase().includes(query)
             );
