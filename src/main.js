@@ -63,30 +63,28 @@ async function main() {
             if (result.stderr.length > 0) console.error(`Python Stderr: ${result.stderr.toString()}`);
         };
 
-        // LIMPIEZA DE TEXTO MULTI-LÍNEA Y PODA MAESTRA (Protocolo Flow v6.0)
-        const processText = (txt, limit = 140) => {
+        // LIMPIEZA DE TEXTO MULTI-LÍNEA Y PODA MAESTRA (Protocolo Flow v7.0)
+        const processText = (txt, limit = 120) => {
             if (!txt) return "";
-            // 1. Unificar espacios y eliminar saltos de línea
-            let cleaned = txt.replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").trim();
             
-            // 2. Limpieza agresiva de preámbulos y citas específicas del desierto
-            cleaned = cleaned
-                .replace(/El sobr?eescrito del salmo dice:?/gi, "")
-                .replace(/Salmo de David,?/gi, "")
-                .replace(/["']cuando estaba en el desierto de Judá["']\.?/gi, "")
-                .replace(/Este salmo fue escrito por?/gi, "")
-                .replace(/El contexto de este pasaje es?/gi, "")
-                .replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, "")
-                .replace(/^["'“”„ \s]+|["'“”„ \s]+$/g, "")
-                .trim();
+            // 1. UNIFICAR: Eliminar saltos de línea y espacios múltiples (v7.0 Heavy Duty)
+            let clean = txt.replace(/[\s\n\r]+/g, " ").trim();
             
-            // 3. Poda estricta a 140 caracteres para Shorts
-            if (cleaned.length > limit) {
-                cleaned = cleaned.substring(0, limit);
-                const lastSpace = cleaned.lastIndexOf(" ");
-                cleaned = cleaned.substring(0, lastSpace > 0 ? lastSpace : limit).trim() + "...";
+            // 2. ELIMINACIÓN DE BLOQUE: El regex ahora busca el bloque completo de preámbulo
+            // Atrapa desde 'El sobrescrito' hasta el final de la mención al desierto o David.
+            const preamblePattern = /El sobr?eescrito del salmo dice:?\s*["']?.*?(?:desierto de Judá|Salmo de David).*?["']?\.?\s*/gi;
+            clean = clean.replace(preamblePattern, "");
+            
+            // 3. LIMPIEZA ADICIONAL: Eliminar "Salmo de David" si quedó suelto
+            clean = clean.replace(/Salmo de David,?\s*/gi, "");
+            
+            // 4. PODA: Cortar a 120 caracteres para máxima legibilidad
+            if (clean.length > limit) {
+                const truncated = clean.substring(0, limit);
+                const lastSpace = truncated.lastIndexOf(" ");
+                return truncated.substring(0, lastSpace > 0 ? lastSpace : limit).trim() + "...";
             }
-            return cleaned;
+            return clean;
         };
 
         const contextText = processText(soulItem.explanation);

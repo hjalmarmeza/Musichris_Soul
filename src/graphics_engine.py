@@ -45,20 +45,20 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
             if base_font_size < 50: break 
             font_main = ImageFont.truetype(font_bold, base_font_size)
         
-        # 1. MIDDLE: Body Text (Absolute Center)
-        y_text = 960 - (total_h // 2)
+        # 1. MIDDLE: Body Text (Positioned slightly higher to avoid overlap)
+        y_text = 900 - (total_h // 2)
         for line in wrapped_lines:
             w, h = draw.textbbox((0, 0), line, font=font_main)[2:]
             draw.text(((width-w)/2, y_text), line, font=font_main, fill="white", stroke_width=3, stroke_fill="black")
             y_text += h + line_spacing
             
-        # 2. BOTTOM: Title Marker (Citation or Phase Name)
+        # 2. BOTTOM: Title Marker (Citation or Phase Name - Lowered)
         deco = "————————"
         w_deco, h_deco = draw.textbbox((0, 0), deco, font=font_citation)[2:]
-        draw.text(((width-w_deco)/2, 1380), deco, font=font_citation, fill=(255, 255, 255, 180))
+        draw.text(((width-w_deco)/2, 1400), deco, font=font_citation, fill=(255, 255, 255, 180))
         
         w_title, h_title = draw.textbbox((0, 0), title, font=font_citation)[2:]
-        draw.text(((width-w_title)/2, 1430), title, font=font_citation, fill="#D4AF37", stroke_width=2, stroke_fill="black")
+        draw.text(((width-w_title)/2, 1450), title, font=font_citation, fill="#D4AF37", stroke_width=2, stroke_fill="black")
 
     else:
         # Outro Credits
