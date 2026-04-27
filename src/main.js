@@ -81,14 +81,36 @@ async function main() {
 
         // RE-MAPEO NARRATIVO VALIDADO: Contexto/Resumen -> Revelación/Enseñanza -> Esperanza/Idea Central
         console.log('   - Fase 1: Contexto/Resumen (La Promesa)');
-        runGraphics('phase1', p1Card, soulItem.verse_citation, smartLimit(soulItem.explanation, 140));
+        
+        // LIMPIEZA DE TEXTO (Eliminar introducciones repetitivas y cortes)
+        const cleanText = (txt) => {
+            if (!txt) return "";
+            return txt
+                .replace(/^El sobreescrito del salmo dice:\s*/i, "")
+                .replace(/^Este salmo fue escrito\s*/i, "")
+                .replace(/^El contexto de este pasaje\s*/i, "")
+                .trim();
+        };
+
+        const contextText = cleanText(soulItem.explanation);
+        const revelationText = cleanText(soulItem.text);
+        
+        // Mensaje de Esperanza Inspirador
+        const hopeMsg = `En medio de "${soulItem.reflection_title}", Su gracia te sostiene. ¡Tu victoria viene de lo alto! 🙌`;
+
+        const phases = {
+            p1: { title: soulItem.verse_citation, body: contextText },
+            p2: { title: "REVELACIÓN", body: revelationText },
+            p3: { title: "ESPERANZA", body: hopeMsg }
+        };
+        
+        runGraphics('phase1', p1Card, phases.p1.title, phases.p1.body);
         
         console.log('   - Fase 2: Revelación (Enseñanza Poderosa)');
-        runGraphics('phase2', p2Card, "REVELACIÓN", smartLimit(soulItem.text, 140));
+        runGraphics('phase2', p2Card, phases.p2.title, phases.p2.body);
         
         console.log('   - Fase 3: Esperanza (Idea Central)');
-        const esperanzaText = `"${soulItem.reflection_title}"\n¡Dios tiene el control!`;
-        runGraphics('phase3', p3Card, "ESPERANZA", esperanzaText);
+        runGraphics('phase3', p3Card, phases.p3.title, phases.p3.body);
         
         console.log('   - Fase 4: Cierre');
         runGraphics('outro', creditsCard, "", "");
