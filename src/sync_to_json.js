@@ -17,7 +17,7 @@ async function syncSheetsToJson() {
             return;
         }
 
-        const jsonPath = path.join(__dirname, '../data/promises.json');
+        const jsonPath = path.join(__dirname, '../data/promises_developed.json');
         
         // Transformar al formato que espera el engine (con IDs)
         const formattedData = soulDatabase.map((item, index) => ({

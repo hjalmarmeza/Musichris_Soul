@@ -55,7 +55,7 @@ async function getSoulDatabase() {
 
 async function getNextPendingBackground() {
     console.log('📡 [API-SHEETS] Buscando paisaje real en Hoja Soul...');
-    const backgrounds = await getSoulSheetsData('1y6GYX2DwjZOJVBwKotKCh3aSVha3K6iQsr5_yG7al88', 'Hoja 1!A:E');
+    const backgrounds = await getSoulSheetsData('19zXfIiAZktXXyixZ1HdcW1IO9bOBn8S8sRPZAXUVZbE', 'Hoja 1!A:E');
     
     // Buscamos el primero que diga 'pending' y tenga URL válida
     for (let i = 1; i < backgrounds.length; i++) {

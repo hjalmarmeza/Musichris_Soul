@@ -7,16 +7,26 @@ const axios = require('axios');
  * Optimized for GitHub Actions (Uses Secrets instead of local files)
  */
 async function getAuth() {
-    const GOOGLE_CREDENTIALS = process.env.GOOGLE_CREDENTIALS;
-    const GOOGLE_TOKEN = process.env.GOOGLE_TOKEN;
+    let creds, token;
 
-    if (!GOOGLE_CREDENTIALS || !GOOGLE_TOKEN) {
-        throw new Error('❌ Error: Credenciales de Google (Secretos) no configuradas en el entorno.');
+    if (process.env.GOOGLE_CREDENTIALS && process.env.GOOGLE_TOKEN) {
+        creds = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+        token = JSON.parse(process.env.GOOGLE_TOKEN);
+    } else {
+        // Fallback a archivos locales para ejecución manual
+        const path = require('path');
+        const credsPath = path.join(__dirname, '../credentials.json');
+        const tokenPath = path.join(__dirname, '../token.json');
+
+        if (fs.existsSync(credsPath) && fs.existsSync(tokenPath)) {
+            console.log('🔑 [AUTH] Usando credenciales locales (credentials.json/token.json)...');
+            creds = JSON.parse(fs.readFileSync(credsPath, 'utf8'));
+            token = JSON.parse(fs.readFileSync(tokenPath, 'utf8'));
+        } else {
+            throw new Error('❌ Error: No se encontraron credenciales (ni en env ni en archivos locales).');
+        }
     }
 
-    const creds = JSON.parse(GOOGLE_CREDENTIALS);
-    const token = JSON.parse(GOOGLE_TOKEN);
-    
     const { client_secret, client_id, redirect_uris } = creds.installed || creds.web;
     const auth = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
     auth.setCredentials(token);
