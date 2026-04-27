@@ -28,15 +28,12 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
         font_main = font_citation = font_handle = font_button = font_footer = ImageFont.load_default()
 
     if not is_outro:
-        # Protocolo Flow v7.8: Majestic High-Density Layout
-        base_font_size = 85
-        max_width_px = 860 # Ocupar casi todo el repositorio (900px)
-        line_spacing = 40 # Espaciado generoso para llenar el repositorio
-
+        # Protocolo Flow v7.9: Small Font / Wide Lines (Full Character Density)
+        base_font_size = 42 # Fuente pequeña para permitir más palabras por línea
+        max_width_px = 890 # Máximo aprovechamiento horizontal (solo 5px de margen)
+        
         while True:
             font_main = ImageFont.truetype(font_bold, base_font_size)
-            
-            # Wrap dinámico basado en píxeles
             words = body.split(' ')
             wrapped_lines = []
             current_line = []
@@ -44,8 +41,7 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
             for word in words:
                 test_line = ' '.join(current_line + [word])
                 bbox = draw.textbbox((0, 0), test_line, font=font_main)
-                w = bbox[2] - bbox[0]
-                if w <= max_width_px:
+                if (bbox[2] - bbox[0]) <= max_width_px:
                     current_line.append(word)
                 else:
                     if current_line:
@@ -57,36 +53,32 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
             if current_line:
                 wrapped_lines.append(' '.join(current_line))
 
-            # Calcular dimensiones totales
-            max_w = 0
-            total_h = 0
-            line_heights = []
-            for l in wrapped_lines:
-                bbox = draw.textbbox((0, 0), l, font=font_main)
-                lw = bbox[2] - bbox[0]
-                lh = bbox[3] - bbox[1]
-                max_w = max(max_w, lw)
-                total_h += lh
-                line_heights.append(lh)
+            # Calcular altura del bloque de texto (sin spacing)
+            line_metrics = [draw.textbbox((0, 0), l, font=font_main) for l in wrapped_lines]
+            text_h = sum([m[3] - m[1] for m in line_metrics])
             
-            total_h += (len(wrapped_lines)-1) * line_spacing
+            # Interlineado dinámico para llenar el repositorio (1100px total, área útil ~700px)
+            target_area_h = 700
+            if len(wrapped_lines) > 1:
+                line_spacing = (target_area_h - text_h) // (len(wrapped_lines) - 1)
+                line_spacing = max(30, min(160, line_spacing)) # Mantener límites estéticos
+            else:
+                line_spacing = 40
+                
+            total_h = text_h + (len(wrapped_lines)-1) * line_spacing
             
-            # Si cabe en el área vertical (850px), salimos
-            if total_h < 850:
-                break
-            
+            if total_h < 950: break # Seguridad vertical
             base_font_size -= 2
-            if base_font_size < 30: break 
+            if base_font_size < 20: break 
         
-        print(f"DEBUG v7.8: lines={len(wrapped_lines)}, font={base_font_size}, max_w={max_w}")
+        print(f"DEBUG v7.9: lines={len(wrapped_lines)}, font={base_font_size}, spacing={line_spacing}")
         
-        # 1. MIDDLE: Body Text (Centrado en el repositorio 1100px)
-        # El repositorio está centrado en y=960 (rango 410 a 1510)
+        # 1. MIDDLE: Body Text (Centrado en y=960)
         y_text = 960 - (total_h // 2)
         for i, line in enumerate(wrapped_lines):
             bbox = draw.textbbox((0, 0), line, font=font_main)
             w = bbox[2] - bbox[0]
-            h = line_heights[i]
+            h = bbox[3] - bbox[1]
             draw.text(((width-w)/2, y_text), line, font=font_main, fill="white", stroke_width=3, stroke_fill="black")
             y_text += h + line_spacing
             
