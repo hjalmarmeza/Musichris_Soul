@@ -76,6 +76,7 @@ async function main() {
                 .replace(/El contexto de este pasaje es?/gi, "")
                 .replace(/Salmo de David,?/gi, "")
                 .replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, "")
+                .replace(/^["'“”„ \s]+|["'“”„ \s]+$/g, "") // Eliminar comillas y espacios al inicio/final
                 .trim();
             
             // 3. Poda agresiva para lectura rápida en Shorts
