@@ -29,43 +29,41 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
 
     if not is_outro:
         # Wrap logic (Safe wrap for 900px card - High density)
-        wrap_width = 16
+        wrap_width = 15 # More breathable
         wrapped_lines = textwrap.wrap(body, width=wrap_width)
-        line_spacing = 45 
+        line_spacing = 50 
 
-        # HARD FIT LOOP: Shrink until width < 750 and height < 900
+        # HARD FIT LOOP: Shrink until width < 750 and height < 700 (Reserved space for titles)
         while True:
             max_w = max([draw.textbbox((0, 0), l, font=font_main)[2] for l in wrapped_lines])
             total_h = sum([draw.textbbox((0, 0), l, font=font_main)[3] for l in wrapped_lines]) + (len(wrapped_lines)-1)*line_spacing
             
-            if max_w < 750 and total_h < 900:
+            if max_w < 750 and total_h < 700:
                 break
             
             base_font_size -= 4
-            if base_font_size < 40: break 
+            if base_font_size < 45: break 
             font_main = ImageFont.truetype(font_bold, base_font_size)
         
-        # Absolute Centering in the 1920x1080 frame
-        # Card is 900x1100 centered at 960y.
-        y = 960 - (total_h // 2) - 50 # Small offset for visual balance
+        # 1. TOP: Title (Citation)
+        w_title, h_title = draw.textbbox((0, 0), title, font=font_citation)[2:]
+        draw.text(((width-w_title)/2, 480), title, font=font_citation, fill="#D4AF37", stroke_width=2, stroke_fill="black")
         
+        # 2. MIDDLE: Body Text (Centered in the remaining card space)
+        y_text = 960 - (total_h // 2)
         for line in wrapped_lines:
             w, h = draw.textbbox((0, 0), line, font=font_main)[2:]
-            draw.text(((width-w)/2, y), line, font=font_main, fill="white", stroke_width=3, stroke_fill="black")
-            y += h + line_spacing
+            draw.text(((width-w)/2, y_text), line, font=font_main, fill="white", stroke_width=3, stroke_fill="black")
+            y_text += h + line_spacing
             
-        # Drawing Decoration Line & Title (Citation/Phase)
-        y += 40
+        # 3. BOTTOM: Phase Marker
+        phase_label = "REVELACIÓN" if "phase2" in mode else "ESPERANZA" if "phase3" in mode else "CONTEXTO"
         deco = "————————"
         w_deco, h_deco = draw.textbbox((0, 0), deco, font=font_citation)[2:]
-        draw.text(((width-w_deco)/2, y), deco, font=font_citation, fill=(255, 255, 255, 180))
+        draw.text(((width-w_deco)/2, 1380), deco, font=font_citation, fill=(255, 255, 255, 180))
         
-        y += h_deco + 20
-        w_cite, h_cite = draw.textbbox((0, 0), title, font=font_citation)[2:]
-        
-        # Gold highlight for the phase title
-        gold_color = "#D4AF37"
-        draw.text(((width-w_cite)/2, y), title, font=font_citation, fill=gold_color, stroke_width=2, stroke_fill="black")
+        w_phase, h_phase = draw.textbbox((0, 0), phase_label, font=font_citation)[2:]
+        draw.text(((width-w_phase)/2, 1430), phase_label, font=font_citation, fill="#D4AF37", stroke_width=2, stroke_fill="black")
 
     else:
         # Outro Credits
