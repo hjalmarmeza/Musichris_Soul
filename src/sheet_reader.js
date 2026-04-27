@@ -57,18 +57,26 @@ async function getNextPendingBackground() {
     console.log('📡 [API-SHEETS] Buscando paisaje real en Hoja Soul...');
     const backgrounds = await getSoulSheetsData('1y6GYX2DwjZOJVBwKotKCh3aSVha3K6iQsr5_yG7al88', 'Hoja 1!A:E');
     
-    // Buscamos el primero que diga 'pending' (ignorando encabezado)
+    // Buscamos el primero que diga 'pending' y tenga URL válida
     for (let i = 1; i < backgrounds.length; i++) {
-        if ((backgrounds[i][2] || '').toLowerCase() === 'pending') {
+        const url = (backgrounds[i][1] || '').trim();
+        const status = (backgrounds[i][2] || '').toLowerCase();
+        
+        if (status === 'pending' && url.startsWith('http')) {
             return {
-                url: backgrounds[i][1],
-                row: i + 1 // Guardamos la fila real para marcarla como DONE luego
+                url: url,
+                row: i + 1 
             };
         }
     }
     
-    // Si no hay pendientes, devolvemos el primero como fallback (fila 2)
-    return { url: backgrounds[1][1], row: 2 }; 
+    // Si no hay pendientes válidos, buscamos CUALQUIERA que tenga URL (fila 2 en adelante)
+    for (let i = 1; i < backgrounds.length; i++) {
+        const url = (backgrounds[i][1] || '').trim();
+        if (url.startsWith('http')) return { url: url, row: i + 1 };
+    }
+
+    throw new Error("No se encontraron paisajes con URLs válidas en la Hoja de Soul.");
 }
 
 module.exports = { getSoulDatabase, getNextPendingBackground };

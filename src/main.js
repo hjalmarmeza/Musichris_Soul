@@ -26,6 +26,9 @@ async function main() {
         const description = `Reflexión: ${soulItem.reflection_title}\nMúsica: MusiChris Studio ✨\n\n#Musichris #Studio #Reflexion #Esperanza #Victoria`;
         
         if (!soulItem) throw new Error(`Pieza con ID ${targetId} no encontrada.`);
+        if (!soulItem.audio_url || !soulItem.audio_url.startsWith('http')) {
+            throw new Error(`La pieza con ID ${soulItem.id} ("${soulItem.reflection_title}") no tiene una URL de audio válida (detectado: "${soulItem.audio_url}"). Por favor, actualiza el Audio Catalog.`);
+        }
 
         console.log(`🎬 PRODUCIENDO: ${soulItem.reflection_title} (ID: ${soulItem.id})`);
         const landscapeInfo = await getNextPendingBackground();

@@ -24,11 +24,15 @@ async function getAuth() {
 }
 
 async function smartDownload(url, outputPath) {
+    if (!url || typeof url !== 'string' || !url.startsWith('http')) {
+        throw new Error(`Invalid URL detected: "${url}". Check your Google Sheet data.`);
+    }
+
     if (url.includes('drive.google.com') || url.includes('/uc?')) {
         return downloadDriveFile(url, outputPath);
     }
     
-    console.log(`🌐 [HTTP-DL] Descargando de servidor externo: ${url.substring(0, 50)}...`);
+    console.log(`🌐 [HTTP-DL] Descargando de servidor externo: ${url.substring(0, 60)}...`);
     const response = await axios({ method: 'get', url: url, responseType: 'stream' });
 
     return new Promise((resolve, reject) => {
