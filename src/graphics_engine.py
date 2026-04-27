@@ -28,33 +28,64 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
         font_main = font_citation = font_handle = font_button = font_footer = ImageFont.load_default()
 
     if not is_outro:
-        # Force font to start a bit larger
-        base_font_size = 75
-        font_main = ImageFont.truetype(font_bold, base_font_size)
+        # Protocolo Flow v7.7: Ultra-Wide Precision
+        base_font_size = 55
+        max_width_px = 880 # Casi el total de los 900px del repositorio
+        line_spacing = 18
 
-        # Usar un ancho de bloque MUCHO mayor (v7.5 Ultra-Wide)
-        wrap_width = 40
-        wrapped_lines = textwrap.wrap(body, width=wrap_width)
-        line_spacing = 25 # Más compacto
-
-        # HARD FIT LOOP: Shrink until width < 860 (margen mínimo de 20px por lado)
         while True:
-            max_w = max([draw.textbbox((0, 0), l, font=font_main)[2] for l in wrapped_lines])
-            total_h = sum([draw.textbbox((0, 0), l, font=font_main)[3] for l in wrapped_lines]) + (len(wrapped_lines)-1)*line_spacing
+            font_main = ImageFont.truetype(font_bold, base_font_size)
             
-            if max_w < 860 and total_h < 750:
+            # Wrap dinámico basado en píxeles
+            words = body.split(' ')
+            wrapped_lines = []
+            current_line = []
+            
+            for word in words:
+                test_line = ' '.join(current_line + [word])
+                bbox = draw.textbbox((0, 0), test_line, font=font_main)
+                w = bbox[2] - bbox[0]
+                if w <= max_width_px:
+                    current_line.append(word)
+                else:
+                    if current_line:
+                        wrapped_lines.append(' '.join(current_line))
+                        current_line = [word]
+                    else:
+                        wrapped_lines.append(word)
+                        current_line = []
+            if current_line:
+                wrapped_lines.append(' '.join(current_line))
+
+            # Calcular dimensiones totales
+            max_w = 0
+            total_h = 0
+            line_heights = []
+            for l in wrapped_lines:
+                bbox = draw.textbbox((0, 0), l, font=font_main)
+                lw = bbox[2] - bbox[0]
+                lh = bbox[3] - bbox[1]
+                max_w = max(max_w, lw)
+                total_h += lh
+                line_heights.append(lh)
+            
+            total_h += (len(wrapped_lines)-1) * line_spacing
+            
+            # Si cabe en el área vertical, salimos
+            if total_h < 800: # Un poco más de margen vertical
                 break
             
             base_font_size -= 2
-            if base_font_size < 30: break 
-            font_main = ImageFont.truetype(font_bold, base_font_size)
+            if base_font_size < 20: break 
         
-        print(f"DEBUG v7.5: lines={len(wrapped_lines)}, font={base_font_size}, max_w={max_w}")
+        print(f"DEBUG v7.7: lines={len(wrapped_lines)}, font={base_font_size}, max_w={max_w}")
         
-        # 1. MIDDLE: Body Text (Positioned slightly higher to avoid overlap)
+        # 1. MIDDLE: Body Text
         y_text = 900 - (total_h // 2)
-        for line in wrapped_lines:
-            w, h = draw.textbbox((0, 0), line, font=font_main)[2:]
+        for i, line in enumerate(wrapped_lines):
+            bbox = draw.textbbox((0, 0), line, font=font_main)
+            w = bbox[2] - bbox[0]
+            h = line_heights[i]
             draw.text(((width-w)/2, y_text), line, font=font_main, fill="white", stroke_width=3, stroke_fill="black")
             y_text += h + line_spacing
             

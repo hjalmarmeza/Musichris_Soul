@@ -1,71 +1,69 @@
+import sys
 import os
-import textwrap
 from PIL import Image, ImageDraw, ImageFont
+import textwrap
 
-def generate_phase_card(title, body, output_path, width=1080, height=1920, font_path="/System/Library/Fonts/Supplemental/Georgia.ttf", is_outro=False):
+def generate_overlay(body, title, output_path):
+    width, height = 1080, 1920
     img = Image.new('RGBA', (width, height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
     
-    try:
-        font_main = ImageFont.truetype(font_path, 55)
-        font_citation = ImageFont.truetype(font_path, 45)
-        font_handle = ImageFont.truetype(font_path, 82)
-        font_button = ImageFont.truetype(font_path, 52)
-        font_footer = ImageFont.truetype(font_path, 44)
-    except:
-        font_main = font_citation = font_handle = font_button = font_footer = ImageFont.load_default()
-
-    if not is_outro:
-        # Drawing Main Content (Teaching/Context)
-        # Wrap text at ~24 chars as per engine.js
-        wrapped_lines = textwrap.wrap(body, width=28)
-        y = height // 2 - (len(wrapped_lines) * 35) # Center vertically
-        
-        for line in wrapped_lines:
-            w, h = draw.textbbox((0, 0), line, font=font_main)[2:]
-            draw.text(((width-w)/2, y), line, font=font_main, fill="white", stroke_width=1, stroke_fill="black")
-            y += h + 25
+    # Fonts
+    assets_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    font_path = os.path.join(assets_dir, "assets", "Georgia-Bold.ttf")
+    
+    base_font_size = 55
+    max_width_px = 880
+    line_spacing = 18
+    
+    while True:
+        try:
+            font = ImageFont.truetype(font_path, base_font_size)
+        except:
+            font = ImageFont.load_default()
             
-        # Drawing Decoration Line & Citation
-        y += 40
-        deco = "————————————"
-        w_deco, h_deco = draw.textbbox((0, 0), deco, font=font_citation)[2:]
-        draw.text(((width-w_deco)/2, y), deco, font=font_citation, fill="white")
+        words = body.split(' ')
+        wrapped_lines = []
+        current_line = []
+        for word in words:
+            test_line = ' '.join(current_line + [word])
+            bbox = draw.textbbox((0, 0), test_line, font=font)
+            if (bbox[2] - bbox[0]) <= max_width_px:
+                current_line.append(word)
+            else:
+                if current_line:
+                    wrapped_lines.append(' '.join(current_line))
+                    current_line = [word]
+                else:
+                    wrapped_lines.append(word)
+                    current_line = []
+        if current_line:
+            wrapped_lines.append(' '.join(current_line))
+            
+        total_h = sum([draw.textbbox((0, 0), l, font=font)[3] - draw.textbbox((0, 0), l, font=font)[1] for l in wrapped_lines]) + (len(wrapped_lines)-1)*line_spacing
         
-        y += h_deco + 10
-        w_cite, h_cite = draw.textbbox((0, 0), title, font=font_citation)[2:]
-        color = "#D4AF37" if "REVELACIÓN" not in title and "ESPERANZA" not in title else "white"
-        draw.text(((width-w_cite)/2, y), title, font=font_citation, fill=color)
+        if total_h < 800:
+            break
+        base_font_size -= 2
+        if base_font_size < 20: break
 
-    else:
-        # Outro Credits
-        handle = "@Musichris_Studio"
-        button_text = "¡Caminemos juntos en fe!"
-        footer = "Escucha la canción completa en el canal"
+    y_text = 900 - (total_h // 2)
+    for line in wrapped_lines:
+        bbox = draw.textbbox((0, 0), line, font=font)
+        w = bbox[2] - bbox[0]
+        h = bbox[3] - bbox[1]
+        draw.text(((width-w)/2, y_text), line, font=font, fill="white", stroke_width=3, stroke_fill="black")
+        y_text += h + line_spacing
         
-        w, h = draw.textbbox((0, 0), handle, font=font_handle)[2:]
-        draw.text(((width-w)/2, height/2 + 220), handle, font=font_handle, fill="white", stroke_width=2, stroke_fill="black")
-        
-        bw, bh = draw.textbbox((0, 0), button_text, font=font_button)[2:]
-        padding_x, padding_y = 60, 30
-        rect_coords = [(width-bw)/2 - padding_x, height/2 + 380 - padding_y, (width+bw)/2 + padding_x, height/2 + 380 + bh + padding_y]
-        draw.rounded_rectangle(rect_coords, radius=bh, fill=(255, 255, 255, 40), outline="white", width=2)
-        draw.text(((width-bw)/2, height/2 + 380), button_text, font=font_button, fill="white")
-        
-        w, h = draw.textbbox((0, 0), footer, font=font_footer)[2:]
-        draw.text(((width-w)/2, height/2 + 540), footer, font=font_footer, fill="white", stroke_width=1, stroke_fill="black")
-
+    # Title
+    font_title = ImageFont.truetype(font_path, 80)
+    w_t = draw.textbbox((0, 0), title, font=font_title)[2]
+    draw.text(((width-w_t)/2, 1400), title, font=font_title, fill="#FFD700", stroke_width=2, stroke_fill="black")
+    
     img.save(output_path)
-    print(f"✅ Generated: {output_path}")
+    print(f"Generated {output_path} with v7.7 logic")
 
 if __name__ == "__main__":
-    import sys
-    mode = sys.argv[1] # phase1, phase2, phase3, outro
-    output = sys.argv[2]
-    
-    if mode == "outro":
-        generate_phase_card("", "", output, is_outro=True)
-    else:
-        title = sys.argv[3]
-        body = sys.argv[4]
-        generate_phase_card(title, body, output)
+    body = "Huyendo de su hijo Absalón, David, un rey acostumbrado al palacio, ahora duerme en la arena en peligro de muerte y escasez."
+    title = "Salmo 63"
+    generate_overlay(body, title, "scratch_overlay.png")
