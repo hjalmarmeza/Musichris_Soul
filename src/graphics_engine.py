@@ -28,9 +28,10 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
         font_main = font_citation = font_handle = font_button = font_footer = ImageFont.load_default()
 
     if not is_outro:
-        # Protocolo Flow v7.9: Small Font / Wide Lines (Full Character Density)
-        base_font_size = 42 # Fuente pequeña para permitir más palabras por línea
-        max_width_px = 890 # Máximo aprovechamiento horizontal (solo 5px de margen)
+        # Protocolo Flow v8.0: Final Redemption (Bulletproof Layout)
+        base_font_size = 50 
+        max_width_px = 940 # Máxima expansión lateral solicitada
+        line_spacing = 25 # Interlineado fijo y elegante
         
         while True:
             font_main = ImageFont.truetype(font_bold, base_font_size)
@@ -53,34 +54,32 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
             if current_line:
                 wrapped_lines.append(' '.join(current_line))
 
-            # Calcular altura del bloque de texto (sin spacing)
-            line_metrics = [draw.textbbox((0, 0), l, font=font_main) for l in wrapped_lines]
-            text_h = sum([m[3] - m[1] for m in line_metrics])
+            # Calcular altura total con el spacing actual
+            total_h = 0
+            line_heights = []
+            for l in wrapped_lines:
+                bbox = draw.textbbox((0, 0), l, font=font_main)
+                lh = bbox[3] - bbox[1]
+                total_h += lh
+                line_heights.append(lh)
             
-            # Interlineado dinámico para llenar el repositorio (1100px total, área útil ~700px)
-            target_area_h = 700
-            if len(wrapped_lines) > 1:
-                line_spacing = (target_area_h - text_h) // (len(wrapped_lines) - 1)
-                line_spacing = max(30, min(160, line_spacing)) # Mantener límites estéticos
-            else:
-                line_spacing = 40
-                
-            total_h = text_h + (len(wrapped_lines)-1) * line_spacing
+            total_h += (len(wrapped_lines)-1) * line_spacing
             
-            if total_h < 950: break # Seguridad vertical
+            # Si el bloque total cabe en el repositorio (1000px útiles), salimos
+            if total_h < 980: break 
+            
             base_font_size -= 2
-            if base_font_size < 20: break 
+            if base_font_size < 18: break 
         
-        print(f"DEBUG v7.9: lines={len(wrapped_lines)}, font={base_font_size}, spacing={line_spacing}")
+        print(f"DEBUG v8.0: lines={len(wrapped_lines)}, font={base_font_size}, h={total_h}")
         
-        # 1. MIDDLE: Body Text (Centrado en y=960)
+        # RENDERIZADO CENTRADO (y=960 es el centro del repositorio)
         y_text = 960 - (total_h // 2)
         for i, line in enumerate(wrapped_lines):
             bbox = draw.textbbox((0, 0), line, font=font_main)
             w = bbox[2] - bbox[0]
-            h = bbox[3] - bbox[1]
             draw.text(((width-w)/2, y_text), line, font=font_main, fill="white", stroke_width=3, stroke_fill="black")
-            y_text += h + line_spacing
+            y_text += line_heights[i] + line_spacing
             
         # 2. BOTTOM: Title Marker (Citation or Phase Name - Lowered)
         deco = "————————"

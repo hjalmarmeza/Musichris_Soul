@@ -63,28 +63,11 @@ async function main() {
             if (result.stderr.length > 0) console.error(`Python Stderr: ${result.stderr.toString()}`);
         };
 
-        // LIMPIEZA DE TEXTO MULTI-LÍNEA Y PODA MAESTRA (Protocolo Flow v7.0)
-        const processText = (txt, limit = 120) => {
+        // PROTOCOLO FLOW v8.0 - NO TRUNCATE (Preservar integridad del mensaje)
+        const processText = (txt) => {
             if (!txt) return "";
-            
-            // 1. UNIFICAR: Eliminar saltos de línea y espacios múltiples (v7.0 Heavy Duty)
-            let clean = txt.replace(/[\s\n\r]+/g, " ").trim();
-            
-            // 2. ELIMINACIÓN DE BLOQUE: El regex ahora busca el bloque completo de preámbulo
-            // Atrapa desde 'El sobrescrito' hasta el final de la mención al desierto o David.
-            const preamblePattern = /El sobr?eescrito del salmo dice:?\s*["']?.*?(?:desierto de Judá|Salmo de David).*?["']?\.?\s*/gi;
-            clean = clean.replace(preamblePattern, "");
-            
-            // 3. LIMPIEZA ADICIONAL: Eliminar "Salmo de David" si quedó suelto
-            clean = clean.replace(/Salmo de David,?\s*/gi, "");
-            
-            // 4. PODA: Cortar a 120 caracteres para máxima legibilidad
-            if (clean.length > limit) {
-                const truncated = clean.substring(0, limit);
-                const lastSpace = truncated.lastIndexOf(" ");
-                return truncated.substring(0, lastSpace > 0 ? lastSpace : limit).trim() + "...";
-            }
-            return clean;
+            // Solo normalizamos espacios para un wrapping perfecto en Python
+            return txt.replace(/[\s\n\r]+/g, " ").trim();
         };
 
         const contextText = processText(soulItem.explanation);
