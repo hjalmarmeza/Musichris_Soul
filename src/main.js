@@ -102,9 +102,9 @@ async function main() {
             [0:v] scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,
                   eq=brightness=-0.1:contrast=1.1,vignette=angle=0.5 [bg];
             [bg] split [b1][b2];
-            [b2] crop=960:1200:(1080-960)/2:(1920-1200)/2, boxblur=25 [blurred];
+            [b2] crop=900:1100:(1080-900)/2:(1920-1100)/2, boxblur=25 [blurred];
             [b1][blurred] overlay=(W-w)/2:(H-h)/2 [card_base];
-            [card_base] drawbox=y='(ih-1200)/2':x='(iw-960)/2':w=960:h=1200:t=fill:c=black@0.4 [final_bg];
+            [card_base] drawbox=y='(ih-1100)/2':x='(iw-900)/2':w=900:h=1100:t=fill:c=black@0.4 [final_bg];
             [final_bg][2:v] overlay=0:0:enable='between(t,2,19.5)' [f1];
             [f1][3:v] overlay=0:0:enable='between(t,20,39.5)' [f2];
             [f2][4:v] overlay=0:0:enable='between(t,40,54.5)'

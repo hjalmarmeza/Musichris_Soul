@@ -33,12 +33,12 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
         wrapped_lines = textwrap.wrap(body, width=wrap_width)
         line_spacing = 50 
 
-        # HARD FIT LOOP: Shrink until width < 840 and height < 950
+        # HARD FIT LOOP: Shrink until width < 820 and height < 950
         while True:
             max_w = max([draw.textbbox((0, 0), l, font=font_main)[2] for l in wrapped_lines])
             total_h = sum([draw.textbbox((0, 0), l, font=font_main)[3] for l in wrapped_lines]) + (len(wrapped_lines)-1)*line_spacing
             
-            if max_w < 840 and total_h < 950:
+            if max_w < 820 and total_h < 950:
                 break
             
             base_font_size -= 5
