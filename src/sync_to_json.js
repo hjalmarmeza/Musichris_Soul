@@ -19,15 +19,16 @@ async function syncSheetsToJson() {
 
         const jsonPath = path.join(__dirname, '../data/promises_developed.json');
         
-        // Transformar al formato que espera el engine (con IDs)
-        const formattedData = soulDatabase.map((item, index) => ({
-            id: index + 1,
+        // Transformar al formato que espera el engine (con IDs y conteo de videos)
+        const formattedData = soulDatabase.map((item) => ({
+            id: item.id,
             title: item.title,
-            reflection_title: item.title, // Ahora usamos el nombre de la canción como título principal
+            reflection_title: item.reflection_title || item.title,
             verse_citation: item.verse_citation,
             text: item.text,
             explanation: item.explanation,
-            audio_url: item.audio_url
+            audio_url: item.audio_url,
+            video_count: item.video_count || 0
         }));
 
         fs.writeFileSync(jsonPath, JSON.stringify(formattedData, null, 2));

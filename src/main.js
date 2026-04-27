@@ -21,9 +21,15 @@ async function main() {
             ? database.find(item => item.id == targetId) 
             : database[Math.floor(Math.random() * database.length)];
         
-        // METADATOS PARA YOUTUBE
-        const title = `${soulItem.reflection_title} | MusiChris Studio 🕊️`;
-        const description = `Reflexión: ${soulItem.reflection_title}\nMúsica: MusiChris Studio ✨\n\n#Musichris #Studio #Reflexion #Esperanza #Victoria`;
+        // METADATOS OPTIMIZADOS PARA EL ALGORITMO DE YOUTUBE (SEO ELITE)
+        const title = `${soulItem.title.toUpperCase()} - ${soulItem.verse_citation} | Reflexión Cristiana 🕊️ #shorts`;
+        
+        const description = `✨ ${soulItem.reflection_title} ✨\n\n` +
+            `"${soulItem.text}"\n\n` +
+            `Esta pieza ministerial basada en ${soulItem.verse_citation} ha sido creada para traer paz y esperanza a tu vida. ` +
+            `La música y la reflexión se unen en MusiChris Studio para fortalecer tu fe en el camino.\n\n` +
+            `🔔 ¡SUSCRÍBETE para recibir tu dosis diaria de esperanza!\n\n` +
+            `#MusichrisStudio #ReflexionCristiana #DiosEsAmor #Esperanza #Fe #PromesasDeDios #ChristianMusic #Worship`;
         
         if (!soulItem) throw new Error(`Pieza con ID ${targetId} no encontrada.`);
         if (!soulItem.audio_url || !soulItem.audio_url.startsWith('http')) {
@@ -55,7 +61,18 @@ async function main() {
         const p3Card = path.join(assetsDir, 'p3.png');
         const creditsCard = path.join(assetsDir, 'credits.png');
         
-        // Usamos spawnSync para evitar problemas de escape con comillas en el texto
+        // Función para limitar texto y asegurar legibilidad
+        const smartLimit = (text, maxChars = 200) => {
+            if (!text || text.length <= maxChars) return text;
+            // Intentar cortar en el segundo punto seguido
+            const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+            if (sentences.length >= 2) {
+                const draft = (sentences[0] + sentences[1]).trim();
+                if (draft.length <= maxChars + 50) return draft;
+            }
+            return text.substring(0, maxChars).trim() + "...";
+        };
+
         const runGraphics = (mode, output, title, body) => {
             const result = spawnSync('python3', ['src/graphics_engine.py', mode, output, title, body]);
             if (result.error) console.error(`Error en graphics_engine: ${result.error}`);
@@ -64,15 +81,12 @@ async function main() {
 
         // RE-MAPEO NARRATIVO VALIDADO: Contexto/Resumen -> Revelación/Enseñanza -> Esperanza/Idea Central
         console.log('   - Fase 1: Contexto/Resumen (La Promesa)');
-        // Si es un capítulo completo, explanation sirve como resumen/idea central
-        runGraphics('phase1', p1Card, soulItem.verse_citation, soulItem.explanation);
+        runGraphics('phase1', p1Card, soulItem.verse_citation, smartLimit(soulItem.explanation, 140));
         
         console.log('   - Fase 2: Revelación (Enseñanza Poderosa)');
-        // El usuario identificó este bloque como la verdadera 'Revelación'
-        runGraphics('phase2', p2Card, "REVELACIÓN", soulItem.text);
+        runGraphics('phase2', p2Card, "REVELACIÓN", smartLimit(soulItem.text, 140));
         
         console.log('   - Fase 3: Esperanza (Idea Central)');
-        // Cerramos con el título de la reflexión como la promesa final
         const esperanzaText = `"${soulItem.reflection_title}"\n¡Dios tiene el control!`;
         runGraphics('phase3', p3Card, "ESPERANZA", esperanzaText);
         

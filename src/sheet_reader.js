@@ -13,11 +13,19 @@ const smartNormalize = (s) => {
 
 async function getSoulDatabase() {
     console.log('📡 [API-MASTER-SYNC] Sincronizando Ecosistema Elite...');
-    const audioCatalog = await getSoulSheetsData('19zXfliAZktXYixZ1HdcW1IO9bOBn8S8sRPZAXUVZbE', 'Hoja 2!A:E');
+    const audioCatalog = await getSoulSheetsData('19zXfIiAZktXXyixZ1HdcW1IO9bOBn8S8sRPZAXUVZbE', 'Hoja 2!A:E');
     const theologyMaster = await getSoulSheetsData('1oTVSF7CjrCtnk3pHdBIRE8gzhE9zKDM5NJFyWV-qsJs', 'Hoja 4!A:L');
+    const missionsLog = await getSoulSheetsData('1y6GYX2DwjZOJVBwKotKCh3aSVha3K6iQsr5_yG7al88', 'Misiones!A:D');
 
     if (!theologyMaster.length) return [];
     
+    // Contar videos producidos desde el log de misiones
+    const videoCounts = {};
+    missionsLog.slice(1).forEach(row => {
+        const id = row[1]; // Columna B es el ID
+        if (id) videoCounts[id] = (videoCounts[id] || 0) + 1;
+    });
+
     // Índices Maestros
     const idxTitleTheo = 1;      // Título
     const idxThemeTheo = 7;      // Temática Central
@@ -33,22 +41,25 @@ async function getSoulDatabase() {
         row: ac
     }));
 
-    return theologyMaster.slice(1).map(theo => {
+    return theologyMaster.slice(1).map((theo, index) => {
         const songTitle = (theo[idxTitleTheo] || '').trim();
         if (!songTitle) return null;
 
+        const currentId = (index + 1).toString();
         const cleanTarget = smartNormalize(songTitle);
         const audioMatch = normalizedCatalog.find(nc => nc.clean === cleanTarget || cleanTarget.includes(nc.clean) || nc.clean.includes(cleanTarget));
         
         if (!audioMatch) return null;
 
         return {
+            id: index + 1,
             title: songTitle,
             reflection_title: theo[idxThemeTheo] || 'Nota de Vida',
-            verse_citation: (theo[idxVerseTheo] || '').split(/[,;\/]/)[0].trim(), // Solo la primera cita (soporta , ; /)
+            verse_citation: (theo[idxVerseTheo] || '').split(/[,;\/]/)[0].trim(), // Solo la primera cita
             text: theo[idxContentTheo] || '',
             explanation: theo[idxContextTheo] || '',
-            audio_url: audioMatch.row[idxUrlAud]
+            audio_url: audioMatch.row[idxUrlAud],
+            video_count: videoCounts[currentId] || 0
         };
     }).filter(i => i && i.audio_url);
 }

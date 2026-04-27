@@ -1,6 +1,6 @@
 module.exports = {
     // Hoja 1: Catálogo Maestro (Canciones y URLs)
-    CATALOG_SHEET_URL: 'https://docs.google.com/spreadsheets/d/19zXfliAZktXYixZ1HdcW1IO9bOBn8S8sRPZAXUVZbE/gviz/tq?tqx=out:csv&sheet=Hoja%202',
+    CATALOG_SHEET_URL: 'https://docs.google.com/spreadsheets/d/19zXfIiAZktXXyixZ1HdcW1IO9bOBn8S8sRPZAXUVZbE/gviz/tq?tqx=out:csv&sheet=Hoja%202',
     
     // Hoja 2: Teología (Versos y Explicaciones)
     THEOLOGY_SHEET_URL: 'https://docs.google.com/spreadsheets/d/1oTVSF7CjrCtnk3pHdBIRE8gzhE9zKDM5NJFyWV-qsJs/gviz/tq?tqx=out:csv&sheet=Hoja%204',

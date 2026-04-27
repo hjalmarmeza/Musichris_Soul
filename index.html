@@ -104,12 +104,11 @@
 
         function renderList(data) {
             const list = document.getElementById('content-list');
-            const pubIds = [1]; // ID de ejemplo que ya está publicado
-            document.getElementById('p-val').innerText = fullCatalog.length - pubIds.length;
+            const totalPublished = data.reduce((acc, curr) => acc + (curr.video_count > 0 ? 1 : 0), 0);
+            document.getElementById('p-val').innerText = data.length - totalPublished;
             
             list.innerHTML = '';
             data.forEach(item => {
-                const isPub = pubIds.includes(item.id);
                 const div = document.createElement('div');
                 div.className = 'item-card';
                 div.onclick = () => produceAtCloud(item);
@@ -118,7 +117,7 @@
                         <h4>${item.reflection_title}</h4>
                         <p>${item.verse_citation}</p>
                     </div>
-                    <div class="badge-pub">VIDEOS: ${isPub ? 1 : 0}</div>
+                    <div class="badge-pub">VIDEOS: ${item.video_count}</div>
                 `;
                 list.appendChild(div);
             });
