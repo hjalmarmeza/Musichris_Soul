@@ -28,42 +28,37 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
         font_main = font_citation = font_handle = font_button = font_footer = ImageFont.load_default()
 
     if not is_outro:
-        # Wrap logic (Safe wrap for 900px card - High density)
-        wrap_width = 15 # More breathable
+        # Wrap logic (Safe wrap for 900px card - v6.0 High density)
+        wrap_width = 18 # Optimized for shorter summary
         wrapped_lines = textwrap.wrap(body, width=wrap_width)
-        line_spacing = 50 
+        line_spacing = 55 # More breathable
 
-        # HARD FIT LOOP: Shrink until width < 750 and height < 700 (Reserved space for titles)
+        # HARD FIT LOOP: Shrink until width < 750 and height < 750 (Reserved space for titles)
         while True:
             max_w = max([draw.textbbox((0, 0), l, font=font_main)[2] for l in wrapped_lines])
             total_h = sum([draw.textbbox((0, 0), l, font=font_main)[3] for l in wrapped_lines]) + (len(wrapped_lines)-1)*line_spacing
             
-            if max_w < 750 and total_h < 700:
+            if max_w < 780 and total_h < 750:
                 break
             
             base_font_size -= 4
-            if base_font_size < 45: break 
+            if base_font_size < 50: break 
             font_main = ImageFont.truetype(font_bold, base_font_size)
         
-        # 1. TOP: Title (Citation)
-        w_title, h_title = draw.textbbox((0, 0), title, font=font_citation)[2:]
-        draw.text(((width-w_title)/2, 480), title, font=font_citation, fill="#D4AF37", stroke_width=2, stroke_fill="black")
-        
-        # 2. MIDDLE: Body Text (Centered in the remaining card space)
+        # 1. MIDDLE: Body Text (Absolute Center)
         y_text = 960 - (total_h // 2)
         for line in wrapped_lines:
             w, h = draw.textbbox((0, 0), line, font=font_main)[2:]
             draw.text(((width-w)/2, y_text), line, font=font_main, fill="white", stroke_width=3, stroke_fill="black")
             y_text += h + line_spacing
             
-        # 3. BOTTOM: Phase Marker
-        phase_label = "REVELACIÓN" if "phase2" in mode else "ESPERANZA" if "phase3" in mode else "CONTEXTO"
+        # 2. BOTTOM: Title Marker (Citation or Phase Name)
         deco = "————————"
         w_deco, h_deco = draw.textbbox((0, 0), deco, font=font_citation)[2:]
         draw.text(((width-w_deco)/2, 1380), deco, font=font_citation, fill=(255, 255, 255, 180))
         
-        w_phase, h_phase = draw.textbbox((0, 0), phase_label, font=font_citation)[2:]
-        draw.text(((width-w_phase)/2, 1430), phase_label, font=font_citation, fill="#D4AF37", stroke_width=2, stroke_fill="black")
+        w_title, h_title = draw.textbbox((0, 0), title, font=font_citation)[2:]
+        draw.text(((width-w_title)/2, 1430), title, font=font_citation, fill="#D4AF37", stroke_width=2, stroke_fill="black")
 
     else:
         # Outro Credits
