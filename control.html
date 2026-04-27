@@ -114,8 +114,8 @@
                 div.onclick = () => produceAtCloud(item);
                 div.innerHTML = `
                     <div class="info">
-                        <h4>${item.reflection_title}</h4>
-                        <p>${item.verse_citation}</p>
+                        <h4>${item.title}</h4>
+                        <p>${item.reflection_title} — ${item.verse_citation}</p>
                     </div>
                     <div class="badge-pub">VIDEOS: ${item.video_count}</div>
                 `;
