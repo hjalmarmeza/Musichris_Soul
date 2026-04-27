@@ -13,7 +13,7 @@ const smartNormalize = (s) => {
 
 async function getSoulDatabase() {
     console.log('📡 [API-MASTER-SYNC] Sincronizando Ecosistema Elite...');
-    const audioCatalog = await getSoulSheetsData('19zXfIiAZktXXyixZ1HdcW1IO9bOBn8S8sRPZAXUVZbE', 'Hoja 2!A:E');
+    const audioCatalog = await getSoulSheetsData('19zXfliAZktXYixZ1HdcW1IO9bOBn8S8sRPZAXUVZbE', 'Hoja 2!A:E');
     const theologyMaster = await getSoulSheetsData('1oTVSF7CjrCtnk3pHdBIRE8gzhE9zKDM5NJFyWV-qsJs', 'Hoja 4!A:L');
 
     if (!theologyMaster.length) return [];
@@ -55,7 +55,7 @@ async function getSoulDatabase() {
 
 async function getNextPendingBackground() {
     console.log('📡 [API-SHEETS] Buscando paisaje real en Hoja Soul...');
-    const backgrounds = await getSoulSheetsData('19zXfIiAZktXXyixZ1HdcW1IO9bOBn8S8sRPZAXUVZbE', 'Hoja 1!A:E');
+    const backgrounds = await getSoulSheetsData('1y6GYX2DwjZOJVBwKotKCh3aSVha3K6iQsr5_yG7al88', 'Hoja 1!A:E');
     
     // Buscamos el primero que diga 'pending' y tenga URL válida
     for (let i = 1; i < backgrounds.length; i++) {

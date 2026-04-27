@@ -2,7 +2,7 @@ const { getSoulDatabase, getNextPendingBackground } = require('./sheet_reader');
 const { smartDownload, updateSheetValue, appendSheetRow } = require('./google_connector');
 const { generateSubtitleFile } = require('./engine');
 const { uploadToYouTube } = require('./youtube_uploader');
-const { execSync } = require('child_process');
+const { execSync, spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -48,13 +48,42 @@ async function main() {
         await smartDownload(backgroundUrl, videoPath);
         await smartDownload(soulItem.audio_url, audioPath);
         
-        await generateSubtitleFile(soulItem);
+        // --- MOTOR GRÁFICO DE ALTA FIDELIDAD (PNG OVERLAYS) ---
+        console.log('📝 Generando superposiciones cinematográficas...');
+        const p1Card = path.join(assetsDir, 'p1.png');
+        const p2Card = path.join(assetsDir, 'p2.png');
+        const p3Card = path.join(assetsDir, 'p3.png');
+        const creditsCard = path.join(assetsDir, 'credits.png');
+        
+        // Usamos spawnSync para evitar problemas de escape con comillas en el texto
+        const runGraphics = (mode, output, title, body) => {
+            const result = spawnSync('python3', ['src/graphics_engine.py', mode, output, title, body]);
+            if (result.error) console.error(`Error en graphics_engine: ${result.error}`);
+            if (result.stderr.length > 0) console.error(`Python Stderr: ${result.stderr.toString()}`);
+        };
+
+        // RE-MAPEO NARRATIVO VALIDADO: Contexto/Resumen -> Revelación/Enseñanza -> Esperanza/Idea Central
+        console.log('   - Fase 1: Contexto/Resumen (La Promesa)');
+        // Si es un capítulo completo, explanation sirve como resumen/idea central
+        runGraphics('phase1', p1Card, soulItem.verse_citation, soulItem.explanation);
+        
+        console.log('   - Fase 2: Revelación (Enseñanza Poderosa)');
+        // El usuario identificó este bloque como la verdadera 'Revelación'
+        runGraphics('phase2', p2Card, "REVELACIÓN", soulItem.text);
+        
+        console.log('   - Fase 3: Esperanza (Idea Central)');
+        // Cerramos con el título de la reflexión como la promesa final
+        const esperanzaText = `"${soulItem.reflection_title}"\n¡Dios tiene el control!`;
+        runGraphics('phase3', p3Card, "ESPERANZA", esperanzaText);
+        
+        console.log('   - Fase 4: Cierre');
+        runGraphics('outro', creditsCard, "", "");
 
         const intermediatePath = path.join(outputDir, 'temp_reflection.mp4');
         const outroPath = path.join(outputDir, 'temp_outro.mp4');
         const logoPath = path.join(assetsDir, 'Logo Hjalmar Animado.mp4');
 
-        // FILTRO PRINCIPAL (CON CARD Y ASS)
+        // FILTRO PRINCIPAL (CON CARD Y PNG OVERLAYS DINÁMICOS)
         const mainFilter = `
             [0:v] scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,
                   eq=brightness=-0.1:contrast=1.1,vignette=angle=0.5 [bg];
@@ -62,28 +91,28 @@ async function main() {
             [b2] crop=900:1100:(1080-900)/2:(1920-1100)/2, boxblur=25 [blurred];
             [b1][blurred] overlay=(W-w)/2:(H-h)/2 [card_base];
             [card_base] drawbox=y='(ih-1100)/2':x='(iw-900)/2':w=900:h=1100:t=fill:c=black@0.4 [final_bg];
-            [final_bg] ass=filename=assets/current_production.ass
+            [final_bg][2:v] overlay=0:0:enable='between(t,2,19.5)' [f1];
+            [f1][3:v] overlay=0:0:enable='between(t,20,39.5)' [f2];
+            [f2][4:v] overlay=0:0:enable='between(t,40,54.5)'
         `.replace(/\s+/g, ' ').trim();
 
-        // COMPOSICIÓN PRINCIPAL: Loop del paisaje y captura del CLÍMAX (ss 60)
-        console.log('🎞️  Componiendo Cuerpo (Capturando Clímax desde 01:00)...');
-        execSync(`"${ffmpegBin}" -y -stream_loop -1 -i "${videoPath}" -ss 60 -i "${audioPath}" -filter_complex "${mainFilter}" -map 0:v -map 1:a -t 60 -r 30 -c:v libx264 -c:a aac -preset fast -pix_fmt yuv420p "${intermediatePath}"`);
+        console.log('🎞️  Componiendo Cuerpo (55s)...');
+        execSync(`"${ffmpegBin}" -y -stream_loop -1 -i "${videoPath}" -ss 60 -i "${audioPath}" -i "${p1Card}" -i "${p2Card}" -i "${p3Card}" -filter_complex "${mainFilter}" -map 0:v -map 1:a -t 55 -r 30 -c:v libx264 -c:a aac -preset fast -pix_fmt yuv420p "${intermediatePath}"`);
 
-        console.log('🎬 Orquestando Outro (Con Música y Suscripción)...');
+        // FILTRO OUTRO (LOGO + PNG CREDITS)
         const outroFilter = `
             [0:v] scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,
                   eq=brightness=-0.3:contrast=1.3,vignette=angle=0.6 [bg];
             [1:v] scale=400:400:force_original_aspect_ratio=increase,crop=400:400,setsar=1,
                   geq=lum='p(X,Y)':a='if(gt(sqrt(pow(X-200,2)+pow(Y-200,2)),200),0,255)' [logo];
-            [bg][logo] overlay='(W-w)/2':'(H-h)/2-280',
-            drawtext=text='@Musichris_Studio':fontcolor=white:fontsize=82:fontfile='${georgiaFont}':x='(w-text_w)/2':y='H/2+220',
-            drawtext=text='¡Caminemos juntos en fe!':fontcolor=white:fontsize=52:fontfile='${georgiaFont}':box=1:boxcolor=white@0.1:boxborderw=20:x='(w-text_w)/2':y='H/2+380',
-            drawtext=text='Suscríbete ahora para más reflexiones':fontcolor=white:fontsize=44:fontfile='${georgiaFont}':box=1:boxcolor=white@0.15:boxborderw=15:x='(w-text_w)/2':y='H/2+520'
+            [bg][logo] overlay='(W-w)/2':'(H-h)/2-280' [bg_logo];
+            [bg_logo][3:v] overlay=0:0
         `.replace(/\s+/g, ' ').trim();
 
-        execSync(`"${ffmpegBin}" -y -stream_loop -1 -i "${videoPath}" -i "${logoPath}" -i "${audioPath}" -filter_complex "${outroFilter}" -map 0:v -map 2:a -t 5 -r 30 -c:v libx264 -c:a aac -pix_fmt yuv420p "${outroPath}"`);
+        console.log('🎬 Orquestando Outro (Credits Premium)...');
+        execSync(`"${ffmpegBin}" -y -stream_loop -1 -i "${videoPath}" -i "${logoPath}" -i "${audioPath}" -i "${creditsCard}" -filter_complex "${outroFilter}" -map 0:v -map 2:a -t 5 -r 30 -c:v libx264 -c:a aac -pix_fmt yuv420p "${outroPath}"`);
 
-        console.log('🔗 Sincronización Final (Master 65s)...');
+        console.log('🔗 Sincronización Final (Master 60s)...');
         execSync(`"${ffmpegBin}" -y -i "${intermediatePath}" -i "${outroPath}" -filter_complex "[0:v][0:a][1:v][1:a]concat=n=2:v=1:a=1[v][a]" -map "[v]" -map "[a]" -preset ultrafast "${outputPath}"`);
 
         await updateSheetValue('1y6GYX2DwjZOJVBwKotKCh3aSVha3K6iQsr5_yG7al88', `Hoja 1!C${landscapeInfo.row}`, 'DONE');
