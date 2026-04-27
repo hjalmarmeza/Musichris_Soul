@@ -28,10 +28,10 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
         font_main = font_citation = font_handle = font_button = font_footer = ImageFont.load_default()
 
     if not is_outro:
-        # Protocolo Flow v7.7: Ultra-Wide Precision
-        base_font_size = 55
-        max_width_px = 880 # Casi el total de los 900px del repositorio
-        line_spacing = 18
+        # Protocolo Flow v7.8: Majestic High-Density Layout
+        base_font_size = 85
+        max_width_px = 860 # Ocupar casi todo el repositorio (900px)
+        line_spacing = 40 # Espaciado generoso para llenar el repositorio
 
         while True:
             font_main = ImageFont.truetype(font_bold, base_font_size)
@@ -71,17 +71,18 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
             
             total_h += (len(wrapped_lines)-1) * line_spacing
             
-            # Si cabe en el área vertical, salimos
-            if total_h < 800: # Un poco más de margen vertical
+            # Si cabe en el área vertical (850px), salimos
+            if total_h < 850:
                 break
             
             base_font_size -= 2
-            if base_font_size < 20: break 
+            if base_font_size < 30: break 
         
-        print(f"DEBUG v7.7: lines={len(wrapped_lines)}, font={base_font_size}, max_w={max_w}")
+        print(f"DEBUG v7.8: lines={len(wrapped_lines)}, font={base_font_size}, max_w={max_w}")
         
-        # 1. MIDDLE: Body Text
-        y_text = 900 - (total_h // 2)
+        # 1. MIDDLE: Body Text (Centrado en el repositorio 1100px)
+        # El repositorio está centrado en y=960 (rango 410 a 1510)
+        y_text = 960 - (total_h // 2)
         for i, line in enumerate(wrapped_lines):
             bbox = draw.textbbox((0, 0), line, font=font_main)
             w = bbox[2] - bbox[0]
