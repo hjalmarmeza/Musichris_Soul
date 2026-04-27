@@ -34,7 +34,7 @@ async function uploadToYouTube(videoPath, soulData) {
                     title: soulData.youtube_title || `${soulData.title} | MusiChris Soul`,
                     description: soulData.youtube_description || 'Explora tu fe con Musichris Soul.',
                     categoryId: '10',
-                    tags: ['MusichrisSoul', 'Devocional', 'Fe'],
+                    tags: ['MusichrisStudio', 'ReflexionCristiana', 'Fe', 'Esperanza', 'Biblia'],
                 },
                 status: {
                     privacyStatus: 'private',

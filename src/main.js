@@ -22,9 +22,9 @@ async function main() {
             : database[Math.floor(Math.random() * database.length)];
         
         // METADATOS OPTIMIZADOS PARA EL ALGORITMO DE YOUTUBE (SEO ELITE)
-        const title = `${soulItem.title.toUpperCase()} - ${soulItem.verse_citation} | Reflexión Cristiana 🕊️ #shorts`;
+        soulItem.youtube_title = `${soulItem.title.toUpperCase()} - ${soulItem.verse_citation} | Reflexión Cristiana 🕊️ #shorts`;
         
-        const description = `✨ ${soulItem.reflection_title} ✨\n\n` +
+        soulItem.youtube_description = `✨ ${soulItem.reflection_title} ✨\n\n` +
             `"${soulItem.text}"\n\n` +
             `Esta pieza ministerial basada en ${soulItem.verse_citation} ha sido creada para traer paz y esperanza a tu vida. ` +
             `La música y la reflexión se unen en MusiChris Studio para fortalecer tu fe en el camino.\n\n` +
