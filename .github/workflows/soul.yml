@@ -22,6 +22,14 @@ jobs:
       - name: 🎞️ Instalando FFmpeg Industrial
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
+      - name: 🐍 Configurando Motor Gráfico Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: 🎨 Instalando Dependencias Gráficas
+        run: pip install Pillow
+
       - name: 🚀 EJECUTANDO PRODUCCIÓN MINISTERIAL
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
