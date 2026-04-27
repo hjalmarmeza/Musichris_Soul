@@ -23,7 +23,7 @@ async function syncSheetsToJson() {
         const formattedData = soulDatabase.map((item, index) => ({
             id: index + 1,
             title: item.title,
-            reflection_title: item.reflection_title,
+            reflection_title: item.title, // Ahora usamos el nombre de la canción como título principal
             verse_citation: item.verse_citation,
             text: item.text,
             explanation: item.explanation,
