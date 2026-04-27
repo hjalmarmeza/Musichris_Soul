@@ -6,14 +6,14 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, font_
     img = Image.new('RGBA', (width, height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
     
-    # Text configuration
-    base_font_size = 55
-    if len(body) > 150: base_font_size = 48
-    if len(body) > 250: base_font_size = 42
+    # Text configuration (SUPERSIZED for readability)
+    base_font_size = 85
+    if len(body) > 150: base_font_size = 72
+    if len(body) > 250: base_font_size = 65
     
     try:
         font_main = ImageFont.truetype(font_path, base_font_size)
-        font_citation = ImageFont.truetype(font_path, 45)
+        font_citation = ImageFont.truetype(font_path, 75)
         font_handle = ImageFont.truetype(font_path, 82)
         font_button = ImageFont.truetype(font_path, 52)
         font_footer = ImageFont.truetype(font_path, 44)
@@ -21,36 +21,34 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, font_
         font_main = font_citation = font_handle = font_button = font_footer = ImageFont.load_default()
 
     if not is_outro:
-        # Wrap text dynamically based on length
-        wrap_width = 32 if base_font_size < 50 else 28
+        # Wrap text narrower to allow larger font size
+        wrap_width = 22 if base_font_size < 75 else 18
         wrapped_lines = textwrap.wrap(body, width=wrap_width)
         
         # Calculate total height to center group
-        line_spacing = 15
+        line_spacing = 25 # Increased spacing
         total_text_height = sum([draw.textbbox((0, 0), line, font=font_main)[3] for line in wrapped_lines]) + (len(wrapped_lines)-1)*line_spacing
         
-        y = height // 2 - (total_text_height // 2) - 40
+        y = height // 2 - (total_text_height // 2) - 80 # Shift up slightly
         
         for line in wrapped_lines:
             w, h = draw.textbbox((0, 0), line, font=font_main)[2:]
-            # Soft shadow for readability
-            draw.text(((width-w)/2 + 2, y + 2), line, font=font_main, fill=(0,0,0,180))
-            draw.text(((width-w)/2, y), line, font=font_main, fill="white")
+            # Premium stroke + shadow
+            draw.text(((width-w)/2, y), line, font=font_main, fill="white", stroke_width=3, stroke_fill="black")
             y += h + line_spacing
             
         # Drawing Decoration Line & Title (Citation/Phase)
-        y += 50
+        y += 70
         deco = "————————————"
         w_deco, h_deco = draw.textbbox((0, 0), deco, font=font_citation)[2:]
-        draw.text(((width-w_deco)/2, y), deco, font=font_citation, fill=(255, 255, 255, 180))
+        draw.text(((width-w_deco)/2, y), deco, font=font_citation, fill=(255, 255, 255, 180), stroke_width=1, stroke_fill="black")
         
-        y += h_deco + 20
+        y += h_deco + 30
         w_cite, h_cite = draw.textbbox((0, 0), title, font=font_citation)[2:]
         
         # Gold highlight for the phase title
         gold_color = "#D4AF37"
-        draw.text(((width-w_cite)/2 + 1, y + 1), title, font=font_citation, fill=(0,0,0,120))
-        draw.text(((width-w_cite)/2, y), title, font=font_citation, fill=gold_color)
+        draw.text(((width-w_cite)/2, y), title, font=font_citation, fill=gold_color, stroke_width=2, stroke_fill="black")
 
     else:
         # Outro Credits (Reference Image 4)
