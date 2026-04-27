@@ -6,10 +6,10 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
     img = Image.new('RGBA', (width, height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
     
-    # Text configuration (SUPREME SIZING)
-    base_font_size = 150
-    if len(body) > 100: base_font_size = 130
-    if len(body) > 160: base_font_size = 110
+    # Text configuration (SUPREME SIZING - fit within 900px card)
+    base_font_size = 135
+    if len(body) > 100: base_font_size = 115
+    if len(body) > 160: base_font_size = 100
     
     # Font path logic
     assets_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,24 +20,33 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
 
     try:
         font_main = ImageFont.truetype(font_bold, base_font_size)
-        font_citation = ImageFont.truetype(font_bold, 80)
-        font_handle = ImageFont.truetype(font_bold, 85)
+        font_citation = ImageFont.truetype(font_bold, 75)
+        font_handle = ImageFont.truetype(font_bold, 80)
         font_button = ImageFont.truetype(font_bold, 52)
         font_footer = ImageFont.truetype(font_bold, 44)
     except:
         font_main = font_citation = font_handle = font_button = font_footer = ImageFont.load_default()
 
     if not is_outro:
-        # Wrap logic (Tight wrap = Huge font)
-        wrap_width = 22
+        # Wrap logic (Fit within 900px card, leaving padding)
+        wrap_width = 20
         wrapped_lines = textwrap.wrap(body, width=wrap_width)
-        
-        # Calculate total height to center group
-        line_spacing = 60 
-        total_text_height = sum([draw.textbbox((0, 0), line, font=font_main)[3] for line in wrapped_lines]) + (len(wrapped_lines)-1)*line_spacing
+        line_spacing = 50 
+
+        # HARD FIT LOOP: Shrink until width < 840 and height < 950
+        while True:
+            max_w = max([draw.textbbox((0, 0), l, font=font_main)[2] for l in wrapped_lines])
+            total_h = sum([draw.textbbox((0, 0), l, font=font_main)[3] for l in wrapped_lines]) + (len(wrapped_lines)-1)*line_spacing
+            
+            if max_w < 840 and total_h < 950:
+                break
+            
+            base_font_size -= 5
+            if base_font_size < 60: break # Safety floor
+            font_main = ImageFont.truetype(font_bold, base_font_size)
         
         # Center the block in the screen
-        y = (height // 2) - (total_text_height // 2) - 50
+        y = (height // 2) - (total_h // 2) - 80
         
         for line in wrapped_lines:
             w, h = draw.textbbox((0, 0), line, font=font_main)[2:]
@@ -45,12 +54,12 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
             y += h + line_spacing
             
         # Drawing Decoration Line & Title (Citation/Phase)
-        y += 60
+        y += 50
         deco = "————————"
         w_deco, h_deco = draw.textbbox((0, 0), deco, font=font_citation)[2:]
         draw.text(((width-w_deco)/2, y), deco, font=font_citation, fill=(255, 255, 255, 180))
         
-        y += h_deco + 30
+        y += h_deco + 25
         w_cite, h_cite = draw.textbbox((0, 0), title, font=font_citation)[2:]
         
         # Gold highlight for the phase title
