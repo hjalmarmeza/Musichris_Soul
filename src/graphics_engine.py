@@ -72,7 +72,8 @@ def generate_phase_card(title, body, output_path, width=1080, height=1920, is_ou
         button_text = "¡Caminemos juntos en fe!"
         footer = "Escucha la canción completa en el canal"
         
-        y = height // 2 - 200
+        # Outro Credits - Positioning below the animated logo
+        y = height // 2 + 50
         w, h = draw.textbbox((0, 0), handle, font=font_handle)[2:]
         draw.text(((width-w)/2, y), handle, font=font_handle, fill="white", stroke_width=3, stroke_fill="black")
         
