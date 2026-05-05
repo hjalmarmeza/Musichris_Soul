@@ -73,9 +73,10 @@ async function main() {
         const contextText = processText(soulItem.explanation);
         const revelationText = processText(soulItem.text);
         
-        // Mensaje de Esperanza Inspirador (Una sola idea fluida, sin emojis problemáticos)
-        const pureReflection = soulItem.reflection_title.split('/')[0].trim();
-        const hopeMsg = `En medio de tu ${pureReflection.toLowerCase()}, Su gracia te sostiene. Tu victoria viene de lo alto!`;
+        // Mensaje de Esperanza Inspirador (Excelencia Teológica y Gramatical)
+        let contextPart = soulItem.reflection_title.split('/')[1] || soulItem.reflection_title.split('/')[0];
+        contextPart = contextPart.trim().toLowerCase().replace('dios', 'Dios');
+        const hopeMsg = `¡En medio de tu ${contextPart}, Su gracia te sostiene. Tu victoria viene de lo alto!`;
 
         const timestamp = Date.now();
         const p1Card = path.join(process.cwd(), `p1_${timestamp}.png`);
